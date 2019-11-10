@@ -16,7 +16,14 @@ public class ClientApp implements Runnable{
     private int isLogged;
     Client client;
     ClientCMD cmdInterface;
+    ClientManager manager;
 
+    void setLogged(String _username){
+        isLogged = 1;
+        userName = _username;
+        currentDirectory = "/";
+
+    }
     public ClientApp(String[] args) {
 
         if (args.length != 3) {
@@ -31,6 +38,7 @@ public class ClientApp implements Runnable{
         isLogged = 0;
         currentDirectory = "";
         userName = "";
+        manager = new ClientManager(this);
 
     }
 
@@ -83,14 +91,15 @@ public class ClientApp implements Runnable{
         Thread cmdThread = new Thread(cmdInterface);
         cmdThread.start();
 
-        /*client.addListener(new Listener.ThreadedListener(new Listener() {
+        client.addListener(new Listener.ThreadedListener(new Listener() {
             public void received (Connection connection, Object object) {
                 if (object instanceof JSONObject) {
                     JSONObject answer = (JSONObject) object;
-                    System.out.println(answer);
+                    assert(answer != null);
+                    manager.handleResponse(answer);
                 }
             }
-        }));*/
+        }));
 
        /* for(int i = 0 ; i < 5 ; i++){
             JSONObject obj = new JSONObject();

@@ -9,10 +9,8 @@ import java.io.IOException;
 public class NameNode implements Runnable{
 
     private int portNumber;
-    private int id;
+    NameNodeManager manager;
     public NameNode(String[] args) {
-
-        id = 0;
 
         if (args.length != 1) {
             System.err.println("Usage: java EchoServer <port number>");
@@ -20,20 +18,20 @@ public class NameNode implements Runnable{
         }
 
         portNumber = Integer.parseInt(args[0]);
+        manager = new NameNodeManager(this);
     }
 
     class Worker implements Runnable{
-        private int id;
         private JSONObject task;
         private Connection c;
-        Worker(Connection _c , int _id , JSONObject _task){
+        Worker(Connection _c  , JSONObject _task){
             c = _c;
-            id = _id;
             task = _task;
         }
         public void run(){
-            System.out.println("Currently thread number " + id + " is executing the shit " + task.get("sender") + "  " + task.get("task"));
-         //   c.sendTCP("ok done by "  + String.valueOf(id));
+            //System.out.println("Currently processing " + task.toString(2));
+
+            c.sendTCP(manager.performJob(task));
         }
 
     }
@@ -61,7 +59,7 @@ public class NameNode implements Runnable{
                 public void received (Connection connection, Object object) {
                     if (object instanceof JSONObject) {
                         JSONObject request = (JSONObject) object;
-                        new Thread(new Worker(connection , ++id , request)).start();
+                        new Thread(new Worker(connection , request)).start();
                     }
                 }
             }));

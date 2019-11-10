@@ -20,10 +20,10 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -68,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1573102050151</updated>
       <workItem from="1573102053334" duration="13610000" />
-      <workItem from="1573300637947" duration="28459000" />
+      <workItem from="1573300637947" duration="35636000" />
     </task>
     <servers />
   </component>
