@@ -33,11 +33,16 @@ class NameNodeManager {
             return login(job);
         if(job.get("command").equals("format"))
             return format(job);
+
+
         JSONObject crap = new JSONObject();
         crap.put("status" , "wholyshit");
         return crap;
     }
 
+    private JSONObject auth(JSONObject job){
+        return new JSONObject();
+    }
     private JSONObject login(JSONObject job){
 
         int found = 0;

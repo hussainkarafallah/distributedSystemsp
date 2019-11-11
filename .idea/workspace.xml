@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="distributedSystemsp:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="" />
+    <list default="true" id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,15 +32,18 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1TH18v1ozSR2K8C0S1REzdjFH2u" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -68,11 +88,23 @@
       <option name="presentableId" value="Default" />
       <updated>1573102050151</updated>
       <workItem from="1573102053334" duration="13610000" />
-      <workItem from="1573300637947" duration="35636000" />
+      <workItem from="1573300637947" duration="58865000" />
+      <workItem from="1573494608491" duration="403000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
