@@ -4,15 +4,8 @@ import com.esotericsoftware.kryo.*;
 import com.esotericsoftware.kryonet.*;
 import org.json.*;
 
-import javax.print.attribute.standard.Severity;
-import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.Semaphore;
 
 
 public class NameNode implements Runnable{
@@ -20,8 +13,12 @@ public class NameNode implements Runnable{
     private int portNumber;
 
     NameNodeManager manager;
-    Proxy proxy;
+    NameNodeProxy proxy;
 
+    public static void main(String [] args){
+        NameNode nameNode = new NameNode(args);
+        nameNode.run();
+    }
     public NameNode(String[] args) {
 
         if (args.length != 1) {
@@ -33,83 +30,6 @@ public class NameNode implements Runnable{
         manager = new NameNodeManager(this);
     }
 
-    class Proxy implements Runnable{
-
-        List<Client> sockets;
-        List<InetSocketAddress> dataNodes;
-        List<Semaphore> semaphores;
-
-
-        public boolean addDataNode(InetAddress datanode , int port){
-
-            /*if( dataNodes.indexOf(datanode) != -1)
-                return false;
-
-            dataNodes.add(datanode);
-            Client client = new Client();
-
-            Kryo kryo = client.getKryo();
-            kryo.register(JSONObject.class);
-            kryo.register(java.util.HashMap.class);
-
-
-           // datanode.getAddress().toString();
-
-            sockets.add(client);
-
-            semaphores.add(new Semaphore(1));
-
-            client.addListener(new Listener.ThreadedListener(new Listener() {
-
-                @Override
-                public void idle(Connection connection) {
-                    InetSocketAddress add = connection.getRemoteAddressTCP();
-                    int idx = sockets.indexOf(add);
-                    assert(idx != -1);
-                    semaphores.get(idx).release();
-                }
-
-            }));*/
-
-            System.out.println(datanode.getHostName());
-            System.out.println(portNumber);
-
-            return true;
-
-        }
-        public void run(){
-            sockets = new ArrayList<>();
-            dataNodes = new ArrayList<>();
-            semaphores = new ArrayList<>();
-
-            System.out.println("Hey proxy started :)");
-
-
-        }
-        /*Server server;
-
-
-        void init(){
-            Server server = new Server();
-            Kryo kryo = server.getKryo();
-            kryo.register(JSONObject.class);
-            kryo.register(java.util.HashMap.class);
-            try {
-                server.bind(portNumber);
-            }
-            catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-        public void run(){
-            System.out.println("Hey radar started :)");
-
-
-
-        }*/
-    }
-
-
 
     class Worker implements Runnable{
         private JSONObject task;
@@ -119,9 +39,10 @@ public class NameNode implements Runnable{
             task = _task;
         }
         public void run(){
+
             if(task.get("command").equals("datanodeauth")){
 
-                boolean result = proxy.addDataNode(c.getRemoteAddressTCP().getAddress() , task.getInt("port"));
+                boolean result = proxy.addDataNode(new InetSocketAddress(c.getRemoteAddressTCP().getAddress() , task.getInt("port")));
 
                 JSONObject response = new JSONObject();
 
@@ -174,42 +95,13 @@ public class NameNode implements Runnable{
 
 
     public void run(){
-
         Thread dispatcherThread = new Thread(new Dispatcher());
         dispatcherThread.start();
 
-        proxy = new Proxy();
+        proxy = new NameNodeProxy();
         Thread proxyThread = new Thread(proxy);
         proxyThread.start();
-
-
     }
-
-/*    class EndPoint{
-        String ipAddress;
-        int portNumber;
-        EndPoint(String _ip , int _port){
-            ipAddress = _ip;
-            portNumber = _port;
-        }
-
-        public String getIpAddress(){
-            return ipAddress;
-        }
-
-        public int getPortNumber(){
-            return portNumber;
-        }
-
-        public boolean equals(Object o){
-            if(o == null) return false;
-            if(o == this) return true;
-            if(!(o instanceof EndPoint)) return false;
-            EndPoint other = (EndPoint)(o);
-            return other.getIpAddress() == this.ipAddress && other.getPortNumber() == this.portNumber;
-        }
-
-    }*/
 }
 
 

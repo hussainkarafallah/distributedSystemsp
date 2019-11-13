@@ -3,27 +3,27 @@ package newdist;
 import com.esotericsoftware.kryonet.Client;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.Buffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 class pathUtility{
 
-    static int validateDirectory(String token){
+    static int validateFilePath(String token){
         if(token.length() < 2) return 0;
         if(token.substring(0 , 2).equals("..")){
             token = token.substring(2 , token.length());
         }
-        System.out.println(token);
-        System.out.println(token.substring(0 , 2));
+
         if(token.charAt(0) == '.'){
             token = token.substring(1 , token.length());
         }
-        System.out.println(token);
+
         boolean ret = token.matches("^['\"]?(?:/[^/\\n]+)*['\"]?$");
         if(ret) return 1;
         return 0;
@@ -37,8 +37,9 @@ class pathUtility{
     }
 }
 
-class commandUtility{
-    static JSONObject getFormatCommand(String tokens[]){
+/*class commandUtility{
+    final static long ChunkLength = 20000;
+    /*static JSONObject getFormatCommand(String tokens[]){
         if(tokens.length != 1){
             return null;
         }
@@ -46,28 +47,14 @@ class commandUtility{
         return ret;
     }
 
-    static JSONObject getLoginCommand(String tokens[]){
-        if(tokens.length != 3){
-           return null;
-        }
-        if(!tokens[1].matches("^[a-zA-Z0-9._-]{3,}$")){
-           return null;
-        }
-        if(!tokens[2].matches("[^\\s]{6,}")){
-           return null;
-        }
-        JSONObject ret = new JSONObject();
-        ret.put("username" , tokens[1]);
-        ret.put("password" , tokens[2]);
-        return ret;
-    }
+
 
     static JSONObject singleFileCommand(String tokens[]){
         if(tokens.length  != 2){
             return null;
         }
 
-        int okDir = pathUtility.validateDirectory(tokens[1]);
+        int okDir = pathUtility.validateFilePath(tokens[1]);
 
         if(okDir == 0 || pathUtility.pathType(tokens[1]).equals("None")){
             return null;
@@ -82,7 +69,7 @@ class commandUtility{
         if(tokens.length != 3){
             return null;
         }
-        if(pathUtility.validateDirectory(tokens[1]) == 0 || pathUtility.validateDirectory(tokens[2]) == 0 || pathUtility.pathType(tokens[1]).equals("None") || pathUtility.pathType(tokens[2]).equals("None")){
+        if(pathUtility.validateFilePath(tokens[1]) == 0 || pathUtility.validateFilePath(tokens[2]) == 0 || pathUtility.pathType(tokens[1]).equals("None") || pathUtility.pathType(tokens[2]).equals("None")){
             return null;
         }
         JSONObject ret = new JSONObject();
@@ -91,19 +78,37 @@ class commandUtility{
         return ret;
     }
 
+    static JSONObject downloadCommand(String tokens[]){
+
+
+
+
+
+
+
+
+
+    }
+    static JSONObject uploadCommand(String tokens[]){
+
+
+
+    }
+
 }
+*/
 
-public class ClientCMD implements Runnable {
+class CommandUtil{
 
-    private List<String> commands;
-    private ClientApp.InputListener listener;
+    static List <String> commands;
 
-    ClientCMD(){
+    static {
         commands = new ArrayList<String>();
         commands.add("login");
         commands.add("format");
         commands.add("create");
         commands.add("download");
+        commands.add("upload");
         commands.add("delete");
         commands.add("info");
         commands.add("copy");
@@ -114,9 +119,175 @@ public class ClientCMD implements Runnable {
         commands.add("deldir");
     }
 
-    void setListener(ClientApp.InputListener _listener){
-        assert(_listener != null);
-        listener = _listener;
+    static JSONObject getErrorObject(String message){
+        JSONObject ret = new JSONObject();
+        ret.put("valid" , "error");
+        ret.put("text" , message);
+        return ret;
+    }
+    static JSONObject invalidQueryError(){
+        return getErrorObject("Please input invalid query");
+    }
+
+    ////////////////////////////////
+    static String validateLoginCommand(String tokens[]){
+        String def = "user name must be at least 3 characters/digits\npassword must be at least 6 characters";
+        if(tokens.length != 3)
+            return def;
+        if(!tokens[1].matches("^[a-zA-Z0-9._-]{3,}$"))
+            return def;
+        if(!tokens[2].matches("[^\\s]{6,}"))
+            return def;
+        return "OK";
+    }
+    static JSONObject getLoginCommand(String tokens[]){
+        String validation = validateLoginCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+        JSONObject ret = new JSONObject();
+        ret.put("command" , "login");
+        ret.put("username" , tokens[1]);
+        ret.put("password" , tokens[2]);
+        ret.put("valid" , "OK");
+        return ret;
+    }
+    //////////////////////////////
+
+    /////////////////////////////
+    static String validateFormatCommand(String tokens[]){
+        if(tokens.length == 1)
+            return "OK";
+        else return "Format takes no parameters";
+    }
+    static JSONObject getFormatCommand(String tokens[]){
+
+        String validation = validateFormatCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        JSONObject ret = new JSONObject();
+        ret.put("valid" , "OK");
+        ret.put("command" , "format");
+
+        return ret;
+    }
+
+    ///////////////////////////////
+    static String validateDownloadCommand(String tokens[]){
+
+        String def = "Enter valid two space separated filepaths, with no extra spaces\nFirst path denoting where you want to write the file you download\nsecond for file path on hdfs";
+
+        if(tokens.length != 3)
+            return def;
+        if(pathUtility.validateFilePath(tokens[1]) == 0 || pathUtility.validateFilePath(tokens[2]) == 0)
+            return def;
+
+        Path p = Paths.get(tokens[1]);
+
+        if(Files.isDirectory(p))
+            return "The first parameter is a directory, please enter a file path to write downloaded data to";
+
+        return "OK";
+    }
+    static JSONObject getDownloadCommand(String tokens[]){
+
+        String validation = validateDownloadCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        JSONObject ret = new JSONObject();;
+
+
+        ret.put("command" , "download");
+        ret.put("writepath" ,  tokens[1]);
+        ret.put("serverpath" , tokens[2]);
+        ret.put("valid" , "OK");
+
+      //  System.out.println("new upload" + ret.toString(2));
+
+        return ret;
+    }
+    /////////////////////////////////////////
+
+    static String validateUploadCommand(String tokens[]){
+
+        String def = "Enter valid two space separated filepaths, with no extra spaces\nFirst path denoting file you want to upload\nsecond for writing path on hdfs";
+
+        if(tokens.length != 3)
+            return def;
+        if(pathUtility.validateFilePath(tokens[1]) == 0 || pathUtility.validateFilePath(tokens[2]) == 0)
+            return def;
+        Path p = Paths.get(tokens[1]);
+        if(Files.isDirectory(p))
+            return "You entered a directory path";
+        if(!Files.exists(p))
+            return "File doesn't exist";
+
+        return "OK";
+    }
+
+    static JSONObject getUploadCommand(String tokens[]){
+
+        String validation = validateUploadCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        JSONObject ret = new JSONObject();;
+        ret.put("command","upload");
+        ret.put("writepath" ,  tokens[2]);
+        ret.put("clientpath" , tokens[1]);
+        ret.put("valid" , "OK");
+        return ret;
+
+    }
+
+    /////////////////////////////////////////////////////
+
+    static JSONObject getCommandObject(String tokens[] , ClientApp client){
+
+        if (tokens.length < 1)
+            return invalidQueryError();
+
+        String cmd = tokens[0];
+
+        if (commands.indexOf(cmd) == -1)
+            return invalidQueryError();
+
+        JSONObject jsonCommand = null;
+
+        if(!cmd.equals("login") && client.isLoggedIn() == 0){
+            return getErrorObject("Please log in");
+        }
+
+        if (cmd.equals("format"))
+            jsonCommand = getFormatCommand(tokens);
+        if(cmd.equals("download"))
+            jsonCommand = getDownloadCommand(tokens);
+        if(cmd.equals("upload"))
+            jsonCommand = getUploadCommand(tokens);
+        if(cmd.equals("login"))
+            jsonCommand = getLoginCommand(tokens);
+
+        if(client.isLoggedIn() == 1){
+            jsonCommand.put("username" , client.userName);
+            jsonCommand.put("directory", client.currentDirectory);
+        }
+
+        assert(jsonCommand != null);
+
+        return jsonCommand;
+
+    }
+}
+public class ClientCMD implements Runnable {
+
+    private List<String> commands;
+
+    ClientApp client;
+
+    ClientCMD(ClientApp _client){
+        assert (_client != null);
+        client = _client;
     }
 
 
@@ -126,88 +297,49 @@ public class ClientCMD implements Runnable {
 
     public void run() {
 
-        System.out.println("wtfffff");
-        BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-        String line = "";
+        System.out.println("Welcome to MullanorovDFS this is the client, please login and then enter your commands");
+        //BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+        try{
+            BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
 
-        while(true) {
+            String line = "";
 
-            try {
-                line = sc.readLine().trim();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            while(true) {
 
-            if(line.compareTo("quit") == 0) {
-                System.out.println("goodbye");
-                break;
-            }
+                Thread.sleep(100);
 
-            System.out.println(line);
+                line = sc.readLine();
 
-            //if (line.length() >= 0) continue;
+                if(line == null) break;
 
-            String tokens[] = line.split("\\s+");
+                line = line.trim();
 
-            for (String token : tokens) {
-                token = token.trim();
-            }
-
-            if (tokens.length < 1) {
-                stateError();
-                continue;
-            }
-
-            String cmd = tokens[0];
-
-            if (commands.indexOf(cmd) == -1) {
-                stateError();
-                continue;
-            }
+                if(line.compareTo("quit") == 0) {
+                    System.out.println("goodbye");
+                    break;
+                }
 
 
-            JSONObject jsonCommand = new JSONObject();
+                String tokens[] = line.split("\\s+");
 
+                for (String token : tokens) {
+                    token = token.trim();
+                }
 
-            //jsonCommand.put("command" , cmd);
+                JSONObject jsonCommand = CommandUtil.getCommandObject(tokens , client);
 
-            if (cmd.equals("format")) {
-                jsonCommand = commandUtility.getFormatCommand(tokens);
-                if (jsonCommand == null) {
-                    stateError();
+                if(jsonCommand.get("valid") != "OK"){
+                    System.out.println(jsonCommand.get("text"));
                     continue;
                 }
-            }
 
-            if (cmd.equals("login")) {
-                jsonCommand = commandUtility.getLoginCommand(tokens);
-                if (jsonCommand == null) {
-                    System.out.println("user name must be at least 3 characters/digits");
-                    System.out.println("password must be at least 6 characters");
-                    continue;
-                }
-            }
+                jsonCommand.remove("valid" );
 
-            if (cmd.equals("delete") || cmd.equals("download") || cmd.equals("info") || cmd.equals("create")) {
-                jsonCommand = commandUtility.singleFileCommand(tokens);
-                if (jsonCommand == null) {
-                    System.out.println("Enter valid directory with no spaces");
-                    continue;
-                }
+                client.notify(jsonCommand);
             }
-
-            if (cmd.equals("copy") || cmd.equals("move")) {
-                jsonCommand = commandUtility.doubleFileCommand(tokens);
-                if (jsonCommand == null) {
-                    System.out.println("Enter valid two directories with no spaces");
-                    continue;
-                }
-            }
-
-            assert (jsonCommand != null);
-            jsonCommand.put("command", cmd);
-            System.out.println(cmd);
-            listener.notifyCommand(jsonCommand);
+        }
+        catch (Exception e){
+            e.printStackTrace();
         }
     }
 

@@ -2,22 +2,52 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="distributedSystemsp:jar" />
+      <artifact name="clientnode:jar" />
+      <artifact name="namenode:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/clientnode_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/newdist/Downloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources2/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/distributedSystemsp_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/namenode_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/distributedSystemsp_jar/distributedSystemsp.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientApp$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientApp$InputListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager$ResponseUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager$ResponseUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Proxy.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ResponseUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ResponseUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/commandUtility.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/pathUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/pathUtility.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,10 +66,14 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1TH18v1ozSR2K8C0S1REzdjFH2u" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -57,7 +91,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Multirun.omar">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="newdist.App" />
       <module name="distributedSystemsp" />
@@ -71,6 +105,66 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="newdist.ClientApp" />
+      <module name="distributedSystemsp" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;127.0.0.1&quot; &quot;26200&quot; &quot;client1&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client/" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Datanode1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="newdist.DataNode" />
+      <module name="distributedSystemsp" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;25100&quot; &quot;127.0.0.1&quot; &quot;26200&quot; &quot;datanode1&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datanode1/" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Datanode2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="newdist.DataNode" />
+      <module name="distributedSystemsp" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;27890&quot; &quot;127.0.0.1&quot; &quot;26200&quot; &quot;datanode2&quot;" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datanode2/" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NameNode" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="newdist.NameNode" />
+      <module name="distributedSystemsp" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;26200&quot;" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="Client" type="Application" />
+      <toRun name="NameNode" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Multirun" factoryName="Multirun" singleton="false" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="1">
+      <runConfiguration name="NameNode" type="Application" />
+      <runConfiguration name="App" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="omar" type="Multirun" factoryName="Multirun" singleton="true" separateTabs="true" startOneByOne="true" markFailedProcess="false" hideSuccessProcess="false" delayTime="0">
+      <runConfiguration name="NameNode" type="Application" />
+      <runConfiguration name="Datanode1" type="Application" />
+      <runConfiguration name="Datanode2" type="Application" />
+      <runConfiguration name="Client" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Datanode1" />
+      <item itemvalue="Application.Datanode2" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.NameNode" />
+      <item itemvalue="Application.App" />
+      <item itemvalue="Multirun.omar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
@@ -89,8 +183,46 @@
       <updated>1573102050151</updated>
       <workItem from="1573102053334" duration="13610000" />
       <workItem from="1573300637947" duration="58865000" />
-      <workItem from="1573494608491" duration="403000" />
+      <workItem from="1573494608491" duration="5342000" />
+      <workItem from="1573502483416" duration="2818000" />
+      <workItem from="1573505630287" duration="21583000" />
+      <workItem from="1573536168829" duration="5990000" />
+      <workItem from="1573545478291" duration="16000" />
+      <workItem from="1573545556378" duration="3595000" />
+      <workItem from="1573550438294" duration="1255000" />
+      <workItem from="1573551735513" duration="132000" />
+      <workItem from="1573551886535" duration="587000" />
+      <workItem from="1573552499427" duration="8563000" />
+      <workItem from="1573574567123" duration="613000" />
+      <workItem from="1573576011628" duration="230000" />
+      <workItem from="1573576262508" duration="524000" />
+      <workItem from="1573576807016" duration="9000" />
+      <workItem from="1573577939866" duration="1248000" />
+      <workItem from="1573579342926" duration="1519000" />
+      <workItem from="1573580887397" duration="5068000" />
+      <workItem from="1573585975006" duration="2271000" />
+      <workItem from="1573591364930" duration="599000" />
+      <workItem from="1573592646068" duration="599000" />
+      <workItem from="1573595585219" duration="599000" />
+      <workItem from="1573596251051" duration="1710000" />
+      <workItem from="1573598172265" duration="654000" />
+      <workItem from="1573598851751" duration="22685000" />
     </task>
+    <task id="LOCAL-00001" summary="added datanode">
+      <created>1573495208062</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573495208062</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added datanode">
+      <created>1573495247033</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1573495247033</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -101,10 +233,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added datanode" />
+    <option name="LAST_COMMIT_MESSAGE" value="added datanode" />
   </component>
 </project>

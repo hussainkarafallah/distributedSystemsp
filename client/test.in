@@ -1,0 +1,11 @@
+login hussain 123456
+format
+upload ./dir/book.pdf /a/b/book.pdf
+upload ./book2.pdf /c/d/book2.pdf
+upload ./dir2/sqr.jpg /sqr.jpg
+upload ./nig.txt /nigga.txt
+download ./abcde/fgh/downloadbook1.pdf /a/b/book.pdf
+download ./xx/yy/zz/downloadbook2.pdf /c/d/book2.pdf
+download ./niggadir/fuckoffplios.txt /nigga.txt
+download ./sqrdir/sqrrr.jpg /sqr.jpg	
+quit

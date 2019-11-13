@@ -3,10 +3,13 @@ package newdist;
 
 import org.json.JSONObject;
 import org.springframework.util.FileSystemUtils;
+import org.springframework.util.SocketUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -33,10 +36,41 @@ public class DataNodeManager {
         }
     }
 
-    JSONObject performJob(JSONObject job){
-        if(job.get("command").equals("ping"))
-            return ResponseUtil.getResponse(job , "OK" , "datanode " + dataNode.dataNodeName + " is reached");
+    void startDownloadJob(JSONObject job){
+        String ip = job.getString("ip");
+        int port = job.getInt("port");
+        String path = job.getString("writepath");
+        Downloader downloader = new Downloader(ip , port , path);
 
+    }
+    JSONObject performJob(JSONObject job){
+        if(job.get("command").equals("connect"))
+            return ResponseUtil.getResponse(job , "OK" , "datanode " + dataNode.dataNodeName + ":" + dataNode.portNumber + " is reached");
+        if(job.get("command").equals("startdownload")) {
+            startDownloadJob(job);
+            return ResponseUtil.getResponse(job , "OK" , "File found on data node");
+        }
+        if(job.get("command").equals("startupload")) {
+            //startDownloadJob(job);
+            System.out.println(job.toString());
+            JSONObject response =  ResponseUtil.getResponse(job , "OK" , "OK");
+            response.remove("command"); response.put("command" , "launchdownload");
+            int port = SocketUtils.findAvailableTcpPort();
+            System.out.println("here is the shit " + response.toString());
+            Uploader uploader = new Uploader(port , job.getString("serverpath") , null , null , null);
+            try {
+                response.put("ip", InetAddress.getLocalHost().getHostAddress());
+                response.put("port", port);
+                System.out.println("here is the shit II" + response.toString());
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            System.out.println("responded with " + response.toString());
+            return response;
+
+        }
         JSONObject crap = new JSONObject();
         crap.put("status" , "wholyshit");
         return crap;

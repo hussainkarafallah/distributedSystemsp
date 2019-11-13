@@ -5,14 +5,16 @@ import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class DataNode implements Runnable{
 
-    private int portNumber , nameNodePort;
+    int portNumber , nameNodePort;
 
     String nameNodeIP ,  dataNodeName;
 
@@ -34,6 +36,11 @@ public class DataNode implements Runnable{
 
         manager= new DataNodeManager(this);
 
+    }
+
+    public static void main(String [] args){
+        DataNode datanode = new DataNode(args);
+        datanode.run();
     }
 
     class Worker implements Runnable{
@@ -65,6 +72,11 @@ public class DataNode implements Runnable{
             server.start();
 
             server.addListener(new Listener.ThreadedListener(new Listener() {
+                @Override
+                public void connected(Connection connection) {
+                    System.out.println("oh yeah we have incoming connection from namenode");
+                }
+
                 public void received (Connection connection, Object object) {
                     if (object instanceof JSONObject) {
                         JSONObject request = (JSONObject) object;
@@ -74,7 +86,12 @@ public class DataNode implements Runnable{
             }));
         }
     }
-    public void run(){  
+    public void run(){
+
+        Thread dispatcherThread = new Thread(new Dispatcher());
+        dispatcherThread.start();
+
+
         connectionClient = new Client();
 
         connectionClient.start();
@@ -95,6 +112,8 @@ public class DataNode implements Runnable{
         connectionRequest.put("port" , portNumber);
 
         connectionClient.sendTCP(connectionRequest);
+
+
 
     }
 
