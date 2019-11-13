@@ -10,9 +10,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/artifacts/datanode_jar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources3/META-INF/MANIFEST.MF" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -172,7 +173,7 @@
       <workItem from="1573595585219" duration="599000" />
       <workItem from="1573596251051" duration="1710000" />
       <workItem from="1573598172265" duration="654000" />
-      <workItem from="1573598851751" duration="24244000" />
+      <workItem from="1573598851751" duration="24479000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -216,6 +217,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added datanode" />
-    <option name="LAST_COMMIT_MESSAGE" value="added datanode" />
+    <MESSAGE value="added artifact" />
+    <option name="LAST_COMMIT_MESSAGE" value="added artifact" />
   </component>
 </project>
