@@ -267,7 +267,7 @@ class CommandUtil{
             jsonCommand = getUploadCommand(tokens);
         if(cmd.equals("login"))
             jsonCommand = getLoginCommand(tokens);
-
+////////////////////erie
         if(client.isLoggedIn() == 1){
             jsonCommand.put("username" , client.userName);
             jsonCommand.put("directory", client.currentDirectory);
