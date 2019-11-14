@@ -117,7 +117,9 @@ class CommandUtil {
         commands.add("lsdir");
         commands.add("mkdir");
         commands.add("deldir");
-        commands.add("ls");
+        commands.add("ls"); // same as ls dir i guess
+        commands.add("cp");
+        commands.add("mv");
     }
 
     static JSONObject getErrorObject(String message) {
@@ -179,9 +181,10 @@ class CommandUtil {
         ret.put("valid", "OK");
         return ret;
     }
+
     static JSONObject getLsCommand(String tokens[]) {
-       if(tokens.length !=1)
-           return getErrorObject("ls does not accept any args");
+        if (tokens.length != 1)
+            return getErrorObject("ls does not accept any args");
 
         JSONObject ret = new JSONObject();
         ret.put("command", "ls");
@@ -189,27 +192,54 @@ class CommandUtil {
         ret.put("valid", "OK");
         return ret;
     }
+
     //////////////////////////////
-    static  JSONObject getInfoCommand(String tokens[]){
-        if(tokens.length !=2)
+    static JSONObject getInfoCommand(String tokens[]) {
+        if (tokens.length != 2)
             return getErrorObject("Please specify path to file only! ");
 
         JSONObject ret = new JSONObject();
         ret.put("command", "info");
         Path p = Paths.get(tokens[1]);
         String validation = "OK";
-        if(pathUtility.validateFilePath(tokens[1])==0)
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
             validation = "No correct Path";
         if (Files.isDirectory(p)) {
             validation = "The first parameter is a directory, please enter a file path to write downloaded data to";
         }
-        if(!validation.equals("OK"))
+        if (!validation.equals("OK"))
             return getErrorObject(validation);
 
-        ret.put("path",tokens[1]);
+        ret.put("path", tokens[1]);
         ret.put("valid", "OK");
         return ret;
     }
+
+    static JSONObject getCpMvCommand(String tokens[]) {
+        if (tokens.length != 3)
+            return getErrorObject("Please specify path to file only! ");
+
+        JSONObject ret = new JSONObject();
+
+        Path p1 = Paths.get(tokens[1]),p2 = Paths.get(tokens[2]);
+        String validation = "OK";
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
+            validation = "No correct Path";
+        if (Files.isDirectory(p1)) {
+            validation = "The first parameter is a directory, please enter a file path";
+        }
+        if(Files.isDirectory(p2)){
+            validation = "The second parameter is a directory, please enter a file path";
+        }
+        if (!validation.equals("OK"))
+            return getErrorObject(validation);
+        ret.put("command", tokens[0]);
+        ret.put("pathFrom", tokens[1]);
+        ret.put("pathTo",tokens[2]);
+        ret.put("valid", "OK");
+        return ret;
+    }
+
     /////////////////////////////
     static String validateFormatCommand(String tokens[]) {
         if (tokens.length == 1)
@@ -334,8 +364,10 @@ class CommandUtil {
             jsonCommand = getDeleteCommand(tokens);
         if (cmd.equals("ls"))
             jsonCommand = getLsCommand(tokens);
-        if(cmd.equals("info"))
+        if (cmd.equals("info"))
             jsonCommand = getInfoCommand(tokens);
+        if (cmd.equals("cp") || cmd.equals("mv"))
+            jsonCommand = getCpMvCommand(tokens);
 ////////////////////erie
         if (client.isLoggedIn() == 1) {
             jsonCommand.put("username", client.userName);

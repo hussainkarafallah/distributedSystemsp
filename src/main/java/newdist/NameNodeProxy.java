@@ -76,6 +76,24 @@ class NameNodeProxy implements Runnable{
         }
         return ret;
     }
+    public  JSONObject MvCp(InetSocketAddress dataNode , JSONObject job){
+        int idx = dataNodes.indexOf(dataNode);
+
+        assert(idx != -1);
+
+        JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
+        try {
+            System.out.println("new request22 to fwd" + job.toString());
+            System.out.println("namenode proxy thread" + Thread.currentThread());
+            Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
+            ret = (JSONObject)(response);
+            assert(ret != null);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return ret;
+    }
     public JSONObject askForInfo(InetSocketAddress dataNode , JSONObject job){
         int idx = dataNodes.indexOf(dataNode);
 

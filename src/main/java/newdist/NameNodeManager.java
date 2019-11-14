@@ -50,6 +50,8 @@ class NameNodeManager {
                 return ls(job);
             if (job.get("command").equals("info"))
                 return info(job);
+            if(job.get("command").equals("cp") || job.get("command").equals("mv"))
+                return MvCp(job);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseUtil.getResponse(job, "NO", "Namenode storage error");
@@ -58,6 +60,53 @@ class NameNodeManager {
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
         return crap;
+    }
+    private JSONObject MvCp(JSONObject job) throws IOException {
+        String strPathFrom = defaultDir + job.get("username") + job.getString("pathFrom");
+        String strPathTo = defaultDir + job.get("username") + job.getString("pathTo");
+        File f = new File(strPathFrom);
+        File f2 = new File(strPathTo);
+        // you have only to check if
+        if (!f.exists() || f.isDirectory() || f2.exists()) {
+            return ResponseUtil.getResponse(job, "NO", "You either have specified an non existing file or it is a directory not a file or the \"to\" file is existing already");
+        }
+        File f3 = f2.getParentFile();
+        System.out.println(f2.getCanonicalPath());
+        System.out.println(strPathFrom+" ::  "+strPathTo);
+        if(!f3.isDirectory()){
+            return ResponseUtil.getResponse(job,"NO", "There is no directory: " + strPathTo);
+        }
+        Scanner sc = new Scanner(f);
+        JSONObject response = new JSONObject();
+        int total = 0, found = 0;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) continue;
+            // System.out.println(line);
+            JSONObject obj = new JSONObject(line);
+            assert (obj != null);
+            String ip = obj.getString("ip");
+            int port = obj.getInt("port");
+
+            InetSocketAddress address = new InetSocketAddress(ip, port);
+            total++;
+            if (nameNode.proxy.isAvailable(address)) {
+                found++;
+                if (found > 1) continue;
+                response = nameNode.proxy.MvCp(address, job);
+                assert (response != null);
+                break;
+            }
+        }
+
+        // move/cp the file on namenode also :D
+        if(job.getString("command").equals("mv")){
+            Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        else{
+            Files.copy(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        return response;
     }
 
     private JSONObject ls(JSONObject job) {

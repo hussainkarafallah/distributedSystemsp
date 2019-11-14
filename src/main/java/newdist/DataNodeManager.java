@@ -61,6 +61,21 @@ public class DataNodeManager {
 
         return newdist.ResponseUtil.getResponse(job, "OK", sb.toString());
     }
+    JSONObject MvCp(JSONObject job) throws IOException {
+        String strPathFrom = "./"+ job.get("username") + job.getString("pathFrom");
+        String strPathTo = "./"+ job.get("username") + job.getString("pathTo");
+
+        File f = new File(strPathFrom);
+        if(!f.exists())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File does not exist on this datanode file: "+strPathFrom);
+        if(job.getString("command").equals("mv")){
+            Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        else{
+            Files.copy(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        return newdist.ResponseUtil.getResponse(job,"OK","Great Success");
+    }
     JSONObject delete(JSONObject job) {
         String strPath = "./"+ job.get("username") + job.getString("path");
         File f = new File(strPath);
@@ -74,7 +89,7 @@ public class DataNodeManager {
         return newdist.ResponseUtil.getResponse(job, status, "file  ought to be deleted");
     }
 
-    JSONObject performJob(JSONObject job) {
+    JSONObject performJob(JSONObject job) throws IOException {
         System.out.println("Wohoo we have new job "+job.getString("command") + " thats it");
         if (job.get("command").equals("connect"))
             return ResponseUtil.getResponse(job, "OK", "datanode " + dataNode.dataNodeName + ":" + dataNode.portNumber + " is reached");
@@ -108,6 +123,8 @@ public class DataNodeManager {
         }
         if(job.getString("command").equals("info"))
             return info(job);
+        if(job.getString("command").equals("cp")||job.getString("command").equals("mc"))
+            return MvCp(job);
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
         return crap;
