@@ -42,23 +42,7 @@ public class DataNodeManager {
         Downloader downloader = new Downloader(ip, port, path);
 
     }
-    JSONObject ls(JSONObject job){
-        String strPath = "./"+ job.get("username") + job.getString("path");
-        File folder = new File(strPath);
-        File[] listOfFiles = folder.listFiles();
-        System.out.println(Boolean.toString(folder.isDirectory()));
-        StringBuilder filesListString = new StringBuilder();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                System.out.println("File " + listOfFiles[i].getName());
-                filesListString.append("File ").append(listOfFiles[i].getName()).append("\n");
-            } else if (listOfFiles[i].isDirectory()) {
-                System.out.println("Directory " + listOfFiles[i].getName());
-                filesListString.append("Directory ").append(listOfFiles[i].getName()).append("\n");
-            }
-        }
-        return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
-    }
+
     JSONObject delete(JSONObject job) {
         String strPath = "./"+ job.get("username") + job.getString("path");
         

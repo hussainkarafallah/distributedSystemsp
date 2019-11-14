@@ -45,6 +45,8 @@ class NameNodeManager {
                 return download(job);
             if(job.get("command").equals("delete"))
                 return delete(job);
+            if(job.get("command").equals("ls"))
+                return ls(job);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -54,6 +56,29 @@ class NameNodeManager {
         JSONObject crap = new JSONObject();
         crap.put("status" , "wholyshit");
         return crap;
+    }
+
+    private JSONObject ls(JSONObject job){
+        String strPath = defaultDir + job.get("username") + job.getString("directory");
+        File f = new File(strPath);
+        if(!f.isDirectory()){
+            return ResponseUtil.getResponse(job , "NO" , "Directory doesn't exist on the server");
+        }
+        File folder = new File(strPath);
+        File[] listOfFiles = folder.listFiles();
+        System.out.println(Boolean.toString(folder.isDirectory()));
+        StringBuilder filesListString = new StringBuilder();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println("File " + listOfFiles[i].getName());
+                filesListString.append("File ").append(listOfFiles[i].getName()).append("\n");
+            } else if (listOfFiles[i].isDirectory()) {
+                System.out.println("Directory " + listOfFiles[i].getName());
+                filesListString.append("Directory ").append(listOfFiles[i].getName()).append("\n");
+            }
+        }
+        return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
+
     }
     private JSONObject delete(JSONObject job) throws FileNotFoundException {
         System.out.println("Name node started deleting file: "+job.getString("path"));
