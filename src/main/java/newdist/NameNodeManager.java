@@ -64,6 +64,8 @@ class NameNodeManager {
             while(sc.hasNextLine()){
                 String line = sc.nextLine();
                 JSONObject curline = new JSONObject(line);
+                System.out.println(curline.toString());
+                if(curline.isNull(username)) continue;
                 if(curline.getString(username) != null)
                     if(curline.getString(username).equals(password)){
                         found = 1;
