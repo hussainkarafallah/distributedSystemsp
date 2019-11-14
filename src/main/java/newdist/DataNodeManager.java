@@ -61,6 +61,47 @@ public class DataNodeManager {
 
         return newdist.ResponseUtil.getResponse(job, "OK", sb.toString());
     }
+    private static void deleteRecursively(File file) throws IOException {
+
+        for (File childFile : file.listFiles()) {
+
+            if (childFile.isDirectory()) {
+                deleteRecursively(childFile);
+            } else {
+                if (!childFile.delete()) {
+                    throw new IOException();
+                }
+            }
+        }
+
+        if (!file.delete()) {
+            throw new IOException();
+        }
+    }
+    JSONObject manipulateDir(JSONObject job) throws IOException {
+        String strPath = "./"+ job.get("username") + job.getString("directory");
+
+        File f = new File(strPath);
+        if(!f.exists() || !f.isDirectory())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File is not dir or does not even exist file: "+strPath);
+        String dirname = job.getString("dirname");
+        if(job.getString("command").equals("mkdir")){
+            f=new File(strPath+"/"+dirname);
+            f.mkdir();
+        }
+        else{
+            f=new File(strPath+"/"+dirname);
+            if(job.getString("force").equals("-r")){
+                deleteRecursively(f);
+            }
+            else {
+                if(f.listFiles().length!=0){
+                    return newdist.ResponseUtil.getResponse(job,"NO","DataNode error permission to remove all files within directory");
+                }
+            }
+        }
+        return newdist.ResponseUtil.getResponse(job,"OK","Great Success");
+    }
     JSONObject MvCp(JSONObject job) throws IOException {
         String strPathFrom = "./"+ job.get("username") + job.getString("pathFrom");
         String strPathTo = "./"+ job.get("username") + job.getString("pathTo");
@@ -125,6 +166,8 @@ public class DataNodeManager {
             return info(job);
         if(job.getString("command").equals("cp")||job.getString("command").equals("mc"))
             return MvCp(job);
+        if(job.getString("command").equals("rmdir")||job.getString("command").equals("mkdir"))
+            return manipulateDir(job);
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
         return crap;

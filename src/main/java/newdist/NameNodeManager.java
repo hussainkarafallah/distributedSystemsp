@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
+import java.util.*;
 
 import org.springframework.util.FileSystemUtils;
 import org.springframework.util.FileSystemUtils.*;
@@ -52,6 +52,8 @@ class NameNodeManager {
                 return info(job);
             if(job.get("command").equals("cp") || job.get("command").equals("mv"))
                 return MvCp(job);
+            if(job.get("command").equals("rmdir") || job.get("command").equals("mkdir"))
+                return manipulateDir(job);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseUtil.getResponse(job, "NO", "Namenode storage error");
@@ -61,6 +63,119 @@ class NameNodeManager {
         crap.put("status", "wholyshit");
         return crap;
     }
+    private ArrayList<InetSocketAddress> getDataNodesFromFile(File f) throws FileNotFoundException {
+        ArrayList<InetSocketAddress> vec = new ArrayList<InetSocketAddress>();
+        Scanner sc = new Scanner(f);
+        JSONObject response = new JSONObject();
+        int total = 0, found = 0;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) continue;
+            // System.out.println(line);
+            JSONObject obj = new JSONObject(line);
+            assert (obj != null);
+            String ip = obj.getString("ip");
+            int port = obj.getInt("port");
+
+            InetSocketAddress address = new InetSocketAddress(ip, port);
+
+            vec.add(address);
+
+        }
+        return vec;
+    }
+
+    private ArrayList<InetSocketAddress> getDataNodesFromAllSubDirectory(File root) throws FileNotFoundException {
+        /*
+         * this will get you a list of all the datanodes that have any chunck in this file subtree
+         */
+        HashSet<String> set = new HashSet<>();
+        ArrayList<InetSocketAddress> ret = new ArrayList<>();
+        Queue<File> q = new LinkedList<File>();
+        q.add(root);
+        while(!q.isEmpty()){
+            File top = q.remove();
+            if(top.isDirectory()){
+                File ar []= top.listFiles();
+                for(File zbr : ar){
+                    q.add(zbr);
+                }
+            }
+            else{
+                ArrayList<InetSocketAddress> ar = getDataNodesFromFile(top);
+                for(InetSocketAddress address : ar){
+                    if(set.contains(address.toString())){
+                        continue;
+                    }
+                    set.add(address.toString());
+                    ret.add(address);
+                }
+            }
+        }
+        return ret;
+    }
+    private JSONObject manipulateDir(JSONObject job) throws IOException {
+        String strPath = defaultDir + job.get("username") + job.getString("directory");
+        File f = new File(strPath);
+
+        // you have only to check if
+        if (!f.exists() || !f.isDirectory()) {
+            return ResponseUtil.getResponse(job, "NO", "Directory does not exist");
+        }
+
+
+        String newDriPath = strPath + "/" + job.get("dirname");
+        // move/cp the file on namenode also :D
+        JSONObject response = ResponseUtil.getResponse(job, "NO", "Deleted only directories on namenode");
+
+        if(job.getString("command").equals("mkdir")){
+
+           f = new File(newDriPath);
+            if(f.exists() && f.isDirectory())
+                return ResponseUtil.getResponse(job, "NO", "another directory exist with the same name");
+            f.mkdir();
+            /// problem is which data node to sent further
+            return ResponseUtil.getResponse(job,"OK","Great success");
+        }
+        else{
+            f = new File(newDriPath);
+            if(!f.exists() || !f.isDirectory())
+                return ResponseUtil.getResponse(job, "NO", "It aint a directory");
+            if(!job.getString("force").equals("-r")){
+                if(f.listFiles().length!=0)
+                    return ResponseUtil.getResponse(job,"NO", "File has content please use -r to force delete recursively");
+
+            }
+            ArrayList<InetSocketAddress> ar = getDataNodesFromAllSubDirectory(f);
+            int found=0,total = ar.size();
+            for(InetSocketAddress address: ar){
+                if (nameNode.proxy.isAvailable(address)) {
+                    response = nameNode.proxy.manipulateDir(address, job);
+                    assert (response != null);
+                }
+            }
+            deleteRecursively(f);
+        }
+        return response;
+    }
+    private static void deleteRecursively(File file) throws IOException {
+
+        for (File childFile : file.listFiles()) {
+
+            if (childFile.isDirectory()) {
+                deleteRecursively(childFile);
+            } else {
+                if (!childFile.delete()) {
+                    throw new IOException();
+                }
+            }
+        }
+
+        if (!file.delete()) {
+            throw new IOException();
+        }
+    }
+
     private JSONObject MvCp(JSONObject job) throws IOException {
         String strPathFrom = defaultDir + job.get("username") + job.getString("pathFrom");
         String strPathTo = defaultDir + job.get("username") + job.getString("pathTo");
@@ -76,19 +191,12 @@ class NameNodeManager {
         if(!f3.isDirectory()){
             return ResponseUtil.getResponse(job,"NO", "There is no directory: " + strPathTo);
         }
-        Scanner sc = new Scanner(f);
+        ArrayList<InetSocketAddress> datanodes = getDataNodesFromFile(f);
+
         JSONObject response = new JSONObject();
         int total = 0, found = 0;
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.isEmpty()) continue;
-            // System.out.println(line);
-            JSONObject obj = new JSONObject(line);
-            assert (obj != null);
-            String ip = obj.getString("ip");
-            int port = obj.getInt("port");
 
-            InetSocketAddress address = new InetSocketAddress(ip, port);
+        for(InetSocketAddress address : datanodes){
             total++;
             if (nameNode.proxy.isAvailable(address)) {
                 found++;

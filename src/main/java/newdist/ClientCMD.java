@@ -116,7 +116,7 @@ class CommandUtil {
         commands.add("opendir");
         commands.add("lsdir");
         commands.add("mkdir");
-        commands.add("deldir");
+        commands.add("rmdir");
         commands.add("ls"); // same as ls dir i guess
         commands.add("cp");
         commands.add("mv");
@@ -214,7 +214,29 @@ class CommandUtil {
         ret.put("valid", "OK");
         return ret;
     }
+    static JSONObject getManDirCommand(String tokens[]) {
 
+        JSONObject ret = new JSONObject();
+
+
+        String validation = "OK";
+
+        if (!validation.equals("OK"))
+            return getErrorObject(validation);
+        ret.put("command", tokens[0]);
+        if(tokens[0].equals("rmdir") && tokens[1].equals("-r"))
+            ret.put("dirname", tokens[2]);
+        else ret.put("dirname",tokens[1]);
+        // current directory is automatically added as ["directory"]
+        ret.put("force","none");
+        if(tokens[0].equals("rmdir")&&tokens.length==3) {
+            if(!tokens[1].equals("-r"))
+                return getErrorObject("Only force argument is applicable \"-r\"");
+            ret.put("force", tokens[1]);
+        }
+        ret.put("valid", "OK");
+        return ret;
+    }
     static JSONObject getCpMvCommand(String tokens[]) {
         if (tokens.length != 3)
             return getErrorObject("Please specify path to file only! ");
@@ -368,6 +390,9 @@ class CommandUtil {
             jsonCommand = getInfoCommand(tokens);
         if (cmd.equals("cp") || cmd.equals("mv"))
             jsonCommand = getCpMvCommand(tokens);
+        if(cmd.equals("mkdir") || cmd.equals("rmdir")){
+            jsonCommand = getManDirCommand(tokens);
+        }
 ////////////////////erie
         if (client.isLoggedIn() == 1) {
             jsonCommand.put("username", client.userName);
