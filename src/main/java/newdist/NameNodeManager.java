@@ -43,6 +43,8 @@ class NameNodeManager {
                 return upload(job);
             if(job.get("command").equals("download"))
                 return download(job);
+            if(job.get("command").equals("delete"))
+                return delete(job);
         }
         catch (IOException e){
             e.printStackTrace();
@@ -53,7 +55,71 @@ class NameNodeManager {
         crap.put("status" , "wholyshit");
         return crap;
     }
+    private JSONObject delete(JSONObject job) throws FileNotFoundException {
+        System.out.println("Name node started deleting file: "+job.getString("path"));
 
+        String strPath = defaultDir + job.get("username") + job.getString("path");
+        System.out.println(job.getString("path"));
+        System.out.println(strPath);
+        job.put("path",job.get("path")); /// here may have an assertion actually
+
+        Path path = Paths.get(strPath);
+        System.out.print(strPath);
+        System.out.println(path);
+        if(!Files.exists(path)){
+            return ResponseUtil.getResponse(job , "NO" , "file doesn't exist on the server");
+        }
+
+        int found = 0, total=0;
+
+        File fileToRead = new File(path.toString());
+
+        Scanner sc = new Scanner(fileToRead);
+        JSONObject response = new JSONObject();
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            if(line.isEmpty()) continue;
+            // System.out.println(line);
+            JSONObject obj = new JSONObject(line);
+            assert(obj != null);
+            String ip = obj.getString("ip");
+            int port = obj.getInt("port");
+
+            InetSocketAddress address = new InetSocketAddress(ip , port);
+            total++;
+            if(nameNode.proxy.isAvailable(address)){
+                found++;
+
+                System.out.println("namenode manager thread" + Thread.currentThread());
+
+                response = nameNode.proxy.askForDelete(address , job);
+
+                System.out.println("jaaaa  " + response.toString() + " " + response);
+
+                assert(response != null);
+
+                System.out.println("jaaaa  " + response.toString() + " " + response);
+
+                break;
+            }
+        }
+        File f = new File(strPath);
+        if(found == total) {
+            if (!f.delete()) {
+                response.put("report", "Some wicked error happened!");
+                return response;
+            }
+        }
+        else{
+            response.put("report","There are still some datanodes with the file");
+            // neeeds extra handling
+            if (!f.delete()) {
+                response.put("report", "Some wicked error happened!");
+                return response;
+            }
+        }
+        return response;
+    }
     private JSONObject login(JSONObject job) {
 
         int found = 0;
@@ -97,6 +163,7 @@ class NameNodeManager {
         }
         return ResponseUtil.getResponse(job , "OK" , "Formatted Successfully");
     }
+
 
     private JSONObject download(JSONObject job) throws IOException{
         String strPath = defaultDir + job.get("username") + job.getString("serverpath");

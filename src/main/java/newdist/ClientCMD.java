@@ -151,6 +151,29 @@ class CommandUtil{
         ret.put("valid" , "OK");
         return ret;
     }
+    static String validateDeleteCommand(String tokens[]){
+        if(tokens.length != 2)
+            return "ERROR user has given more than one path";
+        if(pathUtility.validateFilePath(tokens[1]) == 0 )
+            return "ERROR user has given bad path format";
+        Path p = Paths.get(tokens[1]);
+
+        if(Files.isDirectory(p))
+            return "The parameter is a directory, please enter a file path to remove";
+
+        return "OK";
+    }
+    static JSONObject getDeleteCommand(String tokens[]){
+        String validation =  validateDeleteCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        JSONObject ret = new JSONObject();
+        ret.put("command", "delete");
+        ret.put("path",tokens[1]);
+        ret.put("valid" , "OK");
+        return ret;
+    }
     //////////////////////////////
 
     /////////////////////////////
@@ -267,11 +290,14 @@ class CommandUtil{
             jsonCommand = getUploadCommand(tokens);
         if(cmd.equals("login"))
             jsonCommand = getLoginCommand(tokens);
+        if(cmd.equals("delete"))
+            jsonCommand = getDeleteCommand(tokens);
 ////////////////////erie
         if(client.isLoggedIn() == 1){
             jsonCommand.put("username" , client.userName);
             jsonCommand.put("directory", client.currentDirectory);
         }
+
 
         assert(jsonCommand != null);
 
@@ -336,6 +362,7 @@ public class ClientCMD implements Runnable {
                 jsonCommand.remove("valid" );
 
                 client.notify(jsonCommand);
+
             }
         }
         catch (Exception e){
