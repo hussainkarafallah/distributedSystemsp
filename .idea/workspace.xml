@@ -8,14 +8,29 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="">
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/hussain/c/niggaz.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/c/niggaz.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -26,15 +41,21 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1TH18v1ozSR2K8C0S1REzdjFH2u" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources4/META-INF" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -138,7 +159,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6285ad18-a82e-49f1-bd0e-ffd4e792388e" name="Default Changelist" comment="" />
+      <changelist id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="" />
       <created>1573102050151</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -168,7 +189,8 @@
       <workItem from="1573595585219" duration="599000" />
       <workItem from="1573596251051" duration="1710000" />
       <workItem from="1573598172265" duration="654000" />
-      <workItem from="1573598851751" duration="26559000" />
+      <workItem from="1573598851751" duration="24479000" />
+      <workItem from="1573738306409" duration="26657000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -191,28 +213,49 @@
       <option name="project" value="LOCAL" />
       <updated>1573681915388</updated>
     </task>
-    <task id="LOCAL-00004" summary="added artifact">
-      <created>1573682667926</created>
+    <task id="LOCAL-00004" summary="bug fixes">
+      <created>1573716885325</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1573682667926</updated>
+      <updated>1573716885325</updated>
     </task>
-    <task id="LOCAL-00005" summary="added artifact">
-      <created>1573682810566</created>
+    <task id="LOCAL-00005" summary="added delete methods">
+      <created>1573753606165</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1573682810566</updated>
+      <updated>1573753606165</updated>
     </task>
-    <task id="LOCAL-00006" summary="added artifact">
-      <created>1573682833255</created>
+    <task id="LOCAL-00006" summary="bug fixes">
+      <created>1573753739060</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1573682833255</updated>
+      <updated>1573753739060</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added ls command">
+      <created>1573754826571</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573754826571</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added info commant">
+      <created>1573758999586</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1573758999586</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added copy and move">
+      <created>1573762404296</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1573762404296</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,8 +275,14 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="added datanode" />
     <MESSAGE value="added artifact" />
-    <option name="LAST_COMMIT_MESSAGE" value="added artifact" />
+    <MESSAGE value="added delete methods" />
+    <MESSAGE value="bug fixes" />
+    <MESSAGE value="Added ls command" />
+    <MESSAGE value="Added info commant" />
+    <MESSAGE value="Added copy and move" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added copy and move" />
   </component>
 </project>

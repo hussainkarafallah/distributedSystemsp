@@ -14,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Date;
 
 
 
@@ -21,58 +22,154 @@ public class DataNodeManager {
 
     DataNode dataNode;
 
-    DataNodeManager(DataNode _dataNode){
+    DataNodeManager(DataNode _dataNode) {
         assert (dataNode != null);
         dataNode = _dataNode;
     }
 
-    static class ResponseUtil{
-        static JSONObject getResponse(JSONObject command , String status , String report){
+    static class ResponseUtil {
+        static JSONObject getResponse(JSONObject command, String status, String report) {
             JSONObject ret = new JSONObject(command, JSONObject.getNames(command));
-            assert(command.get("command") != ret.get("command"));
-            ret.put("status",status);
-            ret.put("report" , report);
+            assert (command.get("command") != ret.get("command"));
+            ret.put("status", status);
+            ret.put("report", report);
             return ret;
         }
     }
 
-    void startDownloadJob(JSONObject job){
+    void startDownloadJob(JSONObject job) {
         String ip = job.getString("ip");
         int port = job.getInt("port");
         String path = job.getString("writepath");
-        Downloader downloader = new Downloader(ip , port , path);
+        Downloader downloader = new Downloader(ip, port, path);
 
     }
-    JSONObject performJob(JSONObject job){
-        if(job.get("command").equals("connect"))
-            return ResponseUtil.getResponse(job , "OK" , "datanode " + dataNode.dataNodeName + ":" + dataNode.portNumber + " is reached");
-        if(job.get("command").equals("startdownload")) {
-            startDownloadJob(job);
-            return ResponseUtil.getResponse(job , "OK" , "File found on data node");
+    JSONObject info(JSONObject job) {
+        String strPath = "./"+ job.get("username") + job.getString("path");
+
+        File f = new File(strPath);
+        if(!f.exists())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File does not exist on this datanode file: "+strPath);
+        Integer size = (int)f.length();
+        long secs = f.lastModified();
+        String dt = new Date(secs).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Size of the file: ");
+        sb.append(size);
+        sb.append(" Bytes");
+        sb.append("\nLast modified: ").append(dt).append("\n");
+
+        return newdist.ResponseUtil.getResponse(job, "OK", sb.toString());
+    }
+    private static void deleteRecursively(File file) throws IOException {
+
+        for (File childFile : file.listFiles()) {
+
+            if (childFile.isDirectory()) {
+                deleteRecursively(childFile);
+            } else {
+                if (!childFile.delete()) {
+                    throw new IOException();
+                }
+            }
         }
-        if(job.get("command").equals("startupload")) {
+
+        if (!file.delete()) {
+            throw new IOException();
+        }
+    }
+    JSONObject manipulateDir(JSONObject job) throws IOException {
+        String strPath = "./"+ job.get("username") + job.getString("directory");
+
+        File f = new File(strPath);
+        if(!f.exists() || !f.isDirectory())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File is not dir or does not even exist file: "+strPath);
+        String dirname = job.getString("dirname");
+        if(job.getString("command").equals("mkdir")){
+            f=new File(strPath+"/"+dirname);
+            f.mkdir();
+        }
+        else{
+            f=new File(strPath+"/"+dirname);
+            if(job.getString("force").equals("-r")){
+                deleteRecursively(f);
+            }
+            else {
+                if(f.listFiles().length!=0){
+                    return newdist.ResponseUtil.getResponse(job,"NO","DataNode error permission to remove all files within directory");
+                }
+            }
+        }
+        return newdist.ResponseUtil.getResponse(job,"OK","Great Success");
+    }
+    JSONObject MvCp(JSONObject job) throws IOException {
+        String strPathFrom = "./"+ job.get("username") + job.getString("pathFrom");
+        String strPathTo = "./"+ job.get("username") + job.getString("pathTo");
+
+        File f = new File(strPathFrom);
+        if(!f.exists())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File does not exist on this datanode file: "+strPathFrom);
+        if(job.getString("command").equals("mv")){
+            Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        else{
+            Files.copy(Paths.get(strPathFrom),Paths.get(strPathTo));
+        }
+        return newdist.ResponseUtil.getResponse(job,"OK","Great Success");
+    }
+    JSONObject delete(JSONObject job) {
+        String strPath = "./"+ job.get("username") + job.getString("path");
+        File f = new File(strPath);
+        String status = "OKz";
+
+        if(!f.exists())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File does not exist on this datanode file: "+strPath);
+        System.out.println(Boolean.toString(f.exists()));
+        if (!f.delete())
+            status = "Error";
+        return newdist.ResponseUtil.getResponse(job, status, "file  ought to be deleted");
+    }
+
+    JSONObject performJob(JSONObject job) throws IOException {
+        System.out.println("Wohoo we have new job "+job.getString("command") + " thats it");
+        if (job.get("command").equals("connect"))
+            return ResponseUtil.getResponse(job, "OK", "datanode " + dataNode.dataNodeName + ":" + dataNode.portNumber + " is reached");
+        if (job.get("command").equals("startdownload")) {
+            startDownloadJob(job);
+            return ResponseUtil.getResponse(job, "OK", "File found on data node");
+        }
+        if (job.get("command").equals("startupload")) {
             //startDownloadJob(job);
             System.out.println(job.toString());
-            JSONObject response =  ResponseUtil.getResponse(job , "OK" , "OK");
-            response.remove("command"); response.put("command" , "launchdownload");
+            JSONObject response = ResponseUtil.getResponse(job, "OK", "OK");
+            response.remove("command");
+            response.put("command", "launchdownload");
             int port = SocketUtils.findAvailableTcpPort();
             System.out.println("here is the shit " + response.toString());
-            Uploader uploader = new Uploader(port , job.getString("serverpath") , null , null , null);
+            Uploader uploader = new Uploader(port, job.getString("serverpath"), null, null, null);
             try {
                 response.put("ip", InetAddress.getLocalHost().getHostAddress());
                 response.put("port", port);
                 System.out.println("here is the shit II" + response.toString());
 
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             System.out.println("responded with " + response.toString());
             return response;
 
         }
+        if (job.get("command").equals("delete")) {
+            return delete(job);
+        }
+        if(job.getString("command").equals("info"))
+            return info(job);
+        if(job.getString("command").equals("cp")||job.getString("command").equals("mc"))
+            return MvCp(job);
+        if(job.getString("command").equals("rmdir")||job.getString("command").equals("mkdir"))
+            return manipulateDir(job);
         JSONObject crap = new JSONObject();
-        crap.put("status" , "wholyshit");
+        crap.put("status", "wholyshit");
         return crap;
     }
 

@@ -46,9 +46,9 @@ public class ClientManager {
     }
 
     void handleResponse(JSONObject response){
-
+        System.out.println(response.toString());
         if(response.getString("command").equals("login")){
-            if(response.get("status").equals("OK"));
+            if(response.get("status").equals("OK"))
                 client.setLogged(response.getString("username"));
             return;
         }

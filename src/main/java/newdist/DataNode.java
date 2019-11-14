@@ -51,7 +51,11 @@ public class DataNode implements Runnable{
             task = _task;
         }
         public void run(){
-            c.sendTCP(manager.performJob(task));
+            try {
+                c.sendTCP(manager.performJob(task));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
