@@ -190,7 +190,26 @@ class CommandUtil {
         return ret;
     }
     //////////////////////////////
+    static  JSONObject getInfoCommand(String tokens[]){
+        if(tokens.length !=2)
+            return getErrorObject("Please specify path to file only! ");
 
+        JSONObject ret = new JSONObject();
+        ret.put("command", "info");
+        Path p = Paths.get(tokens[1]);
+        String validation = "OK";
+        if(pathUtility.validateFilePath(tokens[1])==0)
+            validation = "No correct Path";
+        if (Files.isDirectory(p)) {
+            validation = "The first parameter is a directory, please enter a file path to write downloaded data to";
+        }
+        if(!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        ret.put("path",tokens[1]);
+        ret.put("valid", "OK");
+        return ret;
+    }
     /////////////////////////////
     static String validateFormatCommand(String tokens[]) {
         if (tokens.length == 1)
@@ -315,6 +334,8 @@ class CommandUtil {
             jsonCommand = getDeleteCommand(tokens);
         if (cmd.equals("ls"))
             jsonCommand = getLsCommand(tokens);
+        if(cmd.equals("info"))
+            jsonCommand = getInfoCommand(tokens);
 ////////////////////erie
         if (client.isLoggedIn() == 1) {
             jsonCommand.put("username", client.userName);

@@ -14,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Date;
+
 
 
 public class DataNodeManager {
@@ -42,11 +44,25 @@ public class DataNodeManager {
         Downloader downloader = new Downloader(ip, port, path);
 
     }
+    JSONObject info(JSONObject job) {
+        String strPath = "./"+ job.get("username") + job.getString("path");
 
+        File f = new File(strPath);
+        if(!f.exists())
+            return newdist.ResponseUtil.getResponse(job,"ERR","File does not exist on this datanode file: "+strPath);
+        Integer size = (int)f.length();
+        long secs = f.lastModified();
+        String dt = new Date(secs).toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Size of the file: ");
+        sb.append(size);
+        sb.append(" Bytes");
+        sb.append("\nLast modified: ").append(dt).append("\n");
+
+        return newdist.ResponseUtil.getResponse(job, "OK", sb.toString());
+    }
     JSONObject delete(JSONObject job) {
         String strPath = "./"+ job.get("username") + job.getString("path");
-        
-
         File f = new File(strPath);
         String status = "OKz";
 
@@ -90,6 +106,8 @@ public class DataNodeManager {
         if (job.get("command").equals("delete")) {
             return delete(job);
         }
+        if(job.getString("command").equals("info"))
+            return info(job);
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
         return crap;

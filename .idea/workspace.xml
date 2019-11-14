@@ -11,15 +11,18 @@
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/hussain/c/d/book2.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/namenode/hussain/c/d/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/hussain/nigga.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datanode1/hussain/nigga.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/hussain/nigga.txt" beforeDir="false" afterPath="$PROJECT_DIR$/datanode2/hussain/nigga.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager$ResponseUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager$ResponseUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +191,7 @@
       <workItem from="1573596251051" duration="1710000" />
       <workItem from="1573598172265" duration="654000" />
       <workItem from="1573598851751" duration="24479000" />
-      <workItem from="1573738306409" duration="13706000" />
+      <workItem from="1573738306409" duration="17833000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -232,7 +235,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573753739060</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added ls command">
+      <created>1573754826571</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1573754826571</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +267,7 @@
     <MESSAGE value="added artifact" />
     <MESSAGE value="added delete methods" />
     <MESSAGE value="bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
+    <MESSAGE value="Added ls command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ls command" />
   </component>
 </project>
