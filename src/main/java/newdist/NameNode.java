@@ -4,8 +4,13 @@ import com.esotericsoftware.kryo.*;
 import com.esotericsoftware.kryonet.*;
 import org.json.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 
 public class NameNode implements Runnable{
@@ -15,7 +20,26 @@ public class NameNode implements Runnable{
     NameNodeManager manager;
     NameNodeProxy proxy;
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws IOException {
+        args = new String[1];
+        System.out.println(new File(".").getCanonicalPath());
+        Files.deleteIfExists(Paths.get("./zbr"));
+        Files.createFile(Paths.get("./zbr"));
+        File f = new File("./namenode/namenode_hosts.conf");
+        if(!f.exists() || f.isDirectory()) {
+            System.out.println("please read readmefile and configure ./namenode/namenode_hosts.conf file");
+            return;
+        }
+        Files.deleteIfExists(Paths.get("./namenode/zbl"));
+        Files.createFile(Paths.get("./namenode/zbl"));
+        Scanner sc = new Scanner(f);
+        int ind = 0;
+        while(sc.hasNext()){
+            if(ind>=1){
+                System.out.println("Too many args check ./namenode/namenode_hosts.conf");
+            }
+            args[ind++] = sc.next();
+        }
         NameNode nameNode = new NameNode(args);
         nameNode.run();
     }
