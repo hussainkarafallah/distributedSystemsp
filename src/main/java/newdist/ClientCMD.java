@@ -448,8 +448,8 @@ public class ClientCMD implements Runnable {
         System.out.println("Welcome to MullanorovDFS this is the client, please login and then enter your commands");
 
         try {
-            //BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-            BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
+            BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+           // BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
 
             String line = "";
 

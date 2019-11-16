@@ -359,7 +359,7 @@ class NameNodeManager {
         int found = 0;
         String username = job.getString("username");
         String password = job.getString("password");
-        File f = new File("users.conf");
+        File f = new File("./namenode/users.conf");
         try (Scanner sc = new Scanner(f)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();

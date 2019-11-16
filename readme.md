@@ -53,13 +53,13 @@ sudo docker run -v $(pwd):/namenode -it --network host jafarbadour/namenode-dfs:
 
 On datanode run:
 ```aidl
-sudo docker run -v $(pwd):/datanode --network host jafarbadour/datanode-dfs:latest
+sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
 ```
-
+18.220.0.246
 On clientnode run:
 
 ```aidl
-sudo docker run -v $(pwd):/client --network host jafarbadour/client-dfs:latest
+sudo docker run -v $(pwd):/client -it --network host jafarbadour/client-dfs:latest
 ```
 
 -v will let docker container mount the folder (namenode,datanode,client) in the host OS file system

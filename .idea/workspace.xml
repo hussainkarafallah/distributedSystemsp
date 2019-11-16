@@ -8,9 +8,18 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="WorkingDockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.conf" beforeDir="false" afterPath="$PROJECT_DIR$/namenode/users.conf" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,11 +66,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/namenode" />
+      <recent name="$PROJECT_DIR$/client" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/datanode2" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -317,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573923167203</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="WorkingDockerfile">
+      <created>1573926464895</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1573926464895</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
