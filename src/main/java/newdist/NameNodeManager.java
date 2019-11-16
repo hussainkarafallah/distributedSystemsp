@@ -194,7 +194,6 @@ class NameNodeManager {
         if (!f.exists() || f.isDirectory()) {
             return ResponseUtil.getResponse(job, "NO", "You either have specified an non existing file or it is a directory not a file");
         }
-        //System.out.println("checking if exists " + f2.exists() + " " + f2.toString());
 
         if(f2.exists()){
             return ResponseUtil.getResponse(job, "NO", "Your target file already exists");
@@ -202,7 +201,6 @@ class NameNodeManager {
 
         File f3 = f2.getParentFile();
 
-        //System.out.println(f2.getCanonicalPath());
 
         System.out.println(strPathFrom+" ::  "+strPathTo);
         if(!f3.isDirectory()){
@@ -320,10 +318,6 @@ class NameNodeManager {
         else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
     }
 
-
-
-
-
     private JSONObject info(JSONObject job) throws FileNotFoundException {
         String strPath = defaultDir + job.get("username") + job.getString("path");
         File f = new File(strPath);
@@ -340,7 +334,7 @@ class NameNodeManager {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (line.isEmpty()) continue;
-            // System.out.println(line);
+
             JSONObject obj = new JSONObject(line);
             assert (obj != null);
             String ip = obj.getString("ip");
@@ -360,9 +354,6 @@ class NameNodeManager {
         return response;
     }
 
-
-
-
     private JSONObject login(JSONObject job) {
 
         int found = 0;
@@ -373,7 +364,6 @@ class NameNodeManager {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 JSONObject curline = new JSONObject(line);
-                System.out.println(curline.toString());
                 if (curline.isNull(username)) continue;
                 if (curline.getString(username) != null)
                     if (curline.getString(username).equals(password)) {
@@ -408,7 +398,6 @@ class NameNodeManager {
             return ResponseUtil.getResponse(job , "OK" , "All current datanodeds were formatted");
         else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
     }
-
 
     private JSONObject download(JSONObject job) throws IOException {
         String strPath = defaultDir + job.get("username") + job.getString("serverpath");

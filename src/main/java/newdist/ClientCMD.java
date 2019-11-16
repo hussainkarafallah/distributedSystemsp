@@ -376,11 +376,9 @@ class CommandUtil {
 
     static JSONObject getCommandObject(String tokens[], ClientApp client) {
 
-//        System.out.println(tokens[1]);
-//        System.out.println(tokens.length);
         if (tokens.length < 1)
             return invalidQueryError();
-//        System.out.println("Survived");
+
         String cmd = tokens[0];
 
         if (commands.indexOf(cmd) == -1)
