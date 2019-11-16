@@ -9,15 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/datanode_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/datanode_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,12 +46,20 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources4/META-INF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/datanode2" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/datanode2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -70,7 +73,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.NameNode">
+  <component name="RunManager" selected="Multirun.omar">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="newdist.App" />
       <module name="distributedSystemsp" />
@@ -87,7 +90,6 @@
     <configuration name="Client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="newdist.ClientApp" />
       <module name="distributedSystemsp" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;127.0.0.1&quot; &quot;26200&quot; &quot;client1&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/client/" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -96,7 +98,6 @@
     <configuration name="Datanode1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="newdist.DataNode" />
       <module name="distributedSystemsp" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;25100&quot; &quot;127.0.0.1&quot; &quot;26200&quot; &quot;datanode1&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datanode1/" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -105,7 +106,6 @@
     <configuration name="Datanode2" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="newdist.DataNode" />
       <module name="distributedSystemsp" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;27890&quot; &quot;127.0.0.1&quot; &quot;26200&quot; &quot;datanode2&quot;" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datanode2/" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -114,7 +114,6 @@
     <configuration name="NameNode" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="newdist.NameNode" />
       <module name="distributedSystemsp" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;26200&quot;" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -186,9 +185,8 @@
       <workItem from="1573596251051" duration="1710000" />
       <workItem from="1573598172265" duration="654000" />
       <workItem from="1573598851751" duration="24479000" />
-      <workItem from="1573738306409" duration="26657000" />
-      <workItem from="1573771291900" duration="8532000" />
-      <workItem from="1573861346381" duration="2217000" />
+      <workItem from="1573738306409" duration="29092000" />
+      <workItem from="1573772343435" duration="11233000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -253,11 +251,49 @@
       <option name="project" value="LOCAL" />
       <updated>1573762404296</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add mkdir, rmdir, rmdir -r">
+      <created>1573768036444</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1573768036444</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add mkdir, rmdir, rmdir -r">
+      <created>1573780688676</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1573780688676</updated>
+    </task>
+    <task id="LOCAL-00012" summary="sd">
+      <created>1573781974004</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1573781974004</updated>
+    </task>
+    <task id="LOCAL-00013" summary="sd">
+      <created>1573782025584</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1573782025584</updated>
+    </task>
+    <task id="LOCAL-00014" summary="sd">
+      <created>1573783761313</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1573783761313</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -281,6 +317,8 @@
     <MESSAGE value="Added ls command" />
     <MESSAGE value="Added info commant" />
     <MESSAGE value="Added copy and move" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added copy and move" />
+    <MESSAGE value="add mkdir, rmdir, rmdir -r" />
+    <MESSAGE value="sd" />
+    <option name="LAST_COMMIT_MESSAGE" value="sd" />
   </component>
 </project>

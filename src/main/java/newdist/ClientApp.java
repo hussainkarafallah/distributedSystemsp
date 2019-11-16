@@ -3,6 +3,7 @@ package newdist;
 
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 import com.esotericsoftware.kryonet.*;
 import com.esotericsoftware.kryo.*;
@@ -41,7 +42,22 @@ public class ClientApp {
         manager = new ClientManager(this);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        args = new String[3];
+        File f = new File("./client_hosts.conf");
+        System.out.println(new File(".").getCanonicalPath());
+        if(!f.exists() || f.isDirectory()) {
+            System.out.println("please read readmefile and configure client_hosts.conf file");
+            return;
+        }
+        Scanner sc = new Scanner(f);
+        int ind = 0;
+        while(sc.hasNext()){
+            if(ind>=3){
+                System.out.println("Too many args check client_hosts.conf");
+            }
+            args[ind++] = sc.next();
+        }
 
         if (args.length != 3) {
             System.err.println(

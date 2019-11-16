@@ -9,8 +9,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.xml.crypto.Data;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class DataNode implements Runnable{
 
@@ -38,7 +43,24 @@ public class DataNode implements Runnable{
 
     }
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws IOException {
+        args = new String[4];
+        Files.deleteIfExists(Paths.get("./zbr"));
+        Files.createFile(Paths.get("./zbr"));
+        File f = new File("./datanode_hosts.conf");
+        System.out.println("Done");
+        if(!f.exists() || f.isDirectory()) {
+            System.out.println("please read readmefile and configure datanode_hosts.conf file");
+            return;
+        }
+        Scanner sc = new Scanner(f);
+        int ind = 0;
+        while(sc.hasNext()){
+            if(ind>=4){
+                System.out.println("Too many args check datanode_hosts.conf");
+            }
+            args[ind++] = sc.next();
+        }
         DataNode datanode = new DataNode(args);
         datanode.run();
     }
