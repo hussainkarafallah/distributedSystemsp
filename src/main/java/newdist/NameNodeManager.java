@@ -121,6 +121,7 @@ class NameNodeManager {
         return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
 
     }
+
     private JSONObject delete(JSONObject job) throws FileNotFoundException , IOException {
 
         Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
@@ -513,6 +514,60 @@ class NameNodeManager {
 
 
     }
+    /*private JSONObject create(JSONObject job) throws IOException    {
+
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("writepath"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+
+        job.remove("writepath");
+        job.put("writepath", "./" + job.get("username") + "/" + normalized.toString());
+
+        Path path = Paths.get(strPath);
+        Files.deleteIfExists(path);
+
+        Path par = path.getParent();
+        if (par != null && !Files.exists(par))
+            Files.createDirectories(par);
+
+        Files.createFile(path);
+
+        InetSocketAddress datanode = nameNode.proxy.getAvailableDataNode();
+
+
+        JSONObject meta = new JSONObject();
+        meta.put("type", "mainnode");
+        meta.put("ip", datanode.getAddress().getHostAddress());
+        meta.put("port", datanode.getPort());
+
+        PrintWriter pw = new PrintWriter(path.toString());
+        pw.write(meta.toString() + "\n");
+
+        meta = new JSONObject();
+        meta.put("type","info");
+
+        meta.put("size",job.getString("size"));
+        meta.put("last_modified", job.getString("last_modified"));
+        pw.write(meta.toString() + "\n");
+
+        pw.flush();
+        pw.close();
+
+        JSONObject response = ResponseUtil.getResponse(job , "NO" , "Failed to connect to datanode");
+
+        int i = nameNode.proxy.dataNodes.indexOf(datanode);
+
+        try {
+            Object obj = nameNode.proxy.sockets.get(i).sendSafeTCP(job, new JSONObject());
+            response = (JSONObject) (obj);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return response;
+
+
+    }*/
 
     private JSONObject getReplicas(JSONObject job) {
         System.out.println("Getting replicas for" + job.getString("path"));

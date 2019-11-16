@@ -133,7 +133,7 @@ public class DataNode implements Runnable{
         catch (IOException e){
             e.printStackTrace();
         }*/
-
+        System.out.println("asdasdsadasd");
 
         JSONObject connectionRequest = new JSONObject();
         connectionRequest.put("command" , "datanodeauth");

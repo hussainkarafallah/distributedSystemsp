@@ -9,21 +9,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datanode1/hussain/zbr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datanode2/hussain/zbr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/hussain/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode1/almir/zinj/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/almir/zinj/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/almir/zinj/zbr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/hussain/abc/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode2/hussain/abc/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/namenode/hussain/abc/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/hussain/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/hussain/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/zbr" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/App.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Downloader$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Downloader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/pathUtility.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/pathUtility.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/newdist/AppTest.class" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -366,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573938439303</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="added info">
+      <created>1573940825836</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1573940825836</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -402,6 +426,7 @@
     <MESSAGE value="refactor jafar stuff + upgrade format" />
     <MESSAGE value="replicashon" />
     <MESSAGE value="Added readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added readme" />
+    <MESSAGE value="added info" />
+    <option name="LAST_COMMIT_MESSAGE" value="added info" />
   </component>
 </project>

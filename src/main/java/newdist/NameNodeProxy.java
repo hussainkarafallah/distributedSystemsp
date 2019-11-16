@@ -12,9 +12,11 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Semaphore;
+
 
 
 class NameNodeProxy implements Runnable{
@@ -22,7 +24,9 @@ class NameNodeProxy implements Runnable{
     final int replicationFactor = 2;
 
     List<ThreadSafeClient> sockets;
+
     ArrayList<InetSocketAddress> dataNodes;
+    HashMap<InetSocketAddress,ArrayList<JSONObject>> pending = new HashMap<>();
      //   List<Semaphore> semaphores;
 
     Random rng = new Random(1997);
@@ -64,7 +68,11 @@ class NameNodeProxy implements Runnable{
             int idx = dataNodes.indexOf(dataNode);
             if(idx == -1){
                 System.out.println("we need to discuss this later");
+                if(!pending.containsKey(dataNode))
+                    pending.put(dataNode,new ArrayList<JSONObject>());
+                pending.get(dataNode).add(job);
                 continue;
+
             }
 
             try {
@@ -125,10 +133,19 @@ class NameNodeProxy implements Runnable{
 
         client.Launch();
 
+
         client.addListener(new Listener.ThreadedListener(new Listener(){
             @Override
             public void disconnected(Connection connection) {
-                System.out.println("what the fuck one datanode disconnected");
+                System.out.println(" one datanode disconnected");
+                int i =0;
+                for(ThreadSafeClient s : sockets){
+                    if(!s.isConnected())break;
+                    i++;
+                }
+                dataNodes.remove(i);
+                sockets.remove(i);
+
             }
         }));
 
@@ -136,6 +153,7 @@ class NameNodeProxy implements Runnable{
         System.out.println("Trying to add datanode " + datanode.getAddress().getHostAddress() + ":" + datanode.getPort());
 
         sockets.add(client);
+
 
         //semaphores.add(new Semaphore(1));
 
@@ -148,6 +166,19 @@ class NameNodeProxy implements Runnable{
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+        if(pending.containsKey(datanode)){
+            for(JSONObject j : pending.get(datanode)){
+                try {
+                    Object ret = client.sendSafeTCP(j, new JSONObject());
+                    JSONObject response = (JSONObject)ret;
+                    System.out.println(response.toString());
+                }
+                catch (Exception e){
+
+                }
+            }
+            pending.remove(datanode);
         }
 
 

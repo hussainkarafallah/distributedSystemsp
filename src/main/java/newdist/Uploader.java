@@ -129,7 +129,7 @@ public class Uploader {
 
             public void disconnected(Connection connection) {
 
-                System.out.println("Uploaded " + total + " bytes successfully " + " to " + otherGuy.getAddress().getHostAddress() + ":" + otherGuy.getPort() + " and written to file " + writePath.toString() );
+                System.out.println("Written " + total + " bytes successfully " + " to " + otherGuy.getAddress().getHostAddress() + ":" + otherGuy.getPort() + " and written to file " + writePath.toString() );
 
                 server.close();
             }

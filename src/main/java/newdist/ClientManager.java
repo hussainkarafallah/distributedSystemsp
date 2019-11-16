@@ -53,7 +53,9 @@ public class ClientManager {
             return;
         }
         if(response.getString("command").equals("upload")){
+
             if(response.get("status").equals("OK")){
+
                 uploadHandler(response);
                 return;
             }

@@ -358,7 +358,7 @@ class CommandUtil {
 
     }
     //////////////////////////////
-    static JSONObject getInfoCommand(String tokens[]) {
+    static JSONObject getInfoCommand(String[] tokens) {
         if (tokens.length != 2)
             return getErrorObject("Please specify path to file only! ");
 
@@ -375,6 +375,31 @@ class CommandUtil {
             return getErrorObject(validation);
 
         ret.put("path", tokens[1]);
+        ret.put("valid", "OK");
+        return ret;
+    }
+    static JSONObject getCreateCommand(String[] tokens){
+        if (tokens.length != 2)
+            return getErrorObject("Invalid! ");
+        String dummy = "./tmpwwewrestlemania";
+        try {
+            Files.deleteIfExists(Paths.get(dummy));
+            Files.createFile(Paths.get(dummy));
+        }
+        catch (Exception e){}
+
+        JSONObject ret = new JSONObject();
+
+        File f = new File(tokens[1]);
+
+        ret.put("command", "upload");
+        ret.put("writepath", tokens[1]);
+        ret.put("clientpath", dummy);
+
+        Date d = new Date(f.lastModified());
+
+        ret.put("size","0");
+        ret.put("last_modified",d.toString());
         ret.put("valid", "OK");
         return ret;
     }
@@ -419,6 +444,8 @@ class CommandUtil {
             jsonCommand = getMkDirCommand(tokens);
         if(cmd.equals("rmdir"))
             jsonCommand = getRmDirCommand(tokens);
+        if(cmd.equals("create"))
+            jsonCommand = getCreateCommand(tokens);
 
 ////////////////////erie
         if (client.isLoggedIn() == 1) {

@@ -1,6 +1,11 @@
 login hussain 123456
 format
-upload ./zbr ./abc/zbr
-ls ./abc
-ls ./
-quit
+create omar
+create bakr
+create /ali/fallah
+
+info omar
+info bakr
+cd ali
+info fallah
+

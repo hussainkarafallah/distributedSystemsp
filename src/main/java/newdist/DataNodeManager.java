@@ -212,6 +212,8 @@ public class DataNodeManager {
             return MvCp(job);;
         if(job.getString("command").equals("rmdir"))
             return removeDirectory(job);
+     //   if(job.getString("command").equals("create"))
+     //       return createFile(job);
 
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
