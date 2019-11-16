@@ -60,6 +60,8 @@ class NameNodeManager {
                 return makeDirectory(job);
             if(job.get("command").equals("cd"))
                 return changeDirectory(job);
+            if(job.get("command").equals("getreplicas"))
+                return getReplicas(job);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseUtil.getResponse(job, "NO", "Namenode storage error");
@@ -70,27 +72,6 @@ class NameNodeManager {
         return crap;
     }
 
-    private ArrayList<InetSocketAddress> getDataNodesFromFile(File f) throws FileNotFoundException {
-        ArrayList<InetSocketAddress> vec = new ArrayList<InetSocketAddress>();
-        Scanner sc = new Scanner(f);
-        JSONObject response = new JSONObject();
-        int total = 0, found = 0;
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.isEmpty()) continue;
-            // System.out.println(line);
-            JSONObject obj = new JSONObject(line);
-            assert (obj != null);
-            String ip = obj.getString("ip");
-            int port = obj.getInt("port");
-
-            InetSocketAddress address = new InetSocketAddress(ip, port);
-
-            vec.add(address);
-
-        }
-        return vec;
-    }
 
     private static Path getNormalizedPath(String currentDirectory , String toAppend){
 
@@ -132,17 +113,15 @@ class NameNodeManager {
         StringBuilder filesListString = new StringBuilder();
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                System.out.println("File " + listOfFiles[i].getName());
                 filesListString.append("File ").append(listOfFiles[i].getName()).append("\n");
             } else if (listOfFiles[i].isDirectory()) {
-                System.out.println("Directory " + listOfFiles[i].getName());
                 filesListString.append("Directory ").append(listOfFiles[i].getName()).append("\n");
             }
         }
         return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
 
     }
-    private JSONObject delete(JSONObject job) throws FileNotFoundException {
+    private JSONObject delete(JSONObject job) throws FileNotFoundException , IOException {
 
         Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
         String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
@@ -157,7 +136,9 @@ class NameNodeManager {
         int found = 0, total = 0;
 
         File fileToRead = new File(filePath.toString());
-        ArrayList < InetSocketAddress > addresses = getDataNodesFromFile(fileToRead);
+
+        ArrayList<InetSocketAddress> addresses = getDataNodesFromFile(fileToRead);
+
 
         JSONObject okFWD = nameNode.proxy.forwardJob(addresses , job);
 
@@ -201,8 +182,6 @@ class NameNodeManager {
 
         File f3 = f2.getParentFile();
 
-
-        System.out.println(strPathFrom+" ::  "+strPathTo);
         if(!f3.isDirectory()){
             return ResponseUtil.getResponse(job,"NO", "Your target file parent directory doesn't exist: " + strPathTo);
         }
@@ -245,7 +224,7 @@ class NameNodeManager {
     }
 
 
-    private ArrayList<InetSocketAddress> getDataNodesFromAllSubDirectory(File root) throws FileNotFoundException {
+    private ArrayList<InetSocketAddress> getDataNodesFromAllSubDirectory(File root) throws FileNotFoundException , IOException {
         /*
          * this will get you a list of all the datanodes that have any chunck in this file subtree
          */
@@ -273,6 +252,30 @@ class NameNodeManager {
             }
         }
         return ret;
+    }
+
+    private ArrayList<InetSocketAddress> getDataNodesFromFile(File f) throws IOException {
+
+        ArrayList<InetSocketAddress> vec = new ArrayList<InetSocketAddress>();
+        Scanner sc = new Scanner(f);
+        JSONObject response = new JSONObject();
+        int total = 0, found = 0;
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) continue;
+            JSONObject obj = new JSONObject(line);
+            assert (obj != null);
+            if(!obj.getString("type").equals("replica") && !obj.getString("type").equals("mainnode"))
+                continue;
+            String ip = obj.getString("ip");
+            int port = obj.getInt("port");
+
+            InetSocketAddress address = new InetSocketAddress(ip, port);
+
+            vec.add(address);
+
+        }
+        return vec;
     }
 
     private JSONObject makeDirectory(JSONObject job) throws IOException{
@@ -382,7 +385,6 @@ class NameNodeManager {
     }
 
     private JSONObject format(JSONObject job) throws IOException {
-        //this function needs to be upgraded to delete all files but for now it just creates new directory
         String dir = defaultDir + job.getString("username") + "/";
         Path path = Paths.get(dir);
         if (Files.notExists(path)) {
@@ -390,6 +392,7 @@ class NameNodeManager {
         } else {
             File f = new File(dir);
             boolean res = FileSystemUtils.deleteRecursively(path);
+            //System.out.println("formatting namenode");
             assert(res);
             Files.createDirectory(path);
         }
@@ -434,34 +437,23 @@ class NameNodeManager {
             if (nameNode.proxy.isAvailable(add)) {
                 found = 1;
 
-                System.out.println("namenode manager thread" + Thread.currentThread());
-
                 response = nameNode.proxy.askForUpload(add, job);
-
-                System.out.println("jaaaa  " + response.toString() + " " + response);
-
                 assert (response != null);
-
-                System.out.println("jaaaa  " + response.toString() + " " + response);
 
                 break;
             }
         }
-        System.out.println("what the shit why no printing");
-        System.out.println(found);
         if (found == 0) return ResponseUtil.getResponse(job, "NO", "File is temporarily unavailable");
-        System.out.println("Found" + response.toString(2));
         return response;
     }
 
-    private JSONObject upload(JSONObject job) throws IOException {
+    private JSONObject upload(JSONObject job) throws IOException    {
 
-
-        String strPath = defaultDir + job.get("username") + job.getString("writepath");
-        String solPath = job.getString("writepath");
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("writepath"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
 
         job.remove("writepath");
-        job.put("writepath", "./" + job.get("username") + "/" + solPath);
+        job.put("writepath", "./" + job.get("username") + "/" + normalized.toString());
 
         Path path = Paths.get(strPath);
         Files.deleteIfExists(path);
@@ -472,7 +464,6 @@ class NameNodeManager {
 
         Files.createFile(path);
 
-        //System.out.println(path.getFileName());
         InetSocketAddress datanode = nameNode.proxy.getAvailableDataNode();
 
         JSONObject response = ResponseUtil.getResponse(job, "OK", "namenode created the file");
@@ -487,6 +478,13 @@ class NameNodeManager {
 
         PrintWriter pw = new PrintWriter(path.toString());
         pw.write(meta.toString() + "\n");
+
+        meta = new JSONObject();
+        meta.put("type","info");
+        meta.put("key","size");
+        meta.put("size",job.getString("size"));
+        pw.write(meta.toString() + "\n");
+
         pw.flush();
         pw.close();
 
@@ -495,6 +493,42 @@ class NameNodeManager {
 
     }
 
+    private JSONObject getReplicas(JSONObject job) {
+        System.out.println("Getting replicas for" + job.getString("path"));
+        String strPath = defaultDir + job.getString("path");
+        String solPath = job.getString("path");
+        File f = new File(strPath);
+        assert(f.exists());
+        String replicasStr = "";
+        JSONObject ret = new JSONObject(job.toString());
+
+        try{
+
+            FileWriter fw = new FileWriter(f , true);
+            PrintWriter pw = new PrintWriter(fw);
+            ArrayList<InetSocketAddress>  dataNodes = getDataNodesFromFile(f);
+            assert (dataNodes.size() == 1);
+                ArrayList<InetSocketAddress> replicaNodes = nameNode.proxy.getReplicas(dataNodes.get(0));
+            int iter = 0;
+            for(InetSocketAddress replicaNode : replicaNodes){
+                JSONObject meta = new JSONObject();
+                meta.put("ip" , replicaNode.getAddress().getHostAddress());
+                meta.put("port",replicaNode.getPort());
+                meta.put("type","replica");
+                replicasStr += meta.toString() + "\n";
+                pw.println(meta);
+            }
+            pw.close();
+            fw.close();
+            ret.put("replicas",replicasStr);
+            System.out.println(ret.toString());
+            return ResponseUtil.getResponse(ret , "OK" , "replicas are copied successfully");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResponseUtil.getResponse(job , "NO" , "someweirddstuff");
+    }
 
 
 }

@@ -8,7 +8,23 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="" />
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/datanode1/almir/zinj/znoj/book2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/almir/zinj/znoj/book2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/almir/zinj/znoj/book2.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/users.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.conf" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +42,22 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="hussain-refactor" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="hussain-refactor" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,15 +80,14 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/namenode" />
-      <recent name="$PROJECT_DIR$/client" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/datanode2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -74,7 +102,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
+  <component name="RunManager" selected="Multirun.omar">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="newdist.App" />
       <module name="distributedSystemsp" />
@@ -112,6 +140,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Datanode3" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="newdist.DataNode" />
+      <module name="distributedSystemsp" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/datanode3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NameNode" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="newdist.NameNode" />
       <module name="distributedSystemsp" />
@@ -137,6 +173,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Datanode3" />
       <item itemvalue="Application.Datanode1" />
       <item itemvalue="Application.Datanode2" />
       <item itemvalue="Application.Client" />
@@ -301,35 +338,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573885056120</updated>
     </task>
-    <task id="LOCAL-00017" summary="WorkingDockerfile">
-      <created>1573920121138</created>
+    <task id="LOCAL-00017" summary="refactor jafar stuff + upgrade format">
+      <created>1573886434487</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1573920121138</updated>
+      <updated>1573886434487</updated>
     </task>
-    <task id="LOCAL-00018" summary="WorkingDockerfile">
-      <created>1573923167203</created>
+    <task id="LOCAL-00018" summary="replicashon">
+      <created>1573934654754</created>
       <option name="number" value="00018" />
       <option name="presentableId" value="LOCAL-00018" />
       <option name="project" value="LOCAL" />
-      <updated>1573923167203</updated>
+      <updated>1573934654755</updated>
     </task>
-    <task id="LOCAL-00019" summary="WorkingDockerfile">
-      <created>1573926464895</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1573926464895</updated>
-    </task>
-    <task id="LOCAL-00020" summary="WorkingDockerfile">
-      <created>1573928448989</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1573928448989</updated>
-    </task>
-    <option name="localTasksCounter" value="21" />
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +386,7 @@
     <MESSAGE value="add mkdir, rmdir, rmdir -r" />
     <MESSAGE value="sd" />
     <MESSAGE value="refactor jafar stuff + upgrade format" />
-    <MESSAGE value="WorkingDockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="WorkingDockerfile" />
+    <MESSAGE value="replicashon" />
+    <option name="LAST_COMMIT_MESSAGE" value="replicashon" />
   </component>
 </project>

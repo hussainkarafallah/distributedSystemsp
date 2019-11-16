@@ -2,6 +2,7 @@ package newdist;
 
 import com.esotericsoftware.kryonet.Client;
 import org.json.JSONObject;
+import org.springframework.util.FileSystemUtils;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -312,7 +313,6 @@ class CommandUtil {
         ret.put("serverpath", tokens[2]);
         ret.put("valid", "OK");
 
-        //  System.out.println("new upload" + ret.toString(2));
 
         return ret;
     }
@@ -343,9 +343,12 @@ class CommandUtil {
 
         JSONObject ret = new JSONObject();
         ;
+        File f = new File(tokens[1]);
+
         ret.put("command", "upload");
         ret.put("writepath", tokens[2]);
         ret.put("clientpath", tokens[1]);
+        ret.put("size",String.valueOf(f.length()));
         ret.put("valid", "OK");
         return ret;
 
@@ -449,7 +452,7 @@ public class ClientCMD implements Runnable {
 
         try {
             BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-           // BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
+            //BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
 
             String line = "";
 

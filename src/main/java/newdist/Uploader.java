@@ -18,6 +18,8 @@ public class Uploader {
     InetSocketAddress otherEnd;
     JSONObject info;
     byte[] arr;
+    long total;
+    InetSocketAddress otherGuy;
 
     Uploader(int _portNumber , String _filePath , String _writePath , InetSocketAddress add , JSONObject _info){
         assert(_info != null);
@@ -60,15 +62,13 @@ public class Uploader {
 
         try {
             //System.out.println(info.toString(2));
-            JSONObject request = new JSONObject(info, JSONObject.getNames(info));
+            JSONObject request = new JSONObject(info.toString());
 
             InetAddress inetAddress = InetAddress.getLocalHost();
             request.put("command", "startdownload");
             request.put("ip", inetAddress.getHostAddress());
             request.put("port",portNumber);
             request.put("writepath",writePath);
-
-           // System.out.println(request.toString(2));
 
 
             client.sendTCP(request);
@@ -78,8 +78,6 @@ public class Uploader {
         }
     }
     void start() throws IOException{
-
-        System.out.println("here we are uploader started at port " + portNumber);
 
         server = new Server((int)(1e7) , (int)(1e6));
         server.getKryo().register(byte[].class);
@@ -96,6 +94,7 @@ public class Uploader {
         File file = new File(filePath);
         FileInputStream stream = new FileInputStream(file);
         arr = new byte[ (int) (file.length())];
+        total = file.length();
         stream.read(arr);
         stream.close();
 
@@ -115,6 +114,7 @@ public class Uploader {
             }
             public void received (Connection connection, Object object) {
                 if (object instanceof String) {
+                    otherGuy = new InetSocketAddress(connection.getRemoteAddressTCP().getAddress().getHostName() , connection.getRemoteAddressTCP().getPort());
                     String str = (String) (object);
                     assert (str.equals("passchunk"));
                     //System.out.println(cur);
@@ -128,7 +128,9 @@ public class Uploader {
             }
 
             public void disconnected(Connection connection) {
-                System.out.println("ok we are done");
+
+                System.out.println("Uploaded " + total + " bytes successfully " + " to " + otherGuy.getAddress().getHostAddress() + ":" + otherGuy.getPort() + " and written to file " + writePath.toString() );
+
                 server.close();
             }
         }));

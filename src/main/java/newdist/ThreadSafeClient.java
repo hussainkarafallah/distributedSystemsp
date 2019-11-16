@@ -34,34 +34,33 @@ class ThreadSafeClient extends Client {
             e.printStackTrace();
         }
 
-        addListener( new Listener.ThreadedListener(new Listener(){
+        addListener( new Listener(){
 
             public void received(Connection connection, Object o) {
-
-                assert (o != null);
-                response = o;
                 synchronized (resultLock){
+                    assert (o != null);
+                    response = o;
                     resultLock.notify();
                 }
             }
-        }) );
+        }) ;
 
     }
     synchronized public Object sendSafeTCP(Object request , Object _responseType) throws  Exception{
 
-        expectedResponse = _responseType;
+        synchronized (resultLock) {
+            expectedResponse = _responseType;
 
-        sendTCP(request);
+            sendTCP(request);
 
-        synchronized (resultLock){
             resultLock.wait();
+
+            assert (response.getClass() == expectedResponse.getClass());
+
+            Object ret = response;
+
+            return ret;
         }
-
-        assert(response.getClass() == expectedResponse.getClass());
-
-        Object ret = response;
-
-        return ret;
 
     }
 

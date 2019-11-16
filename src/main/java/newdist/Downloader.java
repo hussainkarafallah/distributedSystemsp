@@ -7,6 +7,7 @@ import com.esotericsoftware.kryonet.Listener;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,6 +20,7 @@ public class Downloader {
     String filePath;
     int serverPortNumber;
     Client client;
+
 
     Semaphore sm = new Semaphore(1);
 
@@ -60,7 +62,7 @@ public class Downloader {
 
             public void disconnected(Connection connection) {
 
-                System.out.println("Downloaded " + total + " bytes successfully and written to file " + filePath.toString());
+                System.out.println("Downloaded " + total + " bytes successfully and written to file " + filePath.toString() + " from " + serveIPAddress + ":" + serverPortNumber);
                 byte[] decodedBytes = new byte[total];
                 int iter = 0;
                 for (int i = 0; i < all.size(); i++) {

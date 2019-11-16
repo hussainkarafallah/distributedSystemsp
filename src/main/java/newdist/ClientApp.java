@@ -76,8 +76,6 @@ public class ClientApp {
     void notify(JSONObject cmd){
 
         try{
-
-            //System.out.println(cmd.toString());
             Object ret = client.sendSafeTCP(cmd , new JSONObject());
             JSONObject response = (JSONObject)(ret);
             manager.handleResponse(response);
