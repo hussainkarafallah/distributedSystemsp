@@ -424,10 +424,14 @@ class NameNodeManager {
     }
 
     private JSONObject download(JSONObject job) throws IOException {
-        String strPath = defaultDir + job.get("username") + job.getString("serverpath");
-        String solPath = job.getString("serverpath");
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("serverpath"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+//        job.put("path", normalized.toString());
 
-        job.remove("serverpath");
+
+       // String strPath = defaultDir + job.get("username") + job.getString("serverpath");
+        String solPath = normalized.toString();//job.getString("serverpath");
+
         job.put("serverpath", "./" + job.get("username") + "/" + solPath);
 
         Path path = Paths.get(strPath);

@@ -1,11 +1,12 @@
 login hussain 123456
 format
+create zbr/omar
 create omar
 create bakr
 create /ali/fallah
-
-info omar
-info bakr
-cd ali
-info fallah
-
+download ./bakrd bakr
+cd zbr
+download ./omard omar
+cd ..
+download ./fallahd /ali/fallah
+download ./fallah/fallahd ./ali/fallah

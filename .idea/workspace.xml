@@ -9,38 +9,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datanode1/almir/zinj/zbr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datanode2/almir/zinj/zbr" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/almir/zinj/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/bakrd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/fallah/fallahd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/fallahd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/omard" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode1/hussain/ali/fallah" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/hussain/ali/fallah" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/hussain/ali/fallah" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/hussain/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode2/hussain/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/namenode/hussain/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/omar" beforeDir="false" afterPath="$PROJECT_DIR$/namenode/hussain/omar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/App.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Downloader$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Downloader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/newdist/AppTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -390,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573940825836</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="added info">
+      <created>1573945710952</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1573945710952</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

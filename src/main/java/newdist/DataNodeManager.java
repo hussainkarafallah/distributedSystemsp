@@ -54,7 +54,14 @@ public class DataNodeManager {
             return ResponseUtil.getResponse(job , "NO" , "error formatting some datanode");
         }
         System.out.println("data node formatted with no problems");
-        return ResponseUtil.getResponse(job , "OK" , "data node was formatted successfully");
+        JSONObject response = ResponseUtil.getResponse(job , "OK" , "data node was formatted successfully");
+        File f = new File(".");
+        long fsize = f.getFreeSpace();
+        long tsize = f.getTotalSpace();
+        response.put("fsize",fsize );
+        response.put("tsize",tsize);
+
+        return response;
     }
     JSONObject delete(JSONObject job) {
         String strPath = "./"+ job.get("username") + job.getString("path");
