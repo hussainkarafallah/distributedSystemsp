@@ -11,6 +11,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -348,7 +349,10 @@ class CommandUtil {
         ret.put("command", "upload");
         ret.put("writepath", tokens[2]);
         ret.put("clientpath", tokens[1]);
+        Date d = new Date(f.lastModified());
+
         ret.put("size",String.valueOf(f.length()));
+        ret.put("last_modified",d.toString());
         ret.put("valid", "OK");
         return ret;
 

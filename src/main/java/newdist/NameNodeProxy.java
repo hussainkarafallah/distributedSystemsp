@@ -105,24 +105,6 @@ class NameNodeProxy implements Runnable{
     }
 
 
-    public JSONObject askForInfo(InetSocketAddress dataNode , JSONObject job){
-        int idx = dataNodes.indexOf(dataNode);
-
-        assert(idx != -1);
-
-        JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
-        try {
-
-            Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
-            ret = (JSONObject)(response);
-            assert(ret != null);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return ret;
-    }
-
     public boolean isAvailable(InetSocketAddress dataNode){
         return dataNodes.indexOf(dataNode) != -1;
     }

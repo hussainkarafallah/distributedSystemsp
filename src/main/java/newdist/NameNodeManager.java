@@ -322,7 +322,11 @@ class NameNodeManager {
     }
 
     private JSONObject info(JSONObject job) throws FileNotFoundException {
-        String strPath = defaultDir + job.get("username") + job.getString("path");
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.put("path", normalized.toString());
+
+        Path filePath = Paths.get(strPath);
         File f = new File(strPath);
         if (!f.exists() || f.isDirectory()) {
             return ResponseUtil.getResponse(job, "NO", "File " + job.getString("path") + " does not exist!");
@@ -333,27 +337,43 @@ class NameNodeManager {
 
         Scanner sc = new Scanner(fileToRead);
         JSONObject response = new JSONObject();
+        response=ResponseUtil.getResponse(job,"OK","");
         int total = 0, found = 0;
+        StringBuilder sb = new StringBuilder();
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (line.isEmpty()) continue;
 
             JSONObject obj = new JSONObject(line);
             assert (obj != null);
-            String ip = obj.getString("ip");
-            int port = obj.getInt("port");
-
-            InetSocketAddress address = new InetSocketAddress(ip, port);
-            total++;
-            if (nameNode.proxy.isAvailable(address)) {
-                found++;
-                if (found > 1) continue;
-                response = nameNode.proxy.askForInfo(address, job);
-                assert (response != null);
-                break;
+            if (obj.getString("type").equals("info")) {
+                sb.append("Size: " + obj.getString("size") + " Bytes");
+                sb.append("\n");
+                sb.append("Last modified: " + obj.getString("last_modified"));
+                sb.append("\n");
             }
         }
-        response.put("report",response.getString("report") + "replica ratio is: " + Integer.toString(found*100/total) + "%");
+        sc = new Scanner(fileToRead);
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+            if (line.isEmpty()) continue;
+            JSONObject obj = new JSONObject(line);
+
+            if (!obj.getString("type").equals("info")) {
+                String ip = obj.getString("ip");
+                int port = obj.getInt("port");
+
+                InetSocketAddress address = new InetSocketAddress(ip, port);
+                total++;
+                if (nameNode.proxy.isAvailable(address)) {
+                    found++;
+                }
+                //System.out.println(obj.getInt("port"));
+                sb.append("File is on node:"+obj.getString("ip")+":"+obj.getInt("port")+" as a " + obj.getString("type"));
+                sb.append("\n");
+            }
+        }
+        response.put("report",sb.toString()+ "available replica ratio is: " + Integer.toString(found*100/total) + "%");
         return response;
     }
 
@@ -481,8 +501,9 @@ class NameNodeManager {
 
         meta = new JSONObject();
         meta.put("type","info");
-        meta.put("key","size");
+
         meta.put("size",job.getString("size"));
+        meta.put("last_modified", job.getString("last_modified"));
         pw.write(meta.toString() + "\n");
 
         pw.flush();
