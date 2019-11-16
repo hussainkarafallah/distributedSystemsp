@@ -61,7 +61,7 @@ RUN ls ..# Dockerfile
          RUN ls ..
          ###################
          EXPOSE 8000
-         CMD java -jar ../Excutable_Java.jar
+CMD java -jar ../Excutable_Java.jar
 ###################
 EXPOSE 8000
 CMD java -jar ../Excutable_Java.jar

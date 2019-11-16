@@ -9,21 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datanode1/almir/zinj/znoj/book2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datanode2/almir/zinj/znoj/book2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/almir/zinj/znoj/book2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/users.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode1/jafar/123/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/jafar/123/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/jafar/123/zbr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,6 +55,13 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />

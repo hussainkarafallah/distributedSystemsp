@@ -56,12 +56,12 @@ example
 ```
 {"hussain":"123456","almir":"123456","jafar":"123456"}
 ```
+Make sure there is only one line in the JSON file.
 
 On datanode run:
 ```
 sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
 ```
-18.220.0.246
 On clientnode run:
 
 ```
