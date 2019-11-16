@@ -45,15 +45,15 @@ public class DataNode implements Runnable{
 
     public static void main(String [] args) throws IOException {
         args = new String[4];
-        Files.deleteIfExists(Paths.get("./zbr"));
-        Files.createFile(Paths.get("./zbr"));
-        File zinj=new File(".");
-        System.out.println(zinj.getCanonicalPath());
-        System.out.println();
+//        Files.deleteIfExists(Paths.get("./zbr"));
+//        Files.createFile(Paths.get("./zbr"));
+
         File f = new File("./datanode_hosts.conf");
         System.out.println("Done");
         if(!f.exists() || f.isDirectory()) {
-            System.out.println("please read readmefile and configure datanode_hosts.conf file");
+            System.out.println("Please make a new file named datanode_hosts.conf and inside please write\n " +
+                    "port of datanode, ip of name node, and its port, then a customized name for your datanode\n check please check this file \n " +
+                    "https://github.com/hussainkarafallah/distributedSystemsp/blob/master/datanode2/datanode_hosts.conf");
             return;
         }
         Scanner sc = new Scanner(f);
