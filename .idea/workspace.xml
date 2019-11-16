@@ -8,11 +8,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="new commit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -186,7 +184,10 @@
       <workItem from="1573598172265" duration="654000" />
       <workItem from="1573598851751" duration="24479000" />
       <workItem from="1573738306409" duration="29092000" />
-      <workItem from="1573772343435" duration="11233000" />
+      <workItem from="1573772343435" duration="12558000" />
+      <workItem from="1573868042421" duration="2335000" />
+      <workItem from="1573906621570" duration="9000" />
+      <workItem from="1573917056003" duration="616000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -286,7 +287,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573783761313</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="new commit">
+      <created>1573783893235</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573783893235</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -319,6 +327,7 @@
     <MESSAGE value="Added copy and move" />
     <MESSAGE value="add mkdir, rmdir, rmdir -r" />
     <MESSAGE value="sd" />
-    <option name="LAST_COMMIT_MESSAGE" value="sd" />
+    <MESSAGE value="new commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="new commit" />
   </component>
 </project>
