@@ -20,7 +20,7 @@ import java.util.concurrent.Semaphore;
 class NameNodeProxy implements Runnable{
 
     List<ThreadSafeClient> sockets;
-    List<InetSocketAddress> dataNodes;
+    ArrayList<InetSocketAddress> dataNodes;
      //   List<Semaphore> semaphores;
 
     Random rng = new Random(1997);
@@ -35,6 +35,38 @@ class NameNodeProxy implements Runnable{
 
         return dataNodes.get(idx % sz);
 
+    }
+
+    public JSONObject forwardJobToAll(JSONObject job){
+        return forwardJob(dataNodes , job);
+    }
+    public JSONObject forwardJob(ArrayList<InetSocketAddress>addresses , JSONObject job){
+        JSONObject ret;
+        String errors = "";
+        for(InetSocketAddress dataNode : addresses){
+            int idx = dataNodes.indexOf(dataNode);
+            if(idx == -1){
+                System.out.println("we need to discuss this later");
+                continue;
+            }
+
+            try {
+                System.out.println(dataNode.getPort());
+                Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
+                ret = (JSONObject) (response);
+                assert (ret != null);
+                if(!ret.get("status").equals("OK"))
+                    errors=errors.concat("\n" + ret.get("report"));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        if(errors.isEmpty()){
+            return ResponseUtil.getResponse(job , "OK" , "forwarding was successful");
+        }
+
+        return ResponseUtil.getResponse(job , "NO" , errors);
     }
 
     public JSONObject askForUpload(InetSocketAddress dataNode , JSONObject _job){

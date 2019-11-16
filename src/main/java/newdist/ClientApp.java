@@ -31,6 +31,10 @@ public class ClientApp {
     int isLoggedIn(){
         return isLogged;
     }
+    void setDirectory(String newDir){
+        System.out.println("changing directory " + newDir);
+        currentDirectory = newDir;
+    }
 
     ClientApp(String [] args){
         hostName = args[0];
@@ -73,7 +77,7 @@ public class ClientApp {
 
         try{
 
-            System.out.println(cmd.toString());
+            //System.out.println(cmd.toString());
             Object ret = client.sendSafeTCP(cmd , new JSONObject());
             JSONObject response = (JSONObject)(ret);
             manager.handleResponse(response);

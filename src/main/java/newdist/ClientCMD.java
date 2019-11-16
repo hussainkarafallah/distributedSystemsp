@@ -30,84 +30,16 @@ class pathUtility {
         return 0;*/
         try {
             Path p = Paths.get(token).normalize();
-            //System.out.println(p.toString() + " ok");
         }
         catch (InvalidPathException e){
             e.printStackTrace();
             return 0;
-            //System.out.println("invalid");
         }
         return 1;
     }
 
-    /*static String pathType(String token) {
-        if (token.charAt(0) == '/') return "Absolute";
-        if (token.substring(0, 2).equals("..")) return "Parent";
-        if (token.charAt(0) == '.') return "Relative";
-        return "None";
-    }*/
 }
 
-/*class commandUtility{
-    final static long ChunkLength = 20000;
-    /*static JSONObject getFormatCommand(String tokens[]){
-        if(tokens.length != 1){
-            return null;
-        }
-        JSONObject ret = new JSONObject();
-        return ret;
-    }
-
-
-
-    static JSONObject singleFileCommand(String tokens[]){
-        if(tokens.length  != 2){
-            return null;
-        }
-
-        int okDir = pathUtility.validateFilePath(tokens[1]);
-
-        if(okDir == 0 || pathUtility.pathType(tokens[1]).equals("None")){
-            return null;
-        }
-        JSONObject ret = new JSONObject();
-        ret.put("filepath" , tokens[1]);
-        ret.put("pathtype" , pathUtility.pathType(tokens[1]));
-        return  ret;
-    }
-
-    static JSONObject doubleFileCommand(String tokens[]){
-        if(tokens.length != 3){
-            return null;
-        }
-        if(pathUtility.validateFilePath(tokens[1]) == 0 || pathUtility.validateFilePath(tokens[2]) == 0 || pathUtility.pathType(tokens[1]).equals("None") || pathUtility.pathType(tokens[2]).equals("None")){
-            return null;
-        }
-        JSONObject ret = new JSONObject();
-        ret.put("sourcepath",tokens[1]);
-        ret.put("targetpath",tokens[2]);
-        return ret;
-    }
-
-    static JSONObject downloadCommand(String tokens[]){
-
-
-
-
-
-
-
-
-
-    }
-    static JSONObject uploadCommand(String tokens[]){
-
-
-
-    }
-
-}
-*/
 
 class CommandUtil {
 
@@ -131,6 +63,7 @@ class CommandUtil {
         commands.add("ls"); // same as ls dir i guess
         commands.add("cp");
         commands.add("mv");
+        commands.add("cd");
     }
 
     static JSONObject getErrorObject(String message) {
@@ -168,16 +101,38 @@ class CommandUtil {
         return ret;
     }
 
+    //////////////////////////////////////////
+
+    /////////////////////////////
+
+    static String validateFormatCommand(String tokens[]) {
+        if (tokens.length == 1)
+            return "OK";
+        else return "Format takes no parameters";
+    }
+
+    static JSONObject getFormatCommand(String tokens[]) {
+
+        String validation = validateFormatCommand(tokens);
+        if (!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        JSONObject ret = new JSONObject();
+        ret.put("valid", "OK");
+        ret.put("command", "format");
+
+        try{ Thread.sleep(700); } catch (Exception e){ e.printStackTrace(); }
+
+        return ret;
+    }
+
+    ///////////////////////////////
+
     static String validateDeleteCommand(String tokens[]) {
         if (tokens.length != 2)
             return "Please enter only one argument for this command 1 file path and make sure it's not a directory";
         if (pathUtility.validateFilePath(tokens[1]) == 0)
             return "Please enter only one argument for this command 1 file path and make sure it's not a directory";
-
-        //Path p = Paths.get(tokens[1]);
-        // if (Files.isDirectory(p))
-        //    return "The parameter is a directory, please enter a file path to remove";
-
         return "OK";
     }
 
@@ -193,66 +148,116 @@ class CommandUtil {
         return ret;
     }
 
-    static String
+    /////////////////////////////
+    static String validateCdCommand(String tokens[]){
+        if (tokens.length != 2)
+            return "Please include exactly 1 parameter indicating the directory you want to navigate to and make sure it's not a file";
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
+            return "Invalid directory, please include exactly 1 parameter indicating the directory you want to navigate to and make sure it's not a file";
+        return "OK";
+    }
+    static JSONObject getCdCommand(String tokens[]) {
+        if (tokens.length != 2)
+            return getErrorObject("");
+
+        String validation = validateCdCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject("validation");
+
+        JSONObject ret = new JSONObject();
+        ret.put("command", "cd");
+        ret.put("valid", "OK");
+        ret.put("path" , tokens[1]);
+
+        return ret;
+    }
+    /////////////////////////////
+    static String validateLsCommand(String tokens[]){
+        if (tokens.length != 2)
+            return "Please include exactly 1 parameter indicating the directory you want to view and make sure it's not a file";
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
+            return "Invalid directory, please include exactly 1 parameter indicating the directory you want to view and make sure it's not a file";
+        return "OK";
+    }
     static JSONObject getLsCommand(String tokens[]) {
-        if (tokens.length != 1)
-            return getErrorObject("ls does not accept any args");
+        if (tokens.length != 2)
+            return getErrorObject("");
+
+        String validation = validateLsCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject("validation");
 
         JSONObject ret = new JSONObject();
         ret.put("command", "ls");
-
         ret.put("valid", "OK");
+        ret.put("path" , tokens[1]);
+
         return ret;
     }
 
-    //////////////////////////////
-    static JSONObject getInfoCommand(String tokens[]) {
-        if (tokens.length != 2)
-            return getErrorObject("Please specify path to file only! ");
-
-        JSONObject ret = new JSONObject();
-        ret.put("command", "info");
-        Path p = Paths.get(tokens[1]);
-        String validation = "OK";
+    /////////////////////////////////////////////
+    static String validateMkDirCommand(String [] tokens){
+        if(tokens.length != 2)
+            return "Provide one argument indicating the name of new directory you want to create";
         if (pathUtility.validateFilePath(tokens[1]) == 0)
-            validation = "No correct Path";
-        if (Files.isDirectory(p)) {
-            validation = "The first parameter is a directory, please enter a file path to write downloaded data to";
-        }
-        if (!validation.equals("OK"))
-            return getErrorObject(validation);
+            return "Invalid directory name";
+        return "OK";
 
-        ret.put("path", tokens[1]);
+    }
+    static JSONObject getMkDirCommand(String tokens[]){
+        String validation = validateMkDirCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject("validation");
+        JSONObject ret = new JSONObject();
+        ret.put("command","mkdir");
+        ret.put("path",tokens[1]);
         ret.put("valid", "OK");
         return ret;
     }
-    static JSONObject getManDirCommand(String tokens[]) {
+    /////////////////////////////////////////////
+    static  String validateRmDirCommand(String[] tokens){
+        if(tokens.length != 2 && tokens.length != 3)
+            return "Provide one argument denoting the directory you want to delete and include flag -r if you want to delete everything inside it in case it has files";
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
+            return "Invalid directory name";
+        if(tokens.length == 3 && !tokens[2].equals("-r"))
+            return "Second parameter for this command can be -r only otherwise include only a directory";
+        return "OK";
+
+    }
+    static JSONObject getRmDirCommand(String tokens[]) {
+
+
+        String validation = validateRmDirCommand(tokens);
+        if(!validation.equals("OK"))
+            return getErrorObject("validation");
 
         JSONObject ret = new JSONObject();
-
-
-        String validation = "OK";
-
-        if (!validation.equals("OK"))
-            return getErrorObject(validation);
-        ret.put("command", tokens[0]);
-        if(tokens[0].equals("rmdir") && tokens[1].equals("-r"))
+        ret.put("command", "rmdir");
+        ret.put("path",tokens[1]);
+        ret.put("force","none");
+        ret.put("valid", "OK");
+        if(tokens.length == 3){
+            assert (tokens[2].equals("-r"));
+            ret.put("force","forced");
+        }
+        /*if(tokens[0].equals("rmdir") && tokens[1].equals("-r"))
             ret.put("dirname", tokens[2]);
         else ret.put("dirname",tokens[1]);
         // current directory is automatically added as ["directory"]
-        ret.put("force","none");
+
         if(tokens[0].equals("rmdir")&&tokens.length==3) {
             if(!tokens[1].equals("-r"))
                 return getErrorObject("Only force argument is applicable \"-r\"");
             ret.put("force", tokens[1]);
-        }
-        ret.put("valid", "OK");
+        }*/
+
         return ret;
     }
     static JSONObject getCpMvCommand(String tokens[]) {
         if (tokens.length != 3)
             return getErrorObject("Please specify path to file only! ");
-
+        try{ Thread.sleep(500); } catch (Exception e){e.printStackTrace();}
         JSONObject ret = new JSONObject();
 
         Path p1 = Paths.get(tokens[1]),p2 = Paths.get(tokens[2]);
@@ -274,27 +279,7 @@ class CommandUtil {
         return ret;
     }
 
-    /////////////////////////////
-    static String validateFormatCommand(String tokens[]) {
-        if (tokens.length == 1)
-            return "OK";
-        else return "Format takes no parameters";
-    }
 
-    static JSONObject getFormatCommand(String tokens[]) {
-
-        String validation = validateFormatCommand(tokens);
-        if (!validation.equals("OK"))
-            return getErrorObject(validation);
-
-        JSONObject ret = new JSONObject();
-        ret.put("valid", "OK");
-        ret.put("command", "format");
-
-        return ret;
-    }
-
-    ///////////////////////////////
     static String validateDownloadCommand(String tokens[]) {
 
         String def = "Enter valid two space separated filepaths, with no extra spaces\nFirst path denoting where you want to write the file you download\nsecond for file path on hdfs";
@@ -365,6 +350,27 @@ class CommandUtil {
         return ret;
 
     }
+    //////////////////////////////
+    static JSONObject getInfoCommand(String tokens[]) {
+        if (tokens.length != 2)
+            return getErrorObject("Please specify path to file only! ");
+
+        JSONObject ret = new JSONObject();
+        ret.put("command", "info");
+        Path p = Paths.get(tokens[1]);
+        String validation = "OK";
+        if (pathUtility.validateFilePath(tokens[1]) == 0)
+            validation = "No correct Path";
+        if (Files.isDirectory(p)) {
+            validation = "The first parameter is a directory, please enter a file path to write downloaded data to";
+        }
+        if (!validation.equals("OK"))
+            return getErrorObject(validation);
+
+        ret.put("path", tokens[1]);
+        ret.put("valid", "OK");
+        return ret;
+    }
 
     /////////////////////////////////////////////////////
 
@@ -394,6 +400,8 @@ class CommandUtil {
             jsonCommand = getUploadCommand(tokens);
         if (cmd.equals("login"))
             jsonCommand = getLoginCommand(tokens);
+        if (cmd.equals("cd"))
+            jsonCommand = getCdCommand(tokens);
         if (cmd.equals("delete"))
             jsonCommand = getDeleteCommand(tokens);
         if (cmd.equals("ls"))
@@ -402,9 +410,11 @@ class CommandUtil {
             jsonCommand = getInfoCommand(tokens);
         if (cmd.equals("cp") || cmd.equals("mv"))
             jsonCommand = getCpMvCommand(tokens);
-        if(cmd.equals("mkdir") || cmd.equals("rmdir")){
-            jsonCommand = getManDirCommand(tokens);
-        }
+        if(cmd.equals("mkdir"))
+            jsonCommand = getMkDirCommand(tokens);
+        if(cmd.equals("rmdir"))
+            jsonCommand = getRmDirCommand(tokens);
+
 ////////////////////erie
         if (client.isLoggedIn() == 1) {
             jsonCommand.put("username", client.userName);
@@ -440,8 +450,8 @@ public class ClientCMD implements Runnable {
         System.out.println("Welcome to MullanorovDFS this is the client, please login and then enter your commands");
 
         try {
-            BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-            //BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
+            //BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader sc = new BufferedReader(new FileReader("./test.in"));
 
             String line = "";
 
@@ -469,7 +479,7 @@ public class ClientCMD implements Runnable {
 
                 JSONObject jsonCommand = CommandUtil.getCommandObject(tokens, client);
 
-                if (jsonCommand.get("valid") != "OK") {
+                if (!jsonCommand.get("valid").equals("OK")) {
                     System.out.println(jsonCommand.get("text"));
                     continue;
                 }
