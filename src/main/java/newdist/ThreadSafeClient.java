@@ -5,7 +5,6 @@ import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import org.json.JSONObject;
 
-import java.util.concurrent.Semaphore;
 
 class ThreadSafeClient extends Client {
 

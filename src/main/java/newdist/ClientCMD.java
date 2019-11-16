@@ -6,6 +6,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.nio.Buffer;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 class pathUtility {
 
     static int validateFilePath(String token) {
-        if (token.length() < 2) return 0;
+       /* if (token.length() < 2) return 0;
         if (token.substring(0, 2).equals("..")) {
             token = token.substring(2, token.length());
         }
@@ -26,15 +27,25 @@ class pathUtility {
 
         boolean ret = token.matches("^['\"]?(?:/[^/\\n]+)*['\"]?$");
         if (ret) return 1;
-        return 0;
+        return 0;*/
+        try {
+            Path p = Paths.get(token).normalize();
+            //System.out.println(p.toString() + " ok");
+        }
+        catch (InvalidPathException e){
+            e.printStackTrace();
+            return 0;
+            //System.out.println("invalid");
+        }
+        return 1;
     }
 
-    static String pathType(String token) {
+    /*static String pathType(String token) {
         if (token.charAt(0) == '/') return "Absolute";
         if (token.substring(0, 2).equals("..")) return "Parent";
         if (token.charAt(0) == '.') return "Relative";
         return "None";
-    }
+    }*/
 }
 
 /*class commandUtility{
@@ -159,13 +170,13 @@ class CommandUtil {
 
     static String validateDeleteCommand(String tokens[]) {
         if (tokens.length != 2)
-            return "ERROR user has given more than one path";
+            return "Please enter only one argument for this command 1 file path and make sure it's not a directory";
         if (pathUtility.validateFilePath(tokens[1]) == 0)
-            return "ERROR user has given bad path format";
-        Path p = Paths.get(tokens[1]);
+            return "Please enter only one argument for this command 1 file path and make sure it's not a directory";
 
-        if (Files.isDirectory(p))
-            return "The parameter is a directory, please enter a file path to remove";
+        //Path p = Paths.get(tokens[1]);
+        // if (Files.isDirectory(p))
+        //    return "The parameter is a directory, please enter a file path to remove";
 
         return "OK";
     }
@@ -182,6 +193,7 @@ class CommandUtil {
         return ret;
     }
 
+    static String
     static JSONObject getLsCommand(String tokens[]) {
         if (tokens.length != 1)
             return getErrorObject("ls does not accept any args");

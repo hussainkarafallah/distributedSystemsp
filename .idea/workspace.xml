@@ -9,19 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/datanode_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/datanode_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/hussain/c/niggaz.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/namenode/hussain/c/niggaz.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ThreadSafeClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ThreadSafeClient.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +70,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Multirun.omar">
+  <component name="RunManager" selected="Application.NameNode">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="newdist.App" />
       <module name="distributedSystemsp" />
@@ -191,6 +187,8 @@
       <workItem from="1573598172265" duration="654000" />
       <workItem from="1573598851751" duration="24479000" />
       <workItem from="1573738306409" duration="26657000" />
+      <workItem from="1573771291900" duration="8532000" />
+      <workItem from="1573861346381" duration="2217000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
