@@ -47,6 +47,9 @@ public class DataNode implements Runnable{
         args = new String[4];
         Files.deleteIfExists(Paths.get("./zbr"));
         Files.createFile(Paths.get("./zbr"));
+        File zinj=new File(".");
+        System.out.println(zinj.getCanonicalPath());
+        System.out.println();
         File f = new File("./datanode_hosts.conf");
         System.out.println("Done");
         if(!f.exists() || f.isDirectory()) {
