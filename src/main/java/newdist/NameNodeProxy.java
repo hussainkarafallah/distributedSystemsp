@@ -20,7 +20,7 @@ import java.util.concurrent.Semaphore;
 class NameNodeProxy implements Runnable{
 
     List<ThreadSafeClient> sockets;
-    List<InetSocketAddress> dataNodes;
+    ArrayList<InetSocketAddress> dataNodes;
      //   List<Semaphore> semaphores;
 
     Random rng = new Random(1997);
@@ -35,6 +35,38 @@ class NameNodeProxy implements Runnable{
 
         return dataNodes.get(idx % sz);
 
+    }
+
+    public JSONObject forwardJobToAll(JSONObject job){
+        return forwardJob(dataNodes , job);
+    }
+    public JSONObject forwardJob(ArrayList<InetSocketAddress>addresses , JSONObject job){
+        JSONObject ret;
+        String errors = "";
+        for(InetSocketAddress dataNode : addresses){
+            int idx = dataNodes.indexOf(dataNode);
+            if(idx == -1){
+                System.out.println("we need to discuss this later");
+                continue;
+            }
+
+            try {
+                System.out.println(dataNode.getPort());
+                Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
+                ret = (JSONObject) (response);
+                assert (ret != null);
+                if(!ret.get("status").equals("OK"))
+                    errors=errors.concat("\n" + ret.get("report"));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        if(errors.isEmpty()){
+            return ResponseUtil.getResponse(job , "OK" , "forwarding was successful");
+        }
+
+        return ResponseUtil.getResponse(job , "NO" , errors);
     }
 
     public JSONObject askForUpload(InetSocketAddress dataNode , JSONObject _job){
@@ -169,79 +201,6 @@ class NameNodeProxy implements Runnable{
             e.printStackTrace();
         }
 
-
-        /*try {
-            System.out.println("Trying to connect" + datanode.getAddress().getHostAddress() + " " + datanode.getPort());
-
-            client.connect(7000, datanode.getAddress(), datanode.getPort());
-
-            JSONObject request = new JSONObject();
-            request.put("command" , "connect");
-            client.sendTCP(request);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        client.addListener(new Listener.ThreadedListener(new Listener() {
-
-            public void idle(Connection connection) {
-                int idx = dataNodes.indexOf(datanode);
-                assert(idx != -1);
-                //semaphores.get(idx).release();
-            }
-
-            public void received(Connection connection, Object o) {
-                if ((o instanceof JSONObject)) {
-                    JSONObject response = (JSONObject)(o);
-
-                    handle(response);
-                }
-            }
-        }));*/
-
-
-
-        /*Client client = new Client();
-        client.start();
-        Kryo kryo = client.getKryo();
-        kryo.register(JSONObject.class);
-        kryo.register(java.util.HashMap.class);
-
-
-        System.out.println("Trying to add datanode");
-
-        sockets.add(client);
-
-        //semaphores.add(new Semaphore(1));
-
-        try {
-            System.out.println("Trying to connect" + datanode.getAddress().getHostAddress() + " " + datanode.getPort());
-
-            client.connect(7000, datanode.getAddress(), datanode.getPort());
-
-            JSONObject request = new JSONObject();
-            request.put("command" , "connect");
-            client.sendTCP(request);
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-        client.addListener(new Listener.ThreadedListener(new Listener() {
-
-            public void idle(Connection connection) {
-                int idx = dataNodes.indexOf(datanode);
-                assert(idx != -1);
-                //semaphores.get(idx).release();
-            }
-
-            public void received(Connection connection, Object o) {
-                if ((o instanceof JSONObject)) {
-                    JSONObject response = (JSONObject)(o);
-
-                    handle(response);
-                }
-            }
-        }));*/
 
         return true;
 

@@ -4,8 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.InetSocketAddress;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -52,8 +54,12 @@ class NameNodeManager {
                 return info(job);
             if(job.get("command").equals("cp") || job.get("command").equals("mv"))
                 return MvCp(job);
-            if(job.get("command").equals("rmdir") || job.get("command").equals("mkdir"))
-                return manipulateDir(job);
+            if(job.get("command").equals("rmdir"))
+                return removeDirectory(job);
+            if(job.get("command").equals("mkdir"))
+                return makeDirectory(job);
+            if(job.get("command").equals("cd"))
+                return changeDirectory(job);
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseUtil.getResponse(job, "NO", "Namenode storage error");
@@ -63,6 +69,7 @@ class NameNodeManager {
         crap.put("status", "wholyshit");
         return crap;
     }
+
     private ArrayList<InetSocketAddress> getDataNodesFromFile(File f) throws FileNotFoundException {
         ArrayList<InetSocketAddress> vec = new ArrayList<InetSocketAddress>();
         Scanner sc = new Scanner(f);
@@ -84,6 +91,159 @@ class NameNodeManager {
         }
         return vec;
     }
+
+    private static Path getNormalizedPath(String currentDirectory , String toAppend){
+
+        try{
+            Path p = Paths.get(currentDirectory , toAppend);
+            return p.normalize();
+        }
+        catch (InvalidPathException e){
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+
+    private JSONObject changeDirectory(JSONObject job){
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.remove("path"); job.put("path", normalized.toString());
+        File f = new File(strPath);
+        if (!f.isDirectory()) {
+            return ResponseUtil.getResponse(job, "NO", "Directory doesn't exist on the server or you entered a file not a directory");
+        }
+        return newdist.ResponseUtil.getResponse(job, "OK", "Directory changed with no issues");
+    }
+    private JSONObject ls(JSONObject job) {
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.remove("path"); job.put("path", normalized.toString());
+
+        File f = new File(strPath);
+        if (!f.isDirectory()) {
+            return ResponseUtil.getResponse(job, "NO", "Directory doesn't exist on the server or you entered a file not a directory");
+        }
+        File folder = new File(strPath);
+        File[] listOfFiles = folder.listFiles();
+
+        StringBuilder filesListString = new StringBuilder();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                System.out.println("File " + listOfFiles[i].getName());
+                filesListString.append("File ").append(listOfFiles[i].getName()).append("\n");
+            } else if (listOfFiles[i].isDirectory()) {
+                System.out.println("Directory " + listOfFiles[i].getName());
+                filesListString.append("Directory ").append(listOfFiles[i].getName()).append("\n");
+            }
+        }
+        return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
+
+    }
+    private JSONObject delete(JSONObject job) throws FileNotFoundException {
+
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.put("path", normalized.toString());
+
+        Path filePath = Paths.get(strPath);
+
+        if (!Files.exists(filePath)) {
+            return ResponseUtil.getResponse(job, "NO", "file doesn't exist on the server");
+        }
+
+        int found = 0, total = 0;
+
+        File fileToRead = new File(filePath.toString());
+        ArrayList < InetSocketAddress > addresses = getDataNodesFromFile(fileToRead);
+
+        JSONObject okFWD = nameNode.proxy.forwardJob(addresses , job);
+
+        boolean deleted = false;
+        try {
+            deleted = Files.deleteIfExists(filePath);
+        }
+        catch (IOException e){
+            e.printStackTrace();;
+        }
+
+        if(!deleted)  return ResponseUtil.getResponse(job, "NO", "Some error happened within namenode disk");
+        if(okFWD.get("status").equals("OK"))
+
+            return ResponseUtil.getResponse(job , "OK" , "File was deleted successfully");
+
+        else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
+
+    }
+    private JSONObject MvCp(JSONObject job) throws IOException {
+        Path pathFrom = getNormalizedPath(job.getString("directory") , job.getString("pathFrom"));
+        job.put("pathFrom" , pathFrom.toString());
+        Path pathTo = getNormalizedPath(job.getString("directory") , job.getString("pathTo"));
+        job.put("pathTo" , pathTo.toString());
+
+        String strPathFrom = defaultDir + job.get("username") + pathFrom.toString();
+        String strPathTo = defaultDir + job.get("username") + pathTo.toString();
+
+        File f = new File(strPathFrom);
+        File f2 = new File(strPathTo);
+
+        // you have only to check if
+
+        if (!f.exists() || f.isDirectory()) {
+            return ResponseUtil.getResponse(job, "NO", "You either have specified an non existing file or it is a directory not a file");
+        }
+
+        if(f2.exists()){
+            return ResponseUtil.getResponse(job, "NO", "Your target file already exists");
+        }
+
+        File f3 = f2.getParentFile();
+
+
+        System.out.println(strPathFrom+" ::  "+strPathTo);
+        if(!f3.isDirectory()){
+            return ResponseUtil.getResponse(job,"NO", "Your target file parent directory doesn't exist: " + strPathTo);
+        }
+
+        ArrayList<InetSocketAddress> addresses = getDataNodesFromFile(f);
+        JSONObject okFWD = nameNode.proxy.forwardJob(addresses , job);
+
+
+       /* JSONObject response = new JSONObject();
+        int total = 0, found = 0;
+
+        for(InetSocketAddress address : datanodes){
+            total++;
+            if (nameNode.proxy.isAvailable(address)) {
+                found++;
+                if (found > 1) continue;
+                response = nameNode.proxy.MvCp(address, job);
+                assert (response != null);
+                break;
+            }
+        }*/
+
+        // move/cp the file on namenode also :D
+        String token;
+
+        if(job.getString("command").equals("mv")){
+            Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
+            token = "moved";
+        }
+        else{
+            Files.copy(Paths.get(strPathFrom),Paths.get(strPathTo));
+            token = "copied";
+        }
+
+        if(okFWD.get("status").equals("OK"))
+
+            return ResponseUtil.getResponse(job , "OK" , "File was " + token + " successfully");
+
+        else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
+    }
+
 
     private ArrayList<InetSocketAddress> getDataNodesFromAllSubDirectory(File root) throws FileNotFoundException {
         /*
@@ -114,130 +274,48 @@ class NameNodeManager {
         }
         return ret;
     }
-    private JSONObject manipulateDir(JSONObject job) throws IOException {
-        String strPath = defaultDir + job.get("username") + job.getString("directory");
+
+    private JSONObject makeDirectory(JSONObject job) throws IOException{
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.put("path", normalized.toString());
+        File f = new File(strPath);
+        if(f.exists() && f.isDirectory()){
+            return ResponseUtil.getResponse(job, "NO", "another directory or a file exist with the same name");
+        }
+        f.mkdir();
+        return ResponseUtil.getResponse(job,"OK","New Directory is created successfully");
+
+    }
+
+    private JSONObject removeDirectory(JSONObject job) throws IOException {
+        Path normalized = getNormalizedPath(job.getString("directory") , job.getString("path"));
+        String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
+        job.put("path", normalized.toString());
+
         File f = new File(strPath);
 
-        // you have only to check if
         if (!f.exists() || !f.isDirectory()) {
-            return ResponseUtil.getResponse(job, "NO", "Directory does not exist");
+            return ResponseUtil.getResponse(job, "NO", "Directory does not exist or this is a file name");
         }
 
+        if(job.getString("force").equals("none")){
+            if(f.listFiles().length!=0)
+                return ResponseUtil.getResponse(job,"NO", "File has content please use -r to force delete recursively");
 
-        String newDriPath = strPath + "/" + job.get("dirname");
-        // move/cp the file on namenode also :D
-        JSONObject response = ResponseUtil.getResponse(job, "NO", "Deleted only directories on namenode");
-
-        if(job.getString("command").equals("mkdir")){
-
-           f = new File(newDriPath);
-            if(f.exists() && f.isDirectory())
-                return ResponseUtil.getResponse(job, "NO", "another directory exist with the same name");
-            f.mkdir();
-            /// problem is which data node to sent further
-            return ResponseUtil.getResponse(job,"OK","Great success");
-        }
-        else{
-            f = new File(newDriPath);
-            if(!f.exists() || !f.isDirectory())
-                return ResponseUtil.getResponse(job, "NO", "It aint a directory");
-            if(!job.getString("force").equals("-r")){
-                if(f.listFiles().length!=0)
-                    return ResponseUtil.getResponse(job,"NO", "File has content please use -r to force delete recursively");
-
-            }
-            ArrayList<InetSocketAddress> ar = getDataNodesFromAllSubDirectory(f);
-            int found=0,total = ar.size();
-            for(InetSocketAddress address: ar){
-                if (nameNode.proxy.isAvailable(address)) {
-                    response = nameNode.proxy.manipulateDir(address, job);
-                    assert (response != null);
-                }
-            }
-            deleteRecursively(f);
-        }
-        return response;
-    }
-    private static void deleteRecursively(File file) throws IOException {
-
-        for (File childFile : file.listFiles()) {
-
-            if (childFile.isDirectory()) {
-                deleteRecursively(childFile);
-            } else {
-                if (!childFile.delete()) {
-                    throw new IOException();
-                }
-            }
         }
 
-        if (!file.delete()) {
-            throw new IOException();
-        }
-    }
+        ArrayList<InetSocketAddress> addresses = getDataNodesFromAllSubDirectory(f);
+        JSONObject okFWD = nameNode.proxy.forwardJob(addresses , job);
 
-    private JSONObject MvCp(JSONObject job) throws IOException {
-        String strPathFrom = defaultDir + job.get("username") + job.getString("pathFrom");
-        String strPathTo = defaultDir + job.get("username") + job.getString("pathTo");
-        File f = new File(strPathFrom);
-        File f2 = new File(strPathTo);
-        // you have only to check if
-        if (!f.exists() || f.isDirectory() || f2.exists()) {
-            return ResponseUtil.getResponse(job, "NO", "You either have specified an non existing file or it is a directory not a file or the \"to\" file is existing already");
-        }
-        File f3 = f2.getParentFile();
-        System.out.println(f2.getCanonicalPath());
-        System.out.println(strPathFrom+" ::  "+strPathTo);
-        if(!f3.isDirectory()){
-            return ResponseUtil.getResponse(job,"NO", "There is no directory: " + strPathTo);
-        }
-        ArrayList<InetSocketAddress> datanodes = getDataNodesFromFile(f);
+        boolean res = FileSystemUtils.deleteRecursively(Paths.get(strPath));
+        assert(res);
 
-        JSONObject response = new JSONObject();
-        int total = 0, found = 0;
+        if(okFWD.get("status").equals("OK"))
 
-        for(InetSocketAddress address : datanodes){
-            total++;
-            if (nameNode.proxy.isAvailable(address)) {
-                found++;
-                if (found > 1) continue;
-                response = nameNode.proxy.MvCp(address, job);
-                assert (response != null);
-                break;
-            }
-        }
+            return ResponseUtil.getResponse(job , "OK" , "Directory was deleted successfully");
 
-        // move/cp the file on namenode also :D
-        if(job.getString("command").equals("mv")){
-            Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
-        }
-        else{
-            Files.copy(Paths.get(strPathFrom),Paths.get(strPathTo));
-        }
-        return response;
-    }
-
-    private JSONObject ls(JSONObject job) {
-        String strPath = defaultDir + job.get("username") + job.getString("directory");
-        File f = new File(strPath);
-        if (!f.isDirectory()) {
-            return ResponseUtil.getResponse(job, "NO", "Directory doesn't exist on the server");
-        }
-        File folder = new File(strPath);
-        File[] listOfFiles = folder.listFiles();
-        System.out.println(Boolean.toString(folder.isDirectory()));
-        StringBuilder filesListString = new StringBuilder();
-        for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                System.out.println("File " + listOfFiles[i].getName());
-                filesListString.append("File ").append(listOfFiles[i].getName()).append("\n");
-            } else if (listOfFiles[i].isDirectory()) {
-                System.out.println("Directory " + listOfFiles[i].getName());
-                filesListString.append("Directory ").append(listOfFiles[i].getName()).append("\n");
-            }
-        }
-        return newdist.ResponseUtil.getResponse(job, "OK", filesListString.toString());
-
+        else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
     }
 
     private JSONObject info(JSONObject job) throws FileNotFoundException {
@@ -256,7 +334,7 @@ class NameNodeManager {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
             if (line.isEmpty()) continue;
-            // System.out.println(line);
+
             JSONObject obj = new JSONObject(line);
             assert (obj != null);
             String ip = obj.getString("ip");
@@ -276,71 +354,6 @@ class NameNodeManager {
         return response;
     }
 
-    private JSONObject delete(JSONObject job) throws FileNotFoundException {
-        System.out.println("Name node started deleting file: " + job.getString("path"));
-
-        String strPath = defaultDir + job.get("username") + job.getString("path");
-        System.out.println(job.getString("path"));
-        System.out.println(strPath);
-        job.put("path", job.get("path")); /// here may have an assertion actually
-
-        Path path = Paths.get(strPath);
-        System.out.print(strPath);
-        System.out.println(path);
-        if (!Files.exists(path)) {
-            return ResponseUtil.getResponse(job, "NO", "file doesn't exist on the server");
-        }
-
-        int found = 0, total = 0;
-
-        File fileToRead = new File(path.toString());
-
-        Scanner sc = new Scanner(fileToRead);
-        JSONObject response = new JSONObject();
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.isEmpty()) continue;
-            // System.out.println(line);
-            JSONObject obj = new JSONObject(line);
-            assert (obj != null);
-            String ip = obj.getString("ip");
-            int port = obj.getInt("port");
-
-            InetSocketAddress address = new InetSocketAddress(ip, port);
-            total++;
-            if (nameNode.proxy.isAvailable(address)) {
-                found++;
-
-                System.out.println("namenode manager thread" + Thread.currentThread());
-
-                response = nameNode.proxy.askForDelete(address, job);
-
-                System.out.println("jaaaa  " + response.toString() + " " + response);
-
-                assert (response != null);
-
-                System.out.println("jaaaa  " + response.toString() + " " + response);
-
-                break;
-            }
-        }
-        File f = new File(strPath);
-        if (found == total) {
-            if (!f.delete()) {
-                response.put("report", "Some wicked error happened!");
-                return response;
-            }
-        } else {
-            response.put("report", "There are still some datanodes with the file");
-            // neeeds extra handling
-            if (!f.delete()) {
-                response.put("report", "Some wicked error happened!");
-                return response;
-            }
-        }
-        return response;
-    }
-
     private JSONObject login(JSONObject job) {
 
         int found = 0;
@@ -351,7 +364,6 @@ class NameNodeManager {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 JSONObject curline = new JSONObject(line);
-                System.out.println(curline.toString());
                 if (curline.isNull(username)) continue;
                 if (curline.getString(username) != null)
                     if (curline.getString(username).equals(password)) {
@@ -378,11 +390,14 @@ class NameNodeManager {
         } else {
             File f = new File(dir);
             boolean res = FileSystemUtils.deleteRecursively(path);
+            assert(res);
             Files.createDirectory(path);
         }
-        return ResponseUtil.getResponse(job, "OK", "Formatted Successfully");
+        JSONObject okFWD = nameNode.proxy.forwardJobToAll(job);
+        if(okFWD.get("status").equals("OK"))
+            return ResponseUtil.getResponse(job , "OK" , "All current datanodeds were formatted");
+        else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
     }
-
 
     private JSONObject download(JSONObject job) throws IOException {
         String strPath = defaultDir + job.get("username") + job.getString("serverpath");
@@ -479,47 +494,7 @@ class NameNodeManager {
 
 
     }
- /*   private JSONObject create(){
 
-    }
-
-    private JSONObject read(){
-
-    }
-
-
-
-    private JSONObject delete(){
-
-    }
-
-    private JSONObject getInfo(){
-
-    }
-
-    private JSONObject copy(){
-
-    }
-
-    private JSONObject move(){
-
-    }
-
-    private JSONObject opendir(){
-
-    }
-
-    private JSONObject readdir(){
-
-    }
-
-    private JSONObject makedir(){
-
-    }
-
-    private JSONObject deletedir(){
-
-    }*/
 
 
 }

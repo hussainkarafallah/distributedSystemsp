@@ -64,6 +64,12 @@ public class ClientManager {
                 return;
             }
         }
+        if(response.getString("command").equals("cd")){
+            if(response.get("status").equals("OK")){
+                client.setDirectory(response.getString("path"));
+                return;
+            }
+        }
         normalHandling(response);
 
     }

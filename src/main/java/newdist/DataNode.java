@@ -132,7 +132,6 @@ public class DataNode implements Runnable{
             e.printStackTrace();
         }
 
-        System.out.println(nameNodePort + " " + portNumber);
         JSONObject connectionRequest = new JSONObject();
         connectionRequest.put("command" , "datanodeauth");
         connectionRequest.put("port" , portNumber);
