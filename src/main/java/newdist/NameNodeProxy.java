@@ -19,6 +19,8 @@ import java.util.concurrent.Semaphore;
 
 class NameNodeProxy implements Runnable{
 
+    final int replicationFactor = 2;
+
     List<ThreadSafeClient> sockets;
     ArrayList<InetSocketAddress> dataNodes;
      //   List<Semaphore> semaphores;
@@ -37,6 +39,21 @@ class NameNodeProxy implements Runnable{
 
     }
 
+    ArrayList < InetSocketAddress > getReplicas(InetSocketAddress mainNode){
+        //System.out.println(dataNodes.size());
+        ArrayList < InetSocketAddress > ret = new ArrayList<>();
+        int take = Math.min(dataNodes.size() - 1 , replicationFactor - 1);
+        take = Math.max(take , 0);
+        while (ret.size() < take){
+            int idx = Math.abs(rng.nextInt()) % dataNodes.size();
+            InetSocketAddress add = dataNodes.get(idx);
+            if(add.equals(mainNode)) continue;
+            if(ret.indexOf(add) != -1) continue;
+            ret.add(dataNodes.get(idx));
+        }
+        return ret;
+    }
+
     public JSONObject forwardJobToAll(JSONObject job){
         return forwardJob(dataNodes , job);
     }
@@ -51,7 +68,6 @@ class NameNodeProxy implements Runnable{
             }
 
             try {
-                System.out.println(dataNode.getPort());
                 Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
                 ret = (JSONObject) (response);
                 assert (ret != null);
@@ -71,15 +87,13 @@ class NameNodeProxy implements Runnable{
 
     public JSONObject askForUpload(InetSocketAddress dataNode , JSONObject _job){
         int idx = dataNodes.indexOf(dataNode);
-        System.out.println("new request to fwd" + _job.toString());
         assert(idx != -1);
         JSONObject job = new JSONObject(_job, JSONObject.getNames(_job));
         job.remove("command");
         job.put("command" , "startupload");
         JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
         try {
-            System.out.println("new request22 to fwd" + job.toString());
-            System.out.println("namenode proxy thread" + Thread.currentThread());
+
             Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
             ret = (JSONObject)(response);
             assert(ret != null);
@@ -90,60 +104,7 @@ class NameNodeProxy implements Runnable{
         return ret;
     }
 
-    public JSONObject askForDelete(InetSocketAddress dataNode , JSONObject job){
-        int idx = dataNodes.indexOf(dataNode);
 
-        assert(idx != -1);
-
-        JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
-        try {
-            System.out.println("new request22 to fwd" + job.toString());
-            System.out.println("namenode proxy thread" + Thread.currentThread());
-            Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
-            ret = (JSONObject)(response);
-            assert(ret != null);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return ret;
-    }
-    public JSONObject manipulateDir(InetSocketAddress dataNode, JSONObject job){
-        int idx = dataNodes.indexOf(dataNode);
-
-        assert(idx != -1);
-
-        JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
-        try {
-            System.out.println("new request22 to fwd" + job.toString());
-            System.out.println("namenode proxy thread" + Thread.currentThread());
-            Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
-            ret = (JSONObject)(response);
-            assert(ret != null);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return ret;
-    }
-    public  JSONObject MvCp(InetSocketAddress dataNode , JSONObject job){
-        int idx = dataNodes.indexOf(dataNode);
-
-        assert(idx != -1);
-
-        JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
-        try {
-            System.out.println("new request22 to fwd" + job.toString());
-            System.out.println("namenode proxy thread" + Thread.currentThread());
-            Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
-            ret = (JSONObject)(response);
-            assert(ret != null);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return ret;
-    }
     public JSONObject askForInfo(InetSocketAddress dataNode , JSONObject job){
         int idx = dataNodes.indexOf(dataNode);
 
@@ -151,8 +112,7 @@ class NameNodeProxy implements Runnable{
 
         JSONObject ret = ResponseUtil.getResponse(job , "No" , "unknown error happened");
         try {
-            System.out.println("new request22 to fwd" + job.toString());
-            System.out.println("namenode proxy thread" + Thread.currentThread());
+
             Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
             ret = (JSONObject)(response);
             assert(ret != null);
@@ -183,8 +143,15 @@ class NameNodeProxy implements Runnable{
 
         client.Launch();
 
+        client.addListener(new Listener.ThreadedListener(new Listener(){
+            @Override
+            public void disconnected(Connection connection) {
+                System.out.println("what the fuck one datanode disconnected");
+            }
+        }));
 
-        System.out.println("Trying to add datanode");
+
+        System.out.println("Trying to add datanode " + datanode.getAddress().getHostAddress() + ":" + datanode.getPort());
 
         sockets.add(client);
 

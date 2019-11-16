@@ -70,8 +70,6 @@ public class DataNodeManager {
         String strPathFrom = "./"+ job.get("username") + job.getString("pathFrom");
         String strPathTo = "./"+ job.get("username") + job.getString("pathTo");
 
-        System.out.println(job.toString());
-
         File f = new File(strPathFrom);
         if(!f.exists())
             return newdist.ResponseUtil.getResponse(job,"NO","File does not exist on this datanode file: "+ strPathFrom);
@@ -80,7 +78,6 @@ public class DataNodeManager {
         if(targetDir != null && !Files.exists(targetDir))
             Files.createDirectories(targetDir);
 
-        System.out.println(job.toString());
         if(job.getString("command").equals("mv")){
             Files.move(Paths.get(strPathFrom),Paths.get(strPathTo));
         }
@@ -90,13 +87,52 @@ public class DataNodeManager {
         return newdist.ResponseUtil.getResponse(job,"OK","Great Success");
     }
 
+    void replicate(String filePath , String replicasString){
+        Scanner sc = new Scanner(replicasString);
+        while(sc.hasNextLine()){
+            String line = sc.nextLine();
+            if(line.isEmpty()) continue;
+            JSONObject replica = new JSONObject(line);
+            System.out.println(replica.toString());
 
+            String dataNodeIP = replica.getString("ip");
+            int dataNodePort = replica.getInt("port")       ;
+            String clientPath    = filePath;
+            String writePath = filePath;
+
+            JSONObject additionalInfo = new JSONObject();
+            additionalInfo.put("replication","YES");
+            int port = SocketUtils.findAvailableTcpPort();
+
+            Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
+        }
+    }
+    void askForReplicas(JSONObject fileJob){
+        JSONObject job = new JSONObject();
+        job.put("command" , "getreplicas");
+        job.put("path",fileJob.get("writepath"));
+        try{
+            Object obj = dataNode.nameNodeClient.sendSafeTCP(job , new JSONObject());
+            JSONObject response = (JSONObject)(obj);
+            System.out.println(fileJob.toString());
+
+            if(response.getString("status").equals("NO")){
+                throw new Exception("some weird error happened at name node");
+            }
+            replicate(fileJob.getString("writepath") , response.getString("replicas"));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     void startDownloadJob(JSONObject job) {
         String ip = job.getString("ip");
         int port = job.getInt("port");
         String path = job.getString("writepath");
         Downloader downloader = new Downloader(ip, port, path);
+        if(job.getString("replication").equals("NO"))
+            askForReplicas(job);
 
     }
     JSONObject info(JSONObject job) {
@@ -140,7 +176,7 @@ public class DataNodeManager {
 
 
     JSONObject performJob(JSONObject job) throws IOException {
-        System.out.println("Wohoo we have new job "+job.getString("command") + " thats it");
+       // System.out.println("Wohoo we have new job "+job.getString("command") + " thats it");
         if (job.get("command").equals("connect"))
             return ResponseUtil.getResponse(job, "OK", "datanode " + dataNode.dataNodeName + ":" + dataNode.portNumber + " is reached");
         if (job.get("command").equals("startdownload")) {
@@ -154,12 +190,10 @@ public class DataNodeManager {
             response.remove("command");
             response.put("command", "launchdownload");
             int port = SocketUtils.findAvailableTcpPort();
-            System.out.println("here is the shit " + response.toString());
             Uploader uploader = new Uploader(port, job.getString("serverpath"), null, null, null);
             try {
                 response.put("ip", InetAddress.getLocalHost().getHostAddress());
                 response.put("port", port);
-                System.out.println("here is the shit II" + response.toString());
 
             } catch (Exception e) {
                 e.printStackTrace();

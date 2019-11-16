@@ -30,7 +30,7 @@ public class ClientManager {
 
     void uploadHandler(JSONObject response){
         assert(response != null);
-        //System.out.println(response.toString(2));
+        //System.out.println("####\n"+response.toString(2));
 
         String dataNodeIP = response.getString("datanodeip");
         int dataNodePort = response.getInt("datanodeport");
@@ -38,7 +38,7 @@ public class ClientManager {
         String writePath = response.getString("writepath");
 
         JSONObject additionalInfo = new JSONObject();
-        additionalInfo.put("username" , response.getString("username"));
+        additionalInfo.put("replication","NO");
 
         int port = SocketUtils.findAvailableTcpPort();
         Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);

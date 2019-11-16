@@ -25,7 +25,7 @@ public class DataNode implements Runnable{
 
     DataNodeManager manager;
 
-    Client connectionClient;
+    ThreadSafeClient nameNodeClient;
 
     public DataNode(String[] args) {
 
@@ -100,7 +100,7 @@ public class DataNode implements Runnable{
             server.addListener(new Listener.ThreadedListener(new Listener() {
                 @Override
                 public void connected(Connection connection) {
-                    System.out.println("oh yeah we have incoming connection from namenode");
+                    //System.out.println("oh yeah we have incoming connection from namenode");
                 }
 
                 public void received (Connection connection, Object object) {
@@ -118,25 +118,30 @@ public class DataNode implements Runnable{
         dispatcherThread.start();
 
 
-        connectionClient = new Client();
-
-        connectionClient.start();
-        connectionClient.getKryo().register(JSONObject.class);
-        connectionClient.getKryo().register(java.util.HashMap.class);
-
+        nameNodeClient = new ThreadSafeClient(nameNodeIP , nameNodePort);
+        nameNodeClient.getKryo().register(JSONObject.class);
+        nameNodeClient.getKryo().register(java.util.HashMap.class);
+        nameNodeClient.Launch();
+/*
         System.out.println(nameNodeIP + " " + nameNodePort);
         try {
             connectionClient.connect(7000, nameNodeIP, nameNodePort);
         }
         catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
+
 
         JSONObject connectionRequest = new JSONObject();
         connectionRequest.put("command" , "datanodeauth");
         connectionRequest.put("port" , portNumber);
 
-        connectionClient.sendTCP(connectionRequest);
+        try{
+            nameNodeClient.sendSafeTCP(connectionRequest , new JSONObject());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
 
 
 

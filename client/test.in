@@ -1,23 +1,6 @@
 login hussain 123456
 format
-upload ./dir/book.pdf /a/b/book.pdf
-upload ./book2.pdf /c/d/book2.pdf
-upload ./dir2/sqr.jpg /sqr.jpg
-upload ./nig.txt /nigga.txt
-download ./abcde/fgh/downloadbook.pdf /a/b/book.pdf
-cd /a/
-cd /b/
-cd /../
-cd ./././b
-cd ../..
-mkdir zinj1
-mkdir zinj2
-cd /a/
-mkdir zinj3
-cd ..
+upload ./zbr ./abc/zbr
+ls ./abc
+ls ./
 quit
-
-
-cp /a/b/book.pdf /c/d/book1copy.pdf
-mv /c/d/book2.pdf /a/b/book2moved.pdf
-
