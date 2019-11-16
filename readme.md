@@ -48,18 +48,18 @@ for connecting the nodes better have all the range of the ports connect to all T
 #### How to run
  On namenode run:
  ```aidl
-sudo docker run -v $(pwd):/namenode -it jafarbadour/namenode-dfs:latest
+sudo docker run -v $(pwd):/namenode -it --network host jafarbadour/namenode-dfs:latest
 ```
 
 On datanode run:
 ```aidl
-sudo docker run -v $(pwd):/datanode jafarbadour/datanode-dfs:latest
+sudo docker run -v $(pwd):/datanode --network host jafarbadour/datanode-dfs:latest
 ```
 
 On clientnode run:
 
 ```aidl
-sudo docker run -v $(pwd):/client jafarbadour/client-dfs:latest
+sudo docker run -v $(pwd):/client --network host jafarbadour/client-dfs:latest
 ```
 
 -v will let docker container mount the folder (namenode,datanode,client) in the host OS file system
