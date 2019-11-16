@@ -47,18 +47,24 @@ for connecting the nodes better have all the range of the ports connect to all T
 
 #### How to run
  On namenode run:
- ```aidl
+ ```
 sudo docker run -v $(pwd):/namenode -it --network host jafarbadour/namenode-dfs:latest
 ```
 
+you have also to  configure users.conf which is a json file of {user:password}
+example
+```
+{"hussain":"123456","almir":"123456","jafar":"123456"}
+```
+
 On datanode run:
-```aidl
+```
 sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
 ```
 18.220.0.246
 On clientnode run:
 
-```aidl
+```
 sudo docker run -v $(pwd):/client -it --network host jafarbadour/client-dfs:latest
 ```
 
