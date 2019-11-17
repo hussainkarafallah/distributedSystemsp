@@ -182,9 +182,13 @@ class CommandUtil {
         return "OK";
     }
     static JSONObject getLsCommand(String tokens[]) {
-        if (tokens.length != 2)
+        if (tokens.length > 2)
             return getErrorObject("");
-
+        if(tokens.length == 1){
+            tokens = new String[2];
+            tokens[0] = "ls";
+            tokens[1] = ".";
+        }
         String validation = validateLsCommand(tokens);
         if(!validation.equals("OK"))
             return getErrorObject("validation");
