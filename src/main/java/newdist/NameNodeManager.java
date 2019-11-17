@@ -47,7 +47,7 @@ class NameNodeManager {
             if (job.get("command").equals("format"))
                 return format(job);
 
-            if(!Files.isDirectory(Paths.get("./namenode/"+job.getString("username"))))
+            if(!job.get("command").equals("getreplicas")&&!Files.isDirectory(Paths.get("./namenode/"+job.getString("username"))))
                 return ResponseUtil.getResponse(job,"NO","Please format first");
             if (job.get("command").equals("upload"))
                 return upload(job);
