@@ -69,3 +69,36 @@ sudo docker run -v $(pwd):/client -it --network host jafarbadour/client-dfs:late
 ```
 
 -v will let docker container mount the folder (namenode,datanode,client) in the host OS file system
+
+## Commands in our DFS
+
+login 
+
+format
+
+create
+
+upload pathInClient pathOnServer
+
+download pathOnServer pathOnClient
+
+delete pathToFileOnServer
+
+info pathToFileOnServer
+
+cp firstFilePathOnServer nameOfFileInNewPath
+
+mv firstFilePathOnServer nameOfFileInNewPath
+
+cd changeDirectory
+
+ls listAllFiles/Directories
+
+mkdir createNewDirectory
+
+rmdir -r pathToDir // Force recursive deletion
+
+rmdir pathToDir
+
+
+        

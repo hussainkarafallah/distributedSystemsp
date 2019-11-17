@@ -66,6 +66,7 @@ class CommandUtil {
         commands.add("cp");
         commands.add("mv");
         commands.add("cd");
+
     }
 
     static JSONObject getErrorObject(String message) {
