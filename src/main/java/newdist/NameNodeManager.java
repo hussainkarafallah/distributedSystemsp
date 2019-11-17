@@ -296,7 +296,7 @@ class NameNodeManager {
         job.put("path", normalized.toString());
         File f = new File(strPath);
 
-        if(f.exists() && f.isDirectory()){
+        if(f.exists() ){
             return ResponseUtil.getResponse(job, "NO", "another directory or a file exist with the same name");
         }
         f.mkdirs();
