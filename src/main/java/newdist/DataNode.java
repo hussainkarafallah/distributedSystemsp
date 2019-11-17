@@ -44,7 +44,7 @@ public class DataNode implements Runnable{
 //        Files.createFile(Paths.get("./zbr"));
 
         File f = new File("./datanode_hosts.conf");
-        System.out.println("Done");
+
         if(!f.exists() || f.isDirectory()) {
             System.out.println("Please make a new file named datanode_hosts.conf and inside please write\n " +
                     "port of datanode, ip of name node, and its port, then a customized name for your datanode\n check please check this file \n " +
@@ -128,7 +128,6 @@ public class DataNode implements Runnable{
         catch (IOException e){
             e.printStackTrace();
         }*/
-        System.out.println("asdasdsadasd");
 
         JSONObject connectionRequest = new JSONObject();
         connectionRequest.put("command" , "datanodeauth");

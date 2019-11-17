@@ -105,9 +105,7 @@ class NameNodeProxy implements Runnable{
             }
 
         }
-        System.out.println("size debug");
-        System.out.println(fsize);
-        System.out.println(tsize);
+
         StringBuilder sb = new StringBuilder();
         sb.append("MullanurovDFS has space of (free/total): ");
         sb.append(humanReadableByteCount(fsize,false));

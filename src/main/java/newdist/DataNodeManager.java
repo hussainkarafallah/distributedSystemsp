@@ -184,9 +184,7 @@ public class DataNodeManager {
         JSONObject response = newdist.ResponseUtil.getResponse(job,"OK","");
         response.put("fsize",String.valueOf(fsize) );
         response.put("tsize",String.valueOf(tsize));
-        System.out.println("Size debug");
-        System.out.println(fsize);
-        System.out.println(tsize);
+
         return response;
     }
 
