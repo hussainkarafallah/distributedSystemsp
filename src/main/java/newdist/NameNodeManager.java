@@ -295,10 +295,11 @@ class NameNodeManager {
         String strPath = defaultDir + job.get("username") + "/" + normalized.toString();
         job.put("path", normalized.toString());
         File f = new File(strPath);
+
         if(f.exists() && f.isDirectory()){
             return ResponseUtil.getResponse(job, "NO", "another directory or a file exist with the same name");
         }
-        f.mkdir();
+        f.mkdirs();
         return ResponseUtil.getResponse(job,"OK","New Directory is created successfully");
 
     }
