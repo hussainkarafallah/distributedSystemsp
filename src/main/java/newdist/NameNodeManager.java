@@ -83,12 +83,16 @@ class NameNodeManager {
     private static Path getNormalizedPath(String currentDirectory , String toAppend){
 
         try{
+            if(toAppend.charAt(0)=='/'){
+                return Paths.get(toAppend);
+            }
             Path p = Paths.get(currentDirectory , toAppend);
             return p.normalize();
         }
         catch (InvalidPathException e){
             e.printStackTrace();
         }
+
 
         return null;
 
