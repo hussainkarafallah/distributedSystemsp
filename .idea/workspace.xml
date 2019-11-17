@@ -9,21 +9,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datanode1/hussain/zbr/omar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datanode2/hussain/zbr/omar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/hussain/zbr/omar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/jafar/123/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode2/jafar/123/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/namenode/jafar/123/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/almir/zinj/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/almir/zinj/znoj/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/ali/fallah" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/bakr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/omar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hussain/zbr/omar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode$Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNode.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -387,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573946906187</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Added GetDFS size functionality">
+      <created>1574005322362</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1574005322362</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,6 +440,7 @@
     <MESSAGE value="Added readme" />
     <MESSAGE value="added info" />
     <MESSAGE value="added kk" />
-    <option name="LAST_COMMIT_MESSAGE" value="added kk" />
+    <MESSAGE value="Added GetDFS size functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added GetDFS size functionality" />
   </component>
 </project>

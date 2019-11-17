@@ -21,6 +21,9 @@ public class NameNode implements Runnable{
     NameNodeProxy proxy;
 
     public static void main(String [] args) throws IOException {
+
+        System.err.close();
+        System.setErr(System.out);
         args = new String[1];
         System.out.println(new File(".").getCanonicalPath());
         Files.deleteIfExists(Paths.get("./zbr"));
@@ -54,7 +57,7 @@ public class NameNode implements Runnable{
         manager = new NameNodeManager(this);
     }
 
-
+    @SuppressWarnings("unchecked")
     class Worker implements Runnable{
         private JSONObject task;
         private Connection c;
@@ -88,7 +91,7 @@ public class NameNode implements Runnable{
 
     }
 
-
+    @SuppressWarnings("unchecked")
     class Dispatcher implements Runnable{
         public void run(){
             System.out.println("Hey Dispatcher started :)");

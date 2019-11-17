@@ -47,6 +47,8 @@ public class ClientApp {
     }
 
     public static void main(String[] args) throws IOException {
+        System.err.close();
+        System.setErr(System.out);
         args = new String[3];
         File f = new File("./client_hosts.conf");
         System.out.println(new File(".").getCanonicalPath());

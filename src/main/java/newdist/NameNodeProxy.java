@@ -18,7 +18,6 @@ import java.util.Random;
 import java.util.concurrent.Semaphore;
 
 
-
 class NameNodeProxy implements Runnable{
 
     final int replicationFactor = 2;

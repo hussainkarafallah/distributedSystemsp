@@ -1,20 +1,13 @@
 package newdist;
 
 import com.esotericsoftware.kryo.Kryo;
-import com.esotericsoftware.kryonet.Client;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class DataNode implements Runnable{
@@ -44,6 +37,8 @@ public class DataNode implements Runnable{
     }
 
     public static void main(String [] args) throws IOException {
+        System.err.close();
+        System.setErr(System.out);
         args = new String[4];
 //        Files.deleteIfExists(Paths.get("./zbr"));
 //        Files.createFile(Paths.get("./zbr"));
