@@ -451,6 +451,7 @@ class CommandUtil {
         if(cmd.equals("create"))
             jsonCommand = getCreateCommand(tokens);
 
+
 ////////////////////erie
         if (client.isLoggedIn() == 1) {
             jsonCommand.put("username", client.userName);
