@@ -497,6 +497,12 @@ class NameNodeManager {
         job.put("writepath", "./" + job.get("username") + "/" + normalized.toString());
 
         Path path = Paths.get(strPath);
+        if(Files.exists(path)) {
+            String fileOrDir = "File";
+            if(Files.isDirectory(path))
+                fileOrDir="Directory";
+            return ResponseUtil.getResponse(job, "NO", "mkdir: cannot create directory ‘ss’: "+fileOrDir+" exists\n");
+        }
         Files.deleteIfExists(path);
 
         Path par = path.getParent();
