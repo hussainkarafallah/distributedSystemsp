@@ -14,8 +14,8 @@ public class ClientManager {
         client = _client;
     }
     void normalHandling(JSONObject response){
-     //   System.out.println(response.toString(2));
-        System.out.println(response.getString("report"));
+        System.out.println("\u001B[32m"+response.toString(3));
+        System.out.println("\u001B[34m"+response.getString("report"));
     }
 
     void downloadHandler(JSONObject job){
@@ -46,30 +46,27 @@ public class ClientManager {
     }
 
     void handleResponse(JSONObject response){
-        System.out.println(response.toString());
+
         if(response.getString("command").equals("login")){
-            if(response.get("status").equals("OK"))
+            if(response.get("status").equals("OK")) {
                 client.setLogged(response.getString("username"));
-            return;
-        }
+            }
+        }//System.out.println(response.toString());
         if(response.getString("command").equals("upload")){
 
             if(response.get("status").equals("OK")){
 
                 uploadHandler(response);
-                return;
             }
         }
         if(response.getString("command").equals("launchdownload")){
             if(response.get("status").equals("OK")){
                 downloadHandler(response);
-                return;
             }
         }
         if(response.getString("command").equals("cd")){
             if(response.get("status").equals("OK")){
                 client.setDirectory(response.getString("path"));
-                return;
             }
         }
         normalHandling(response);

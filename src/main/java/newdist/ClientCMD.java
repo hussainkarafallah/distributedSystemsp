@@ -385,7 +385,7 @@ class CommandUtil {
     static JSONObject getCreateCommand(String[] tokens){
         if (tokens.length != 2)
             return getErrorObject("Invalid! ");
-        String dummy = "./tmpwwewrestlemania";
+        String dummy = "./!@#$%^&#@$#$#%^$";
         try {
             Files.deleteIfExists(Paths.get(dummy));
             Files.createFile(Paths.get(dummy));
