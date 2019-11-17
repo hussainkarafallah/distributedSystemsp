@@ -527,7 +527,8 @@ public class ClientCMD implements Runnable {
                 client.notify(jsonCommand);
 
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }

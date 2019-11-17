@@ -8,8 +8,43 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="bug fixes">
+      <change afterPath="$PROJECT_DIR$/datanode1/jafar/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode3/jafar/zbr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/jafar/zbr" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/almir/zinj/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/almir/zinj/znoj/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/jafar/jkj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/jafar/zinj/zinj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/jafar/zinja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/almir/zinj/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/almir/zinj/znoj/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/asd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/ss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/zinj/ss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/zinja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode3/hussain/nigga.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hyuguyguyg/a/zinj/book.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hyuguyguyg/c/d/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hyuguyguyg/nigga.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/hyuguyguyg/sqr.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/asd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/asdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/jkj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/ss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/zinj/ss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/zinj/zinj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/zinja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +197,14 @@
       <runConfiguration name="NameNode" type="Application" />
       <runConfiguration name="Datanode1" type="Application" />
       <runConfiguration name="Datanode2" type="Application" />
+      <runConfiguration name="Datanode3" type="Application" />
       <runConfiguration name="Client" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="zinj" type="Multirun" factoryName="Multirun" singleton="false" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="1">
+      <runConfiguration name="NameNode" type="Application" />
+      <runConfiguration name="Datanode1" type="Application" />
+      <runConfiguration name="Datanode2" type="Application" />
       <method v="2" />
     </configuration>
     <list>
@@ -173,6 +215,7 @@
       <item itemvalue="Application.NameNode" />
       <item itemvalue="Application.App" />
       <item itemvalue="Multirun.omar" />
+      <item itemvalue="Multirun.zinj" />
     </list>
     <recent_temporary>
       <list>
@@ -228,6 +271,7 @@
       <workItem from="1573598851751" duration="24479000" />
       <workItem from="1573738306409" duration="29092000" />
       <workItem from="1573772343435" duration="11233000" />
+      <workItem from="1574027310356" duration="6493000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -517,5 +561,16 @@
     <MESSAGE value="Added absolute path" />
     <MESSAGE value="bug fixes" />
     <option name="LAST_COMMIT_MESSAGE" value="bug fixes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java</url>
+          <line>498</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

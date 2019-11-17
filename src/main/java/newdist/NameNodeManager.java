@@ -30,6 +30,7 @@ class NameNodeManager {
     NameNode nameNode;
 
 
+
     final String defaultDir = "./namenode/";
 
     NameNodeManager(NameNode _nameNode) {
@@ -411,14 +412,19 @@ class NameNodeManager {
             e.printStackTrace();
         }
 
-        if (found == 1)
+        if (found == 1) {
+            nameNode.proxy.usersToFormat.add(username);
             return ResponseUtil.getResponse(job, "OK", "Login Successful");
+        }
+
         return ResponseUtil.getResponse(job, "NO", "Login Failed");
 
     }
 
+
     private JSONObject format(JSONObject job) throws IOException {
         String dir = defaultDir + job.getString("username") + "/";
+
         Path path = Paths.get(dir);
         if (Files.notExists(path)) {
             Files.createDirectories(path);

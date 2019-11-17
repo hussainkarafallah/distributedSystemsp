@@ -139,7 +139,7 @@ public class DataNodeManager {
             askForReplicas(job);
 
     }
-    JSONObject info(JSONObject job) {
+  /*  JSONObject info(JSONObject job) {
         String strPath = "./"+ job.get("username") + job.getString("path");
 
         File f = new File(strPath);
@@ -155,7 +155,7 @@ public class DataNodeManager {
         sb.append("\nLast modified: ").append(dt).append("\n");
 
         return newdist.ResponseUtil.getResponse(job, "OK", sb.toString());
-    }
+    }*/
 
     JSONObject removeDirectory(JSONObject job) throws IOException {
         String strPath = "./"+ job.get("username") + job.getString("path");
@@ -220,20 +220,34 @@ public class DataNodeManager {
             return format(job);
         if (job.get("command").equals("delete"))
             return delete(job);
-        if(job.getString("command").equals("info"))
-            return info(job);
+  //      if(job.getString("command").equals("info"))
+    //        return info(job);
         if(job.getString("command").equals("cp")||job.getString("command").equals("mv"))
             return MvCp(job);;
         if(job.getString("command").equals("rmdir"))
             return removeDirectory(job);
         if(job.getString("command").equals("getsize"))
             return getDFSsize(job);
+        if(job.getString("command").equals("replicate"))
+            return replicate(job);
      //   if(job.getString("command").equals("create"))
      //       return createFile(job);
 
         JSONObject crap = new JSONObject();
         crap.put("status", "wholyshit");
         return crap;
+    }
+
+    JSONObject replicate(JSONObject job){
+        String dataNodeIP = job.getString("ip");
+        int dataNodePort = job.getInt("port")       ;
+        String clientPath    = job.getString("filepath");
+        String writePath = job.getString("filepath");
+        JSONObject additionalInfo = new JSONObject();
+        additionalInfo.put("replication","YES");
+        int port = SocketUtils.findAvailableTcpPort();
+        Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
+        return ResponseUtil.getResponse(job,"OK","Great success");
     }
 
 
