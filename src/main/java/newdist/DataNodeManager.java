@@ -56,10 +56,7 @@ public class DataNodeManager {
         System.out.println("data node formatted with no problems");
         JSONObject response = ResponseUtil.getResponse(job , "OK" , "data node was formatted successfully");
         File f = new File(".");
-        long fsize = f.getFreeSpace();
-        long tsize = f.getTotalSpace();
-        response.put("fsize",fsize );
-        response.put("tsize",tsize);
+
 
         return response;
     }
@@ -180,6 +177,18 @@ public class DataNodeManager {
         assert (res);
         return newdist.ResponseUtil.getResponse(job,"OK","Directory was removed from datanode successfully");
     }
+    JSONObject getDFSsize(JSONObject job){
+        File f = new File(".");
+        long fsize = f.getFreeSpace();
+        long tsize = f.getTotalSpace();
+        JSONObject response = newdist.ResponseUtil.getResponse(job,"OK","");
+        response.put("fsize",String.valueOf(fsize) );
+        response.put("tsize",String.valueOf(tsize));
+        System.out.println("Size debug");
+        System.out.println(fsize);
+        System.out.println(tsize);
+        return response;
+    }
 
 
     JSONObject performJob(JSONObject job) throws IOException {
@@ -219,6 +228,8 @@ public class DataNodeManager {
             return MvCp(job);;
         if(job.getString("command").equals("rmdir"))
             return removeDirectory(job);
+        if(job.getString("command").equals("getsize"))
+            return getDFSsize(job);
      //   if(job.getString("command").equals("create"))
      //       return createFile(job);
 

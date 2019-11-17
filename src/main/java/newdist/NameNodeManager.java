@@ -29,6 +29,7 @@ class NameNodeManager {
 
     NameNode nameNode;
 
+
     final String defaultDir = "./namenode/";
 
     NameNodeManager(NameNode _nameNode) {
@@ -418,9 +419,13 @@ class NameNodeManager {
             Files.createDirectory(path);
         }
         JSONObject okFWD = nameNode.proxy.forwardJobToAll(job);
+        JSONObject response;
         if(okFWD.get("status").equals("OK"))
-            return ResponseUtil.getResponse(job , "OK" , "All current datanodeds were formatted");
-        else return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
+            response= ResponseUtil.getResponse(job , "OK" , "All current datanodeds were formatted");
+        else  return ResponseUtil.getResponse(job, "NO", okFWD.getString("report"));
+        job.put("command","getsize");
+        response = nameNode.proxy.getDFSsize(job);
+        return response;
     }
 
     private JSONObject download(JSONObject job) throws IOException {

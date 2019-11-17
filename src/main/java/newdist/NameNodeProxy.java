@@ -92,7 +92,34 @@ class NameNodeProxy implements Runnable{
 
         return ResponseUtil.getResponse(job , "NO" , errors);
     }
+    public JSONObject getDFSsize(JSONObject job){
+        JSONObject response = newdist.ResponseUtil.getResponse(job,"OK","");
+        long tsize=0,fsize=0;
+        for(ThreadSafeClient s : sockets) {
+            try {
+                JSONObject temp =(JSONObject)s.sendSafeTCP(job, new JSONObject());
+                tsize+=Long.parseLong(temp.getString("tsize"));
+                fsize+=Long.parseLong(temp.getString("fsize"));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
 
+        }
+        System.out.println("size debug");
+        System.out.println(fsize);
+        System.out.println(tsize);
+        StringBuilder sb = new StringBuilder();
+        sb.append("MullanurovDFS has space of (free/total): ");
+        sb.append(humanReadableByteCount(fsize,false));
+        sb.append("/"+humanReadableByteCount(tsize,false));
+        sb.append("\n Free space "+String.valueOf(fsize*100/tsize)+"%, Format successful");
+        response.put("report",sb.toString());
+        return response;
+    }
+    public static String humanReadableByteCount(long bytes, boolean si) {
+        return String.valueOf(bytes/(1<<30)) + " GB";
+    }
     public JSONObject askForUpload(InetSocketAddress dataNode , JSONObject _job){
         int idx = dataNodes.indexOf(dataNode);
         assert(idx != -1);
