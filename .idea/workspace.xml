@@ -9,7 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -240,14 +241,7 @@
       <workItem from="1573772343435" duration="11233000" />
       <workItem from="1574027310356" duration="7190000" />
       <workItem from="1574034844832" duration="806000" />
-      <workItem from="1574036395292" duration="10453000" />
-    </task>
-    <task id="LOCAL-00001" summary="added datanode">
-      <created>1573495208062</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1573495208062</updated>
+      <workItem from="1574036395292" duration="10757000" />
     </task>
     <task id="LOCAL-00002" summary="added datanode">
       <created>1573495247033</created>
@@ -571,7 +565,28 @@
       <option name="project" value="LOCAL" />
       <updated>1574102684316</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574102890024</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1574102890024</updated>
+    </task>
+    <task id="LOCAL-00049" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574102911000</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1574102911000</updated>
+    </task>
+    <task id="LOCAL-00050" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574102964329</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1574102964330</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
