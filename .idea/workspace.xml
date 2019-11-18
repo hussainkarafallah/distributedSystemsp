@@ -8,7 +8,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="" />
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +239,7 @@
       <workItem from="1573772343435" duration="11233000" />
       <workItem from="1574027310356" duration="7190000" />
       <workItem from="1574034844832" duration="806000" />
-      <workItem from="1574036395292" duration="3300000" />
+      <workItem from="1574036395292" duration="6216000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -525,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574042394496</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574042502507</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1574042502507</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -569,7 +579,8 @@
     <MESSAGE value="bug fixes" />
     <MESSAGE value="last version" />
     <MESSAGE value="added runMetodockerize&#10;this bash will be run and all images will be built and pushed to docker hub" />
-    <option name="LAST_COMMIT_MESSAGE" value="added runMetodockerize&#10;this bash will be run and all images will be built and pushed to docker hub" />
+    <MESSAGE value="ADDED CONFIGURATION ON AWS" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADDED CONFIGURATION ON AWS" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

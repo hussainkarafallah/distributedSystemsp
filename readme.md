@@ -81,6 +81,8 @@ write the following script
 snap install docker
 mkdir /home/ubuntu/namenode
 echo "26200" >>/home/ubuntu/namenode/namenode_hosts.conf
+echo "{"hussain":"123456","almir":"123456","jafar":"123456"}" >>/home/ubuntu/namenode/users.conf
+
 ```
 
 Initialization of datanodes 
@@ -88,9 +90,10 @@ Initialization of datanodes
 #!/bin/bash
 snap install docker
 mkdir /home/ubuntu/datanode
-echo "25011 3.13.55.12 26200 datanode" >>/home/ubuntu/datanode/datanode_hosts.conf
+echo "25011 18.217.199.246 26200 datanode" >>/home/ubuntu/datanode/datanode_hosts.conf
 cd /home/ubuntu/datanode
-sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
+sudo docker pull jafarbadour/datanode-dfs:latest
+sudo docker run -v $(pwd):/datanode -it -d --network host jafarbadour/datanode-dfs:latest
 
 ```
 where in the last line we have the ip:port of the namenode as mentioned above in the datanode_hosts.conf
@@ -100,7 +103,7 @@ Initialization of clientnode
 #!/bin/bash
 snap install docker
 mkdir /home/ubuntu/client
-echo "3.13.55.12 26200 client" >>/home/ubuntu/client/datanode_hosts.conf
+echo "18.217.199.246 26200 client" >>/home/ubuntu/client/client_hosts.conf
 
 ```
 
