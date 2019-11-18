@@ -60,7 +60,7 @@ Make sure there is only one line in the JSON file.
 
 On datanode run:
 ```
-sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
+sudo docker run -v $(pwd):/datanode -it --network host -d jafarbadour/datanode-dfs:latest
 ```
 On clientnode run:
 
