@@ -9,7 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BashesForDFSnodes/myKey.pem" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -240,7 +241,7 @@
       <workItem from="1573772343435" duration="11233000" />
       <workItem from="1574027310356" duration="7190000" />
       <workItem from="1574034844832" duration="806000" />
-      <workItem from="1574036395292" duration="8937000" />
+      <workItem from="1574036395292" duration="10161000" />
     </task>
     <task id="LOCAL-00001" summary="added datanode">
       <created>1573495208062</created>
@@ -557,7 +558,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574100448165</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574100877229</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1574100877229</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
