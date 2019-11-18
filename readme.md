@@ -101,4 +101,14 @@ rmdir -r pathToDir // Force recursive deletion
 rmdir pathToDir
 
 
+# Building the docker images
+
+when one wants to build the docker images and push to docker hub please follow this commands
+
+```
+chmod +x runMeTodockerize.sh
+./runMeTodockerize.sh
+```
+
+
         

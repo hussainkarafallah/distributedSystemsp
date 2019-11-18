@@ -12,7 +12,7 @@ WORKDIR "/client"
 RUN pwd
 
 ADD ./out/artifacts/clientnode_jar/distributedSystemsp.jar ../Excutable_Java.jar
-RUN ls ..# Dockerfile
+RUN ls ..
 
 EXPOSE 8000
 CMD java -jar ../Excutable_Java.jar
