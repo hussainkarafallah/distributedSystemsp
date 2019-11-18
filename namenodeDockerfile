@@ -9,11 +9,13 @@ apt-get install default-jre -y
 
 
 ##################
-RUN mkdir /datanode
-WORKDIR "/datanode"
-ADD ./out/artifacts/datanode_jar/distributedSystemsp.jar ../Excutable_Java.jar
-##################
+RUN mkdir /namenode
+WORKDIR "/namenode"
+RUN pwd
 
+ADD ./out/artifacts/namenode_jar/distributedSystemsp.jar ../Excutable_Java.jar
+RUN ls
+RUN ls ..
 
 EXPOSE 8000
 CMD java -jar ../Excutable_Java.jar

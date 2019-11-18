@@ -7,13 +7,12 @@ apt-get update -y && \
 # Install Java
 apt-get install default-jre -y
 
+RUN mkdir /client
+WORKDIR "/client"
+RUN pwd
 
-##################
-RUN mkdir /datanode
-WORKDIR "/datanode"
-ADD ./out/artifacts/datanode_jar/distributedSystemsp.jar ../Excutable_Java.jar
-##################
-
+ADD ./out/artifacts/clientnode_jar/distributedSystemsp.jar ../Excutable_Java.jar
+RUN ls ..# Dockerfile
 
 EXPOSE 8000
 CMD java -jar ../Excutable_Java.jar
