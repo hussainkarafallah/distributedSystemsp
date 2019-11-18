@@ -97,6 +97,9 @@ class NameNodeProxy implements Runnable {
 
     public JSONObject getDFSsize(JSONObject job) {
         JSONObject response = newdist.ResponseUtil.getResponse(job, "OK", "");
+        if(sockets.size()==0){
+            return ResponseUtil.getResponse(job,"NO","Datanodes are offline");
+        }
         long tsize = 0, fsize = 0;
         for (ThreadSafeClient s : sockets) {
             try {
