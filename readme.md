@@ -98,7 +98,8 @@ mkdir createNewDirectory
 
 rmdir -r pathToDir // Force recursive deletion
 
-rmdir pathToDir```
+rmdir pathToDir
+```
 
 
 # Building the docker images
