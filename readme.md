@@ -70,6 +70,40 @@ sudo docker run -v $(pwd):/client -it --network host jafarbadour/client-dfs:late
 
 -v will let docker container mount the folder (namenode,datanode,client) in the host OS file system
 
+## AWS initialization
+
+When initialization of namenode
+in 3rd step in instance configuration -> advanced details -> User data
+write the following script
+
+```
+#!/bin/bash
+snap install docker
+mkdir /home/ubuntu/namenode
+echo "26200" >>/home/ubuntu/namenode/namenode_hosts.conf
+```
+
+Initialization of datanodes 
+```
+#!/bin/bash
+snap install docker
+mkdir /home/ubuntu/datanode
+echo "25011 3.13.55.12 26200 datanode" >>/home/ubuntu/datanode/datanode_hosts.conf
+cd /home/ubuntu/datanode
+sudo docker run -v $(pwd):/datanode -it --network host jafarbadour/datanode-dfs:latest
+
+```
+where in the last line we have the ip:port of the namenode as mentioned above in the datanode_hosts.conf
+
+Initialization of clientnode
+```
+#!/bin/bash
+snap install docker
+mkdir /home/ubuntu/client
+echo "3.13.55.12 26200 client" >>/home/ubuntu/client/datanode_hosts.conf
+
+```
+
 ## Commands in our DFS
 ```
 login 
