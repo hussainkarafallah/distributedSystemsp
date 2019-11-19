@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 public class ClientApp {
 
-    String hostName , clientName , currentDirectory , userName;
+    String hostName , clientName , currentDirectory , userName, myIp;
     private int portNumber;
     private int isLogged;
 
@@ -37,9 +37,11 @@ public class ClientApp {
     }
 
     ClientApp(String [] args){
-        hostName = args[0];
-        portNumber = Integer.parseInt(args[1]);
-        clientName = args[2];
+        myIp =args[0];
+        hostName = args[1];
+        portNumber = Integer.parseInt(args[2]);
+        clientName = args[3];
+
         isLogged = 0;
         currentDirectory = "";
         userName = "";
@@ -49,7 +51,7 @@ public class ClientApp {
     public static void main(String[] args) throws IOException {
         System.err.close();
         System.setErr(System.out);
-        args = new String[3];
+        args = new String[4];
         File f = new File("./client_hosts.conf");
         System.out.println(new File(".").getCanonicalPath());
         if(!f.exists() || f.isDirectory()) {
@@ -65,7 +67,7 @@ public class ClientApp {
             args[ind++] = sc.next();
         }
 
-        if (args.length != 3) {
+        if (args.length != 4) {
             System.err.println(
                     "Usage: java EchoClient <host name> <port number>");
             System.exit(1);

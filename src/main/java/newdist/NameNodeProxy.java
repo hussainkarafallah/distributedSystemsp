@@ -136,6 +136,7 @@ class NameNodeProxy implements Runnable {
 
             Object response = sockets.get(idx).sendSafeTCP(job, new JSONObject());
             ret = (JSONObject) (response);
+       //     ret.put("ip" , dataNodes.get(idx).getAddress().getHostAddress());
             assert (ret != null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -376,7 +377,7 @@ class NameNodeProxy implements Runnable {
                     job.put("port",d.getPort());
                     job.put("filepath",jd3);
                     int i = dataNodes.indexOf(alive);
-                    addInfo(f,alive);
+                    addInfo(f,d);
                     sockets.get(i).sendSafeTCP(job,new JSONObject());
                     System.out.println("File " + jd3 + " is being replicated to " + d.toString());
                 }

@@ -1,12 +1,24 @@
-login hussain 123456
+login jafar 123456
 format
-create zbr/omar
-create omar
-create bakr
-create /ali/fallah
-download ./bakrd bakr
-cd zbr
-download ./omard omar
+mkdir testdir
+cd testdir
+upload ./book.pdf ./book.pdf
 cd ..
-download ./fallahd /ali/fallah
-download ./fallah/fallahd ./ali/fallah
+info ./testdir/book.pdf
+mkdir anotherdir
+cp ./testdir/book.pdf ./anotherdir/bookcopy.pdf
+delete ./testdir/book.pdf
+ls /testdir/
+download ./downloaded.pdf ./anotherdir/bookcopy.pdf/
+
+
+login jafar 123456
+format
+create ./f1
+create ./f2
+create ./f3
+create ./f4
+# disconnect DN3
+delete f3
+# connect DN3
+

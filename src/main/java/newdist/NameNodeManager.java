@@ -507,7 +507,7 @@ class NameNodeManager {
             String fileOrDir = "File";
             if(Files.isDirectory(path))
                 fileOrDir="Directory";
-            return ResponseUtil.getResponse(job, "NO", "mkdir: cannot create directory ‘ss’: "+fileOrDir+" exists\n");
+            return ResponseUtil.getResponse(job, "NO", "Attempting to write on currently existing file or directory");
         }
         Files.deleteIfExists(path);
 

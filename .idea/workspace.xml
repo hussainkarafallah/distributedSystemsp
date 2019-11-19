@@ -8,17 +8,53 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/datanode1/jafar/zinj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/datanode2/jafar/zinj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/namenode/jafar/zinj" afterDir="false" />
+    <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="added Jars">
+      <change afterPath="$PROJECT_DIR$/client/book.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/downloaded.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/tmpforupload" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode1/jafar/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode1/jafar/f2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/jafar/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/jafar/f2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode3/jafar/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode3/jafar/f2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/jafar/f1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/jafar/f2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode1/jafar/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode2/jafar/zbr" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/datanode3/jafar/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/book2.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client_hosts.conf" beforeDir="false" afterPath="$PROJECT_DIR$/client/client_hosts.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/test.in" beforeDir="false" afterPath="$PROJECT_DIR$/client/test.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/datanode_hosts.conf" beforeDir="false" afterPath="$PROJECT_DIR$/datanode1/datanode_hosts.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/jafar/zinj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/datanode_hosts.conf" beforeDir="false" afterPath="$PROJECT_DIR$/datanode2/datanode_hosts.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/zinj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode3/datanode_hosts.conf" beforeDir="false" afterPath="$PROJECT_DIR$/datanode3/datanode_hosts.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/namenode/jafar/zinj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/clientnode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/datanode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/namenode_jar/distributedSystemsp.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/ClientManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/DataNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/NameNodeProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/newdist/Uploader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientApp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/ClientManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/CommandUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Dispatcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode$Worker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/DataNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/NameNodeProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/Uploader$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/Uploader$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/newdist/Uploader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/newdist/Uploader.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,13 +121,13 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.appearance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/client" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/BashesForDFSnodes" />
       <recent name="$PROJECT_DIR$/datanode2" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/client" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -251,14 +287,7 @@
       <workItem from="1574034844832" duration="806000" />
       <workItem from="1574036395292" duration="13912000" />
       <workItem from="1574120619109" duration="57000" />
-      <workItem from="1574152616680" duration="473000" />
-    </task>
-    <task id="LOCAL-00003" summary="added datanode">
-      <created>1573681915388</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1573681915388</updated>
+      <workItem from="1574152616680" duration="9046000" />
     </task>
     <task id="LOCAL-00004" summary="bug fixes">
       <created>1573716885325</created>
@@ -596,7 +625,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574103207992</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="added Jars">
+      <created>1574153358969</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1574153358970</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,17 +677,7 @@
     <MESSAGE value="last version" />
     <MESSAGE value="added runMetodockerize&#10;this bash will be run and all images will be built and pushed to docker hub" />
     <MESSAGE value="ADDED CONFIGURATION ON AWS" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADDED CONFIGURATION ON AWS" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/newdist/NameNodeManager.java</url>
-          <line>498</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added Jars" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Jars" />
   </component>
 </project>

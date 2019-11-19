@@ -1,0 +1,4 @@
+{"port":27890,"ip":"127.0.0.1","type":"mainnode"}
+{"size":"0","type":"info","last_modified":"Thu Jan 01 03:00:00 MSK 1970"}
+{"port":25100,"ip":"127.0.0.1","type":"replica"}
+{"port":25444,"ip":"127.0.0.1","type":"replica"}

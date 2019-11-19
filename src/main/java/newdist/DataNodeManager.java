@@ -108,7 +108,7 @@ public class DataNodeManager {
             additionalInfo.put("replication","YES");
             int port = SocketUtils.findAvailableTcpPort();
 
-            Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
+            Uploader uploader = new Uploader(dataNode.myIp , port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
         }
     }
     void askForReplicas(JSONObject fileJob){
@@ -204,9 +204,10 @@ public class DataNodeManager {
             response.remove("command");
             response.put("command", "launchdownload");
             int port = SocketUtils.findAvailableTcpPort();
-            Uploader uploader = new Uploader(port, job.getString("serverpath"), null, null, null);
+            Uploader uploader = new Uploader(dataNode.myIp , port, job.getString("serverpath"), null, null, null);
             try {
-                response.put("ip", InetAddress.getLocalHost().getHostAddress());
+                //response.put("ip", InetAddress.getLocalHost().getHostAddress());
+                response.put("ip", dataNode.myIp);
                 response.put("port", port);
 
             } catch (Exception e) {
@@ -246,7 +247,7 @@ public class DataNodeManager {
         JSONObject additionalInfo = new JSONObject();
         additionalInfo.put("replication","YES");
         int port = SocketUtils.findAvailableTcpPort();
-        Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
+        Uploader uploader = new Uploader(dataNode.myIp , port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
         return ResponseUtil.getResponse(job,"OK","Great success");
     }
 

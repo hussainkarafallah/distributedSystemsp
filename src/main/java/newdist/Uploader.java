@@ -13,7 +13,7 @@ public class Uploader {
 
     Server server;
     int portNumber;
-    String filePath , writePath;
+    String filePath , writePath , hostIP;
     final int ChunkSize = 500000;
     InetSocketAddress otherEnd;
     JSONObject info;
@@ -21,8 +21,10 @@ public class Uploader {
     long total;
     InetSocketAddress otherGuy;
 
-    Uploader(int _portNumber , String _filePath , String _writePath , InetSocketAddress add , JSONObject _info){
+
+    Uploader(String _ip , int _portNumber , String _filePath , String _writePath , InetSocketAddress add , JSONObject _info){
         assert(_info != null);
+        hostIP = _ip;
         portNumber = _portNumber;
         filePath = _filePath;
         otherEnd = add;
@@ -64,10 +66,11 @@ public class Uploader {
             //System.out.println(info.toString(2));
             JSONObject request = new JSONObject(info.toString());
 
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            System.out.println(inetAddress.toString());
+           // InetAddress inetAddress = InetAddress.getLocalHost();
+     //       System.out.println(inetAddress.toString());
             request.put("command", "startdownload");
-            request.put("ip", inetAddress.getHostAddress());
+            //request.put("ip", inetAddress.getHostAddress());
+            request.put("ip" , hostIP);
             request.put("port",portNumber);
             request.put("writepath",writePath);
 
@@ -115,7 +118,7 @@ public class Uploader {
             }
             public void received (Connection connection, Object object) {
                 if (object instanceof String) {
-                    otherGuy = new InetSocketAddress(connection.getRemoteAddressTCP().getAddress().getHostName() , connection.getRemoteAddressTCP().getPort());
+                    otherGuy = new InetSocketAddress(connection.getRemoteAddressTCP().getAddress().getHostAddress() , connection.getRemoteAddressTCP().getPort());
                     String str = (String) (object);
                     assert (str.equals("passchunk"));
                     //System.out.println(cur);
@@ -133,6 +136,7 @@ public class Uploader {
                 System.out.println("This machine wrote " + total + " bytes successfully to another machine and new file is created" );
 
                 server.close();
+
             }
         }));
 

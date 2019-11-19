@@ -14,7 +14,8 @@ public class DataNode implements Runnable{
 
     int portNumber , nameNodePort;
 
-    String nameNodeIP ,  dataNodeName;
+
+    String nameNodeIP ,  dataNodeName, myIp;
 
     DataNodeManager manager;
 
@@ -22,15 +23,15 @@ public class DataNode implements Runnable{
 
     public DataNode(String[] args) {
 
-        if (args.length != 4) {
+        if (args.length != 5) {
             System.err.println("Data node initalization error");
             System.exit(1);
         }
-
-        portNumber = Integer.parseInt(args[0]);
-        nameNodeIP = args[1];
-        nameNodePort = Integer.parseInt(args[2]);
-        dataNodeName = args[3];
+        myIp = args[0];
+        portNumber = Integer.parseInt(args[1]);
+        nameNodeIP = args[2];
+        nameNodePort = Integer.parseInt(args[3]);
+        dataNodeName = args[4];
 
         manager= new DataNodeManager(this);
 
@@ -39,7 +40,7 @@ public class DataNode implements Runnable{
     public static void main(String [] args) throws IOException {
         System.err.close();
         System.setErr(System.out);
-        args = new String[4];
+        args = new String[5];
 //        Files.deleteIfExists(Paths.get("./zbr"));
 //        Files.createFile(Paths.get("./zbr"));
 
@@ -104,6 +105,7 @@ public class DataNode implements Runnable{
                 public void received (Connection connection, Object object) {
                     if (object instanceof JSONObject) {
                         JSONObject request = (JSONObject) object;
+                 //       request.put("ip" , connection.getRemoteAddressTCP().getAddress().getHostAddress());
                         new Thread(new DataNode.Worker(connection , request)).start();
                     }
                 }

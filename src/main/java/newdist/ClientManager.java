@@ -14,8 +14,9 @@ public class ClientManager {
         client = _client;
     }
     void normalHandling(JSONObject response){
-        System.out.println("\u001B[32m"+response.toString(3));
-        System.out.println("\u001B[34m"+response.getString("report"));
+
+        System.out.println("\u001B[36m"+response.toString(3));
+        System.out.println("\u001B[37m"+response.getString("report"));
     }
 
     void downloadHandler(JSONObject job){
@@ -41,7 +42,7 @@ public class ClientManager {
         additionalInfo.put("replication","NO");
 
         int port = SocketUtils.findAvailableTcpPort();
-        Uploader uploader = new Uploader(port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
+        Uploader uploader = new Uploader(client.myIp , port , clientPath , writePath , new InetSocketAddress(dataNodeIP , dataNodePort) , additionalInfo);
 
     }
 
