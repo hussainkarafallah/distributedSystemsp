@@ -1,3 +1,35 @@
+login almir 123456
+format
+mkdir dir1
+cd dir1
+upload ./book.pdf file1
+cd ..
+cp ./dir1/file1 file2
+delete dir1/file1
+ls dir1
+create file3
+info file3
+# shutdown datanode 1
+info file3
+delete file3
+# show that file3 is still on datanonde 1
+# reconnect datanode 1
+# shutdown datanode 1
+# show that file3is now deleted 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 login jafar 123456
 format
 mkdir testdir
