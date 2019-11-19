@@ -65,6 +65,7 @@ public class Uploader {
             JSONObject request = new JSONObject(info.toString());
 
             InetAddress inetAddress = InetAddress.getLocalHost();
+            System.out.println(inetAddress.toString());
             request.put("command", "startdownload");
             request.put("ip", inetAddress.getHostAddress());
             request.put("port",portNumber);

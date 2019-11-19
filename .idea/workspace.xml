@@ -9,8 +9,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99fd1639-5ce8-418d-800c-f92fccb7413e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/datanode1/jafar/zinj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/datanode2/jafar/zinj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/namenode/jafar/zinj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/client.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/datanode.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" beforeDir="false" afterPath="$PROJECT_DIR$/BashesForDFSnodes/namenode.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode1/jafar/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode2/jafar/zbr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/datanode3/jafar/zbr" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -241,14 +249,9 @@
       <workItem from="1573772343435" duration="11233000" />
       <workItem from="1574027310356" duration="7190000" />
       <workItem from="1574034844832" duration="806000" />
-      <workItem from="1574036395292" duration="10757000" />
-    </task>
-    <task id="LOCAL-00002" summary="added datanode">
-      <created>1573495247033</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1573495247033</updated>
+      <workItem from="1574036395292" duration="13912000" />
+      <workItem from="1574120619109" duration="57000" />
+      <workItem from="1574152616680" duration="473000" />
     </task>
     <task id="LOCAL-00003" summary="added datanode">
       <created>1573681915388</created>
@@ -586,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574102964330</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="ADDED CONFIGURATION ON AWS">
+      <created>1574103207992</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1574103207992</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
